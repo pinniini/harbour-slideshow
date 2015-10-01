@@ -55,11 +55,6 @@ Page {
         // Menu to start slideshow in the current folder.
         PullDownMenu {
             MenuItem {
-                text: qsTr("Test")
-                onClicked: pageStack.push(Qt.resolvedUrl("TestPage.qml"))
-            }
-
-            MenuItem {
                 text: qsTr("About")
                 onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
             }

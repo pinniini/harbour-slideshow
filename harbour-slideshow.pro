@@ -30,8 +30,7 @@ OTHER_FILES += qml/harbour-slideshow.qml \
     qml/pages/SlideshowPage.qml \
     qml/pages/SettingsPage.qml \
     qml/pages/AboutPage.qml \
-    qml/pages/ImagePage.qml \
-    qml/pages/TestPage.qml
+    qml/pages/ImagePage.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line
