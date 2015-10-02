@@ -26,10 +26,6 @@
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Test</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>SettingsPage</name>
@@ -70,13 +66,6 @@
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TestPage</name>
-    <message>
-        <source>Go up</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
