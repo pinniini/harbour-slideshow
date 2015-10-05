@@ -35,6 +35,7 @@ import QtQuick 2.1
 import Sailfish.Silica 1.0
 
 CoverBackground {
+    id: coverPage
     property string imageSource: ""
 
     // Default cover when slideshow is not running.
@@ -67,19 +68,23 @@ CoverBackground {
         source: imageSource
         asynchronous: true
         fillMode: Image.PreserveAspectFit
+        sourceSize.width: coverPage.width
+        sourceSize.height: coverPage.height
     }
 
-    // TODO: Cover actions to continue or pause slideshow.
-//    CoverActionList {
-//        id: coverActions
+    // Cover actions.
+    CoverActionList {
+        id: coverActions
+        enabled: imageSource != "" ? (!mainPage.stopOnMinimize) : false
 
-//        CoverAction {
-//            iconSource: "image://theme/icon-m-pause"
-//            onTriggered: {
-
-//            }
-//        }
-//    }
+        // Toggle slideshow.
+        CoverAction {
+            iconSource: mainPage.slideshowPlaying ? "image://theme/icon-cover-pause" : "image://theme/icon-cover-play"
+            onTriggered: {
+                mainPage.coverToggleSlideshow()
+            }
+        }
+    }
 
     // Set current image.
     function setImage(source)
@@ -87,5 +92,3 @@ CoverBackground {
         imageSource = source
     }
 }
-
-

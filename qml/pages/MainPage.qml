@@ -38,11 +38,14 @@ import harbour.slideshow.FolderModel 1.0
 Page {
     id: mainPage
     allowedOrientations: Orientation.All
+    clip: true
 
     // Property to tell if the slideshow is enabled for the current folder.
     property bool slideshowEnabled: false
     property string head: ""
     property bool firstLoad: true
+    property alias slideshowPlaying: slideshowPage.slideshowRunning
+    property alias stopOnMinimize: settingsPage.stp
 
     // Signals.
     // Notify cover about image change.
@@ -111,14 +114,14 @@ Page {
             id: delegate
             visible: fileName != "." // Hide dot, i.e. current folder.
             height: fileName == "." ? 0 : Theme.itemSizeSmall // Hide dot, i.e. current folder.
-            x: Theme.paddingSmall
-            width: parent.width - Theme.paddingMedium
+            width: parent.width
 
             // Row to place icon and filename.
             Row {
                 id: delegRow
                 anchors.verticalCenter: parent.verticalCenter
                 spacing: 5
+                x: Theme.horizontalPageMargin
 
                 // Icon. Image-icon when image, Up-icon when dotdot and Folder-icon when folder.
                 Image {
@@ -184,8 +187,17 @@ Page {
             // If application deactivates and setting is that slideshow should stop, then stop slideshow.
             if(!active && settingsPage.slideSettings.stopMinimized)
                 slideshowPage.stopSlideshow()
-            else if(active && settingsPage.slideSettings.stopMinimized)  // If application is activating and slideshow is stopped, restart it.
-                slideshowPage.startSlideshow()
+//            else if(active && settingsPage.slideSettings.stopMinimized)  // If application is activating and slideshow is stopped, restart it.
+//                slideshowPage.startSlideshow()
         }
+    }
+
+    // Called when cover action is toggling the slideshow status.
+    function coverToggleSlideshow()
+    {
+        if(slideshowPlaying)
+            slideshowPage.stopSlideshow()
+        else
+            slideshowPage.startSlideshow()
     }
 }

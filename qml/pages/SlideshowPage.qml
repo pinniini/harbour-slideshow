@@ -38,12 +38,14 @@ import harbour.slideshow.FolderModel 1.0
 Page {
     id: slideshowPage
     allowedOrientations: Orientation.All
+    showNavigationIndicator: !slideshowRunning
 
     // Properties.
     property string imageSource: ""
     property FolderModel pictureModel: null
     property int startIndex: 1
     property int currentPictureIndex: startIndex
+    property bool slideshowRunning: true
 
     // Settings.
     property int slideshowInterval: 5000
@@ -76,6 +78,7 @@ Page {
                 }
 
                 imageSource = pictureModel.getPath(currentPictureIndex)
+                slideshowRunning = true
             }
         }
         else if(status === PageStatus.Deactivating)
@@ -88,50 +91,81 @@ Page {
         }
     }
 
-    SilicaFlickable {
+    // Image.
+    Image {
+        id: slideshowPicture
         anchors.fill: parent
+        asynchronous: true
+        cache: false
+        clip: true
+        fillMode: Image.PreserveAspectFit
+        sourceSize.width: slideshowPage.width
+        sourceSize.height: slideshowPage.height
 
-        // Menu.
-        PullDownMenu {
-            MenuItem {
-                id: startStopMenu
-                text: slideshowTimer.running ? qsTr("Stop") : qsTr("Start")
+        source: imageSource
 
-                onClicked: {
-                    console.log("Start/Stop pulley triggered...")
-                    if(slideshowTimer.running)
-                    {
-                        console.log("Slideshow running -> stop...")
-                        slideshowTimer.stop()
-                    }
-                    else
-                    {
-                        console.log("Slideshow stopped -> start...")
-                        slideshowTimer.start()
-                    }
-                }
+        onStatusChanged: {
+            if(status == Image.Ready)
+            {
+                console.log("Image ready, start timer...")
+                imageChanged(imageSource)
+                slideshowTimer.start()
             }
         }
+    }
 
-        // Image.
-        Image {
-            id: slideshowPicture
-            anchors.fill: parent
-            asynchronous: true
-            cache: false
-            clip: true
-            fillMode: Image.PreserveAspectFit
+    /*
+      Pause indicators.
+      */
 
-            source: imageSource
+    Rectangle {
+        id: circlePause
+        width: 160
+        height: 160
+        radius: width/2
+        anchors.centerIn: parent
+        border.color: Theme.highlightColor
+        border.width: 5
+        opacity: 0.6
+        color: "transparent"
+        visible: !slideshowRunning
+    }
+    Rectangle {
+        id: leftPause
+        width: 20
+        height: 100
+        anchors.centerIn: parent
+        anchors.horizontalCenterOffset: -25
+        radius: 10
+        color: Theme.highlightColor
+        opacity: 0.9
+        visible: !slideshowRunning
+    }
+    Rectangle {
+        id: rightPause
+        width: 20
+        height: 100
+        anchors.centerIn: parent
+        anchors.horizontalCenterOffset: 25
+        radius: 10
+        color: Theme.highlightColor
+        opacity: 0.9
+        visible: !slideshowRunning
+    }
 
-            onStatusChanged: {
-                if(status == Image.Ready)
-                {
-                    console.log("Image ready, start timer...")
-                    imageChanged(imageSource)
-                    slideshowTimer.start()
-                }
-            }
+    // -------------------------------------------
+
+    // Handle start/stop by click.
+    MouseArea {
+        id: slideshowToggleArea
+        anchors.fill: parent
+
+        // Toggle slideshow start/stop.
+        onClicked: {
+            if(slideshowRunning)
+                stopSlideshow()
+            else
+                startSlideshow()
         }
     }
 
@@ -181,13 +215,18 @@ Page {
     // Stop the slideshow if running.
     function stopSlideshow()
     {
+        // If running, stop.
         if(slideshowTimer.running)
+        {
+            slideshowRunning = false
             slideshowTimer.stop()
+        }
     }
 
-    // Star slideshow. If running, restart.
+    // Star slideshow.
     function startSlideshow()
     {
+        slideshowRunning = true
         slideshowTimer.restart()
     }
 }

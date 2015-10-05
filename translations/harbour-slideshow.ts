@@ -97,15 +97,4 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
-<context>
-    <name>SlideshowPage</name>
-    <message>
-        <source>Stop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
 </TS>
