@@ -34,6 +34,7 @@
 #include <QtQuick>
 #include <QtQml>
 #include <sailfishapp.h>
+#include <QTranslator>
 
 #include "settings.h"
 #include "foldermodel.h"
@@ -44,6 +45,17 @@ int main(int argc, char *argv[])
     qmlRegisterType<FolderModel>("harbour.slideshow.FolderModel", 1, 0, "FolderModel");
 
     QGuiApplication *a = SailfishApp::application(argc, argv);
+
+    // Translations.
+    QTranslator translator;
+    QString locale = QLocale::system().name();
+    //locale = "fi";
+    if(!translator.load("harbour-slideshow-" + locale, SailfishApp::pathTo("translations").toLocalFile()))
+    {
+        qDebug() << "Could not load locale: " + locale;
+    }
+    a->installTranslator(&translator);
+
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("appVersion", APP_VERSION);
     view->setSource(SailfishApp::pathTo("qml/harbour-slideshow.qml"));

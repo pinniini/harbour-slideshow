@@ -40,9 +40,11 @@ CONFIG += sailfishapp_i18n
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/harbour-slideshow-de.ts
+TRANSLATIONS += translations/harbour-slideshow-fi.ts \
+    translations/harbour-slideshow-sv.ts \
+    translations/harbour-slideshow-de.ts
 
-VERSION = 0.6-1
+VERSION = 0.7-1
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 HEADERS += \

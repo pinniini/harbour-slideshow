@@ -38,6 +38,16 @@ Page {
     id: aboutPage
     allowedOrientations: Orientation.All
 
+    property string issuesText: qsTr("Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)")
+
+    // React on status changes.
+    onStatusChanged: {
+        if(status === PageStatus.Activating)
+        {
+            issueLabel.text = Theme.highlightText(issuesText, "github", Theme.highlightColor)
+        }
+    }
+
     // Content in flickable. Enables scroll if
     // content gets too long.
     SilicaFlickable {
@@ -78,6 +88,8 @@ Page {
             Label {
                 text: qsTr("Joni Korhonen, also known as pinniini")
                 x: Theme.paddingMedium
+                wrapMode: Text.WordWrap
+                width: parent.width - Theme.paddingMedium
             }
 
             SectionHeader {
@@ -115,11 +127,12 @@ Page {
             }
 
             Label {
+                id: issueLabel
                 textFormat: Text.AutoText
                 wrapMode: Text.Wrap
                 width: parent.width - Theme.paddingMedium
                 x: Theme.paddingMedium
-                text: Theme.highlightText("Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)", "github", Theme.highlightColor)
+                //text: Theme.highlightText(qsTr("Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)"), "github", Theme.highlightColor)
                 //text: qsTr("Found bugs? Got some great improvement ideas? Please report them to <a style=\"color: inherit; text-decoration: underline;\" href=\"https://github.com/pinniini/harbour-slideshow\">github</a> and I am happy to look them through :)")
                 MouseArea {
                     anchors.fill: parent

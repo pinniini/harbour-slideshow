@@ -13,7 +13,7 @@ Name:       harbour-slideshow
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Slideshow application
-Version:    0.6
+Version:    0.7
 Release:    1
 Group:      Qt/Qt
 License:    BSD
@@ -67,5 +67,6 @@ desktop-file-install --delete-original       \
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/86x86/apps/%{name}.png
+%{_datadir}/%{name}/translations
 # >> files
 # << files

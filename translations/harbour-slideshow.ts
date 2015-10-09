@@ -39,6 +39,10 @@
         <source>Slideshow is an application to automatically view your awesome pictures. It works folder-based, i.e. you select a folder which contains pictures and start the slideshow from the pulley menu. Simple!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>

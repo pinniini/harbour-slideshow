@@ -8,6 +8,9 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Fri Oct 9 2015 Joni Korhonen <joni.h.korhonen@gmail.com> 0.7-1
+- Added translations
+
 * Mon Oct 5 2015 Joni Korhonen <joni.h.korhonen@gmail.com> 0.6-1
 - Fixed github issues #1, #4
 - Start/stop slideshow by clicking the picture
