@@ -41,7 +41,7 @@
     </message>
     <message>
         <source>Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)</source>
-        <translation type="unfinished"></translation>
+        <translation>Hittat några fel? Har du några bra förbättringsidéer? Rapportera till GitHub så skall jag gärna titta igenom det. :)</translation>
     </message>
 </context>
 <context>
