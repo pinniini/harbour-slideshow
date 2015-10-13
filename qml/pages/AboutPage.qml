@@ -123,6 +123,18 @@ Page {
             }
 
             SectionHeader {
+                text: qsTr("Credits")
+            }
+
+            Label {
+                id: swedishTranslationLabel
+                wrapMode: Text.Wrap
+                width: parent.width - Theme.paddingMedium
+                x: Theme.paddingMedium
+                text: qsTr("Swedish translation by: Åke Engelbrektson")
+            }
+
+            SectionHeader {
                 text: qsTr("Ideas/Issues")
             }
 

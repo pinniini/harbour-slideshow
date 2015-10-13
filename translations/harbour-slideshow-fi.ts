@@ -45,6 +45,16 @@
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="126"/>
+        <source>Credits</source>
+        <translation>Kiitokset</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="134"/>
+        <source>Swedish translation by: Åke Engelbrektson</source>
+        <translation>Ruotsinkieliset käännökset: Åke Engelbrektson</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="138"/>
         <source>Ideas/Issues</source>
         <translation>Ideoita/Onglemia</translation>
     </message>
@@ -88,39 +98,58 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="53"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="73"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="188"/>
         <source>Settings</source>
         <translation>Asetukset</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="86"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="109"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="190"/>
+        <source>second</source>
+        <translation>sekunti</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="110"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="191"/>
         <source>seconds</source>
         <translation>sekuntia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="87"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="118"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="189"/>
         <source>Slideshow interval</source>
         <translation>Esityksen ajastus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="96"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="127"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="192"/>
         <source>Loop pictures</source>
         <translation>Kierrätä kuvia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="97"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="128"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="193"/>
         <source>Slideshow starts over when reaching the end.</source>
         <translation>Esitys alkaa alusta, kun loppu on saavutettu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="107"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="138"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="194"/>
         <source>Stop when minimized</source>
         <translation>Pysäytä, kun ohjelma pienennetään</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="108"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="139"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="195"/>
         <source>Slideshow will be stopped when pushed minimized.</source>
         <translation>Esitys pysäytetään, kun ohjelma pienennetään</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="149"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="196"/>
+        <source>Language:</source>
+        <translation>Kieli:</translation>
     </message>
 </context>
 </TS>

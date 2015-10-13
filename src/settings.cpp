@@ -36,7 +36,7 @@
 #include <QSettings>
 
 Settings::Settings(QObject *parent) :
-    QObject(parent), m_interval(5), m_loop(true), m_stopMinimized(true)
+    QObject(parent), m_interval(5), m_loop(true), m_stopMinimized(true), m_language("en")
 {
     // Use QSettings for the settings.
     // CONFIG += sailfishapp takes care about organization and application name,
@@ -45,6 +45,7 @@ Settings::Settings(QObject *parent) :
     m_interval = settings.value("interval", 5).toInt();
     m_loop = settings.value("loop", true).toBool();
     m_stopMinimized = settings.value("stopMinimized", true).toBool();
+    m_language = settings.value("language", "").toString();
 }
 
 /*
@@ -64,7 +65,7 @@ void Settings::setInterval(int interval)
     emit intervalChanged(m_interval);
 
     QSettings settings;
-    settings.setValue("interval", interval);
+    settings.setValue("interval", m_interval);
 }
 
 // Get loop.
@@ -80,7 +81,7 @@ void Settings::setLoop(bool loop)
     emit loopChanged(m_loop);
 
     QSettings settings;
-    settings.setValue("loop", loop);
+    settings.setValue("loop", m_loop);
 }
 
 // Get stopMinimized.
@@ -96,5 +97,25 @@ void Settings::setStopMinimized(bool stopMinimized)
     emit stopMinimizedChanged(m_stopMinimized);
 
     QSettings settings;
-    settings.setValue("stopMinimized", stopMinimized);
+    settings.setValue("stopMinimized", m_stopMinimized);
+}
+
+// Get language.
+QString Settings::language() const
+{
+    return m_language;
+}
+
+// Set language.
+void Settings::setLanguage(const QString &language)
+{
+    // Language changes.
+    if(m_language != language)
+    {
+        m_language = language;
+        emit languageChanged(m_language);
+
+        QSettings settings;
+        settings.setValue("language", m_language);
+    }
 }

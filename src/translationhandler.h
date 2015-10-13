@@ -31,42 +31,32 @@
 
 */
 
-#include <QtQuick>
-#include <QtQml>
-#include <sailfishapp.h>
+#ifndef TRANSLATIONHANDLER_H
+#define TRANSLATIONHANDLER_H
+
+#include <QObject>
 #include <QTranslator>
 
-#include "settings.h"
-#include "foldermodel.h"
-#include "translationhandler.h"
-
-int main(int argc, char *argv[])
+class TranslationHandler : public QObject
 {
-    qmlRegisterType<Settings>("harbour.slideshow.Settings", 1, 0, "SlideSettings");
-    qmlRegisterType<FolderModel>("harbour.slideshow.FolderModel", 1, 0, "FolderModel");
-    qmlRegisterType<TranslationHandler>("harbour.slideshow.TranslationHandler", 1, 0, "TranslationHandler");
+    Q_OBJECT
+public:
+    explicit TranslationHandler(QObject *parent = 0);
+    ~TranslationHandler();
 
-    QGuiApplication *a = SailfishApp::application(argc, argv);
+    // Load new translation.
+    Q_INVOKABLE void loadTranslation(QString language);
 
-    // Translations.
-    Settings settings;
-    QString locale = settings.language();
-    QTranslator translator;
-    if(locale != "en" && !translator.load("harbour-slideshow-" + locale, SailfishApp::pathTo("translations").toLocalFile()))
-    {
-        qDebug() << "Could not load locale: " + locale;
+signals:
+    void translateUI();
 
-        locale = QLocale::system().name();
-        if(!translator.load("harbour-slideshow-" + locale, SailfishApp::pathTo("translations").toLocalFile()))
-        {
-            qDebug() << "Could not load locale: " + locale;
-        }
-    }
-    a->installTranslator(&translator);
+public slots:
 
-    QQuickView *view = SailfishApp::createView();
-    view->rootContext()->setContextProperty("appVersion", APP_VERSION);
-    view->setSource(SailfishApp::pathTo("qml/harbour-slideshow.qml"));
-    view->show();
-    return a->exec();
-}
+private:
+    QTranslator m_translator;
+    QString m_langPath;
+    QString m_langFilePrefix;
+    QString m_defaultLangPrefix;
+};
+
+#endif // TRANSLATIONHANDLER_H

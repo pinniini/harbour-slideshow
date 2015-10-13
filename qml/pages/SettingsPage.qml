@@ -35,6 +35,7 @@ import QtQuick 2.1
 import Sailfish.Silica 1.0
 
 import harbour.slideshow.Settings 1.0
+import harbour.slideshow.TranslationHandler 1.0
 
 Page {
     id: settingsPage
@@ -48,6 +49,25 @@ Page {
     property bool lp: settings.loop
     property bool stp: settings.stopMinimized
 
+    // Select current language from the language combo.
+    Component.onCompleted: {
+        var curLang = settings.language
+
+        for(var i = 0; i < languageContext.children.length; ++i)
+        {
+            var child = languageContext.children[i]
+            if(child.hasOwnProperty("value"))
+            {
+                // Current language found.
+                if(child.value === curLang)
+                {
+                    languageCombo.currentIndex = i
+                    break
+                }
+            }
+        }
+    }
+
     PageHeader {
         id: pageHeader
         title: qsTr("Settings")
@@ -56,6 +76,13 @@ Page {
     // Settings.
     SlideSettings {
         id: settings
+    }
+
+    // Translations.
+    TranslationHandler {
+        id: translationHandler
+
+        onTranslateUI: translateUi()
     }
 
     // Settings in flickable so that the page is scrollable
@@ -78,12 +105,16 @@ Page {
 
             Slider {
                 id: intervalSlider
+
+                property string second: qsTr("second")
+                property string seconds: qsTr("seconds")
+
                 width: parent.width
                 minimumValue: 1
                 maximumValue: 30
                 value: intrvl
                 stepSize: 1
-                valueText: value + " " + qsTr("seconds")
+                valueText: value + " " + (value == 1 ? second : seconds)
                 label: qsTr("Slideshow interval")
 
                 onValueChanged: {
@@ -112,6 +143,56 @@ Page {
                     settings.stopMinimized = checked
                 }
             }
+
+            ComboBox {
+                id: languageCombo
+                label: qsTr("Language:")
+
+                menu: ContextMenu {
+                    id: languageContext
+                    MenuItem {
+                        property string value: "en"
+                        text: "English"
+                        onClicked: {
+                            settings.language = value
+                            translationHandler.loadTranslation(value)
+                        }
+                    }
+                    MenuItem {
+                        property string value: "fi"
+                        text: "Suomi"
+                        onClicked: {
+                            settings.language = value
+                            translationHandler.loadTranslation(value)
+                        }
+
+                    }
+                    MenuItem {
+                        property string value: "sv"
+                        text: "Svenska"
+                        onClicked: {
+                            settings.language = value
+                            translationHandler.loadTranslation(value)
+                        }
+                    }
+                }
+            }
         }
+    }
+
+    // Functions.
+
+    function translateUi()
+    {
+        console.log("Translate ui...")
+        pageHeader.title = qsTr("Settings")
+        intervalSlider.label = qsTr("Slideshow interval")
+        intervalSlider.second = qsTr("second")
+        intervalSlider.seconds = qsTr("seconds")
+        loopSwitch.text = qsTr("Loop pictures")
+        loopSwitch.description = qsTr("Slideshow starts over when reaching the end.")
+        stopSwitch.text = qsTr("Stop when minimized")
+        stopSwitch.description = qsTr("Slideshow will be stopped when pushed minimized.")
+        languageCombo.label = qsTr("Language:")
     }
 }

@@ -43,6 +43,14 @@
         <source>Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Credits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swedish translation by: Åke Engelbrektson</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>
@@ -98,6 +106,14 @@
     </message>
     <message>
         <source>Slideshow will be stopped when pushed minimized.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>second</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

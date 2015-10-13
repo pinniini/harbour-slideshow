@@ -17,7 +17,8 @@ CONFIG += sailfishapp
 SOURCES += src/harbour-slideshow.cpp \
     src/settings.cpp \
     src/foldermodel.cpp \
-    src/folderitem.cpp
+    src/folderitem.cpp \
+    src/translationhandler.cpp
 
 OTHER_FILES += qml/harbour-slideshow.qml \
     qml/cover/CoverPage.qml \
@@ -50,4 +51,5 @@ DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 HEADERS += \
     src/settings.h \
     src/foldermodel.h \
-    src/folderitem.h
+    src/folderitem.h \
+    src/translationhandler.h
