@@ -45,7 +45,7 @@
     </message>
     <message>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Tack</translation>
     </message>
     <message>
         <source>Swedish translation by: Åke Engelbrektson</source>
@@ -110,11 +110,11 @@
     </message>
     <message>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Språk:</translation>
     </message>
     <message>
         <source>second</source>
-        <translation type="unfinished"></translation>
+        <translation>sekund</translation>
     </message>
 </context>
 </TS>
