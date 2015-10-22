@@ -49,7 +49,7 @@
     </message>
     <message>
         <source>Swedish translation by: Åke Engelbrektson</source>
-        <translation type="unfinished"></translation>
+        <translation>Svensk översättning av: Åke Engelbrektson</translation>
     </message>
 </context>
 <context>
