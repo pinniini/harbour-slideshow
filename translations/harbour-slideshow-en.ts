@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fi">
+<TS version="2.1" language="en_US">
 <context>
     <name>AboutPage</name>
     <message>
+        <location filename="../qml/pages/AboutPage.qml" line="41"/>
+        <source>Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)</source>
+        <translation>Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)</translation>
+    </message>
+    <message>
         <location filename="../qml/pages/AboutPage.qml" line="65"/>
         <source>About Slideshow</source>
-        <translation>Tietoja Slideshow:sta</translation>
+        <translation>About Slideshow</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="69"/>
@@ -16,52 +21,47 @@
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="73"/>
         <source>Slideshow is an application to automatically view your awesome pictures. It works folder-based, i.e. you select a folder which contains pictures and start the slideshow from the pulley menu. Simple!</source>
-        <translation>Slideshow on ohjelma mahtavien kuviesi automaattiseen näyttämiseen. Se toimii kansiopohjaisesti, eli valitset kansion ja käynnistät esityksen ylävalikosta. Yksinkertaista!</translation>
+        <translation>Slideshow is an application to automatically view your awesome pictures. It works folder-based, i.e. you select a folder which contains pictures and start the slideshow from the pulley menu. Simple!</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="80"/>
         <source>Version </source>
-        <translation>Versio </translation>
+        <translation>Version </translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="85"/>
         <source>By who</source>
-        <translation>Tekijä</translation>
+        <translation>By who</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="89"/>
         <source>Joni Korhonen, also known as pinniini</source>
-        <translation>Joni Korhonen, tunnetaan myös nimellä pinniini</translation>
+        <translation>Joni Korhonen, also known as pinniini</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="96"/>
         <source>License</source>
-        <translation>Lisenssi</translation>
+        <translation>License</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="110"/>
         <source>Code</source>
-        <translation>Koodi</translation>
+        <translation>Code</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="126"/>
         <source>Credits</source>
-        <translation>Kiitokset</translation>
+        <translation>Credits</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="134"/>
         <source>Swedish translation by: Åke Engelbrektson</source>
-        <translation>Ruotsinkieliset käännökset: Åke Engelbrektson</translation>
+        <translation>Swedish translation by: Åke Engelbrektson</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="138"/>
         <source>Ideas/Issues</source>
-        <translation>Ideoita/Onglemia</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="41"/>
-        <source>Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)</source>
-        <translation>Löysitkö virheitä? Onko sinulla hyviä kehitysideoita? Raportoi ne github:iin, niin katson ne läpi mielelläni :)</translation>
+        <translation>Ideas/Issues</translation>
     </message>
 </context>
 <context>
@@ -78,31 +78,31 @@
         <location filename="../qml/pages/MainPage.qml" line="89"/>
         <location filename="../qml/pages/MainPage.qml" line="242"/>
         <source>About</source>
-        <translation>Tietoja</translation>
+        <translation>About</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="95"/>
         <location filename="../qml/pages/MainPage.qml" line="243"/>
         <source>Settings</source>
-        <translation>Asetukset</translation>
+        <translation>Settings</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="101"/>
         <location filename="../qml/pages/MainPage.qml" line="244"/>
         <source>Start slideshow in current folder</source>
-        <translation>Käynnistä esitys nykyisessä kansiossa</translation>
+        <translation>Start slideshow in current folder</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="49"/>
         <location filename="../qml/pages/MainPage.qml" line="250"/>
         <source>Go up</source>
-        <translation>Avaa ylempi taso</translation>
+        <translation>Go up</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="50"/>
         <location filename="../qml/pages/MainPage.qml" line="247"/>
         <source>Start from here</source>
-        <translation>Aloita tästä</translation>
+        <translation>Start from here</translation>
     </message>
 </context>
 <context>
@@ -111,67 +111,67 @@
         <location filename="../qml/pages/SettingsPage.qml" line="78"/>
         <location filename="../qml/pages/SettingsPage.qml" line="208"/>
         <source>Settings</source>
-        <translation>Asetukset</translation>
+        <translation>Settings</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="116"/>
         <location filename="../qml/pages/SettingsPage.qml" line="212"/>
         <source>second</source>
-        <translation>sekunti</translation>
+        <translation>second</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="117"/>
         <location filename="../qml/pages/SettingsPage.qml" line="213"/>
         <source>seconds</source>
-        <translation>sekuntia</translation>
+        <translation>seconds</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="125"/>
         <location filename="../qml/pages/SettingsPage.qml" line="211"/>
         <source>Slideshow interval</source>
-        <translation>Esityksen ajastus</translation>
+        <translation>Slideshow interval</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="134"/>
         <location filename="../qml/pages/SettingsPage.qml" line="214"/>
         <source>Loop pictures</source>
-        <translation>Kierrätä kuvia</translation>
+        <translation>Loop pictures</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="135"/>
         <location filename="../qml/pages/SettingsPage.qml" line="215"/>
         <source>Slideshow starts over when reaching the end.</source>
-        <translation>Esitys alkaa alusta, kun loppu on saavutettu.</translation>
+        <translation>Slideshow starts over when reaching the end.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="145"/>
         <location filename="../qml/pages/SettingsPage.qml" line="216"/>
         <source>Random order</source>
-        <translation>Satunnainen järjestys</translation>
+        <translation>Random order</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="146"/>
         <location filename="../qml/pages/SettingsPage.qml" line="217"/>
         <source>Slideshow plays the pictures in a random order.</source>
-        <translation>Esitys toistaa kuvat satunnaisessa järjestyksessä.</translation>
+        <translation>Slideshow plays the pictures in a random order.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="156"/>
         <location filename="../qml/pages/SettingsPage.qml" line="218"/>
         <source>Stop when minimized</source>
-        <translation>Pysäytä, kun ohjelma pienennetään</translation>
+        <translation>Stop when minimized</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="157"/>
         <location filename="../qml/pages/SettingsPage.qml" line="219"/>
         <source>Slideshow will be stopped when pushed minimized.</source>
-        <translation>Esitys pysäytetään, kun ohjelma pienennetään.</translation>
+        <translation>Slideshow will be stopped when pushed minimized.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="167"/>
         <location filename="../qml/pages/SettingsPage.qml" line="220"/>
         <source>Language:</source>
-        <translation>Kieli:</translation>
+        <translation>Language:</translation>
     </message>
 </context>
 </TS>

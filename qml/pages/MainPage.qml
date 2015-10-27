@@ -46,6 +46,8 @@ Page {
     property bool firstLoad: true
     property alias slideshowPlaying: slideshowPage.slideshowRunning
     property alias stopOnMinimize: settingsPage.stp
+    property string goUpText: qsTr("Go up")
+    property string contextStartText: qsTr("Start from here")
 
     // Signals.
     // Notify cover about image change.
@@ -83,22 +85,22 @@ Page {
         // Menu to start slideshow in the current folder.
         PullDownMenu {
             MenuItem {
+                id: menuAbout
                 text: qsTr("About")
                 onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
             }
 
             MenuItem {
+                id: menuSettings
                 text: qsTr("Settings")
                 onClicked: pageStack.push(settingsPage)
             }
 
             MenuItem {
+                id: menuStartFolder
                 text: qsTr("Start slideshow in current folder")
                 onClicked: {
-                    slideshowPage.pictureModel = folderModel
-                    slideshowPage.slideshowInterval = 1000 * settingsPage.slideSettings.interval
-                    slideshowPage.loop = settingsPage.slideSettings.loop
-                    pageStack.push(slideshowPage)
+                    startSlideshow(-1)
                 }
 
                 enabled: slideshowEnabled
@@ -110,11 +112,11 @@ Page {
             id: pageHeader
             title: head
         }
-        delegate: BackgroundItem {
+        //delegate: BackgroundItem {
+        delegate: ListItem {
             id: delegate
-            visible: fileName != "." // Hide dot, i.e. current folder.
-            height: fileName == "." ? 0 : Theme.itemSizeSmall // Hide dot, i.e. current folder.
             width: parent.width
+            contentHeight: Theme.itemSizeSmall
 
             // Row to place icon and filename.
             Row {
@@ -133,11 +135,28 @@ Page {
                 // Filename or Go up -string.
                 Label {
                     x: Theme.paddingLarge
-                    text: fileName == ".." ? qsTr("Go up") : fileName
+                    text: fileName == ".." ? goUpText : fileName
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                     anchors.verticalCenter: parent.verticalCenter
                 }
             }
+
+            // Context menu to start slideshow from the picture the user chooses.
+            menu: isFolder == true ? null : contextMenu
+            // Context menu
+//            Component {
+//                id: contextMenu
+                ContextMenu {
+                    id: contextMenu
+                    MenuItem {
+                        id: contextStart
+                        text: contextStartText
+                        onClicked: {
+                            startSlideshow(index)
+                        }
+                    }
+                }
+//            }
 
             // Change folder on click.
             onClicked: {
@@ -158,6 +177,10 @@ Page {
     // Settings.
     SettingsPage {
         id: settingsPage
+
+        onTranslate: {
+            mainPage.translateUi()
+        }
     }
 
     // Actual slideshow.
@@ -187,8 +210,6 @@ Page {
             // If application deactivates and setting is that slideshow should stop, then stop slideshow.
             if(!active && settingsPage.slideSettings.stopMinimized)
                 slideshowPage.stopSlideshow()
-//            else if(active && settingsPage.slideSettings.stopMinimized)  // If application is activating and slideshow is stopped, restart it.
-//                slideshowPage.startSlideshow()
         }
     }
 
@@ -199,5 +220,33 @@ Page {
             slideshowPage.stopSlideshow()
         else
             slideshowPage.startSlideshow()
+    }
+
+    // Start slideshow with proper settings and selected index (-1 if started from the pulley menu).
+    function startSlideshow(index)
+    {
+        slideshowPage.pictureModel = folderModel
+        slideshowPage.slideshowInterval = 1000 * settingsPage.slideSettings.interval
+        slideshowPage.loop = settingsPage.slideSettings.loop
+        slideshowPage.random = settingsPage.slideSettings.random
+        slideshowPage.startIndex = index
+        pageStack.push(slideshowPage)
+    }
+
+    // Translate UI.
+    function translateUi()
+    {
+        console.log("MainPage - translateUi")
+
+        // Pulley menu.
+        menuAbout.text = qsTr("About")
+        menuSettings.text = qsTr("Settings")
+        menuStartFolder.text = qsTr("Start slideshow in current folder")
+
+        // Context menu.
+        contextStartText = qsTr("Start from here")
+
+        // Go up -text.
+        goUpText = qsTr("Go up")
     }
 }

@@ -43,9 +43,10 @@ CONFIG += sailfishapp_i18n
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-slideshow-fi.ts \
     translations/harbour-slideshow-sv.ts \
+    translations/harbour-slideshow-en.ts \
     translations/harbour-slideshow-de.ts
 
-VERSION = 0.7-1
+VERSION = 0.8-1
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 HEADERS += \
@@ -53,3 +54,12 @@ HEADERS += \
     src/foldermodel.h \
     src/folderitem.h \
     src/translationhandler.h
+
+icon108.path  = /usr/share/icons/hicolor/108x108/apps
+icon108.files = 108x108/harbour-slideshow.png
+icon128.path  = /usr/share/icons/hicolor/128x128/apps
+icon128.files = 128x128/harbour-slideshow.png
+icon256.path  = /usr/share/icons/hicolor/256x256/apps
+icon256.files = 256x256/harbour-slideshow.png
+
+INSTALLS = icon108 icon128 icon256

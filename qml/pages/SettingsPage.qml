@@ -48,6 +48,11 @@ Page {
     property int intrvl: settings.interval
     property bool lp: settings.loop
     property bool stp: settings.stopMinimized
+    property bool rndm: settings.random
+
+    // Signals.
+    // Notify about language change.
+    signal translate()
 
     // Select current language from the language combo.
     Component.onCompleted: {
@@ -82,7 +87,9 @@ Page {
     TranslationHandler {
         id: translationHandler
 
-        onTranslateUI: translateUi()
+        onTranslateUI: {
+            translateUi()
+        }
     }
 
     // Settings in flickable so that the page is scrollable
@@ -130,6 +137,17 @@ Page {
 
                 onCheckedChanged: {
                     settings.loop = checked
+                }
+            }
+
+            TextSwitch {
+                id: randomSwitch
+                text: qsTr("Random order")
+                description: qsTr("Slideshow plays the pictures in a random order.")
+                checked: rndm
+
+                onCheckedChanged: {
+                    settings.random = checked
                 }
             }
 
@@ -184,15 +202,24 @@ Page {
 
     function translateUi()
     {
-        console.log("Translate ui...")
+        console.log("SettingsPage - translateUi")
+
+        // Page header.
         pageHeader.title = qsTr("Settings")
+
+        // Settings.
         intervalSlider.label = qsTr("Slideshow interval")
         intervalSlider.second = qsTr("second")
         intervalSlider.seconds = qsTr("seconds")
         loopSwitch.text = qsTr("Loop pictures")
         loopSwitch.description = qsTr("Slideshow starts over when reaching the end.")
+        randomSwitch.text = qsTr("Random order")
+        randomSwitch.description = qsTr("Slideshow plays the pictures in a random order.")
         stopSwitch.text = qsTr("Stop when minimized")
         stopSwitch.description = qsTr("Slideshow will be stopped when pushed minimized.")
         languageCombo.label = qsTr("Language:")
+
+        // Emit translate signal.
+        translate()
     }
 }

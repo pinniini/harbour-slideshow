@@ -43,6 +43,7 @@ class Settings : public QObject
     // Exposed properties.
     Q_PROPERTY(int interval READ interval WRITE setInterval NOTIFY intervalChanged)
     Q_PROPERTY(bool loop READ loop WRITE setLoop NOTIFY loopChanged)
+    Q_PROPERTY(bool random READ random WRITE setRandom NOTIFY randomChanged)
     Q_PROPERTY(bool stopMinimized READ stopMinimized WRITE setStopMinimized NOTIFY stopMinimizedChanged)
     Q_PROPERTY(QString language READ language WRITE setLanguage NOTIFY languageChanged)
 
@@ -54,6 +55,8 @@ public:
     void setInterval(int interval);
     bool loop() const;
     void setLoop(bool loop);
+    bool random() const;
+    void setRandom(bool random);
     bool stopMinimized() const;
     void setStopMinimized(bool stopMinimized);
     QString language() const;
@@ -63,6 +66,7 @@ public:
 signals:
     void intervalChanged(int interval);
     void loopChanged(bool loop);
+    void randomChanged(bool random);
     void stopMinimizedChanged(bool stopMinimized);
     void languageChanged(const QString &language);
 
@@ -71,6 +75,7 @@ public slots:
 private:
     int m_interval;
     bool m_loop;
+    bool m_random;
     bool m_stopMinimized;
     QString m_language;
 };

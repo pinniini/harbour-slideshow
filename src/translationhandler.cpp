@@ -32,6 +32,7 @@
 */
 
 #include <QDebug>
+#include <QGuiApplication>
 #include <sailfishapp.h>
 
 #include "translationhandler.h"
@@ -54,15 +55,13 @@ TranslationHandler::~TranslationHandler()
 
 void TranslationHandler::loadTranslation(QString language)
 {
-    // Load default language (English).
-    if(language == "" || language == "en")
-    {
-        qApp->removeTranslator(&m_translator);
-        m_translator.load(m_defaultLangPrefix, m_langPath);
-        emit translateUI();
-        return;
-    }
+    qDebug() << "Selected language: " << language;
 
+    // No languge.
+    if(language == "")
+        return;
+
+    // Remove old translator and load new file.
     qApp->removeTranslator(&m_translator);
     m_translator.load(m_langFilePrefix + language, m_langPath);
 

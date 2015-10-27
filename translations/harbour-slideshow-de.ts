@@ -77,6 +77,10 @@
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Start from here</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsPage</name>
@@ -114,6 +118,14 @@
     </message>
     <message>
         <source>second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Random order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slideshow plays the pictures in a random order.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,80 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="en_US">
 <context>
     <name>AboutPage</name>
     <message>
         <source>About Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>About Slideshow</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Version </source>
-        <translation type="unfinished"></translation>
+        <translation>Version</translation>
     </message>
     <message>
         <source>Joni Korhonen, also known as pinniini</source>
-        <translation type="unfinished"></translation>
+        <translation>Joni Korhonen, also known as pinniini</translation>
     </message>
     <message>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>License</translation>
     </message>
     <message>
         <source>Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Code</translation>
     </message>
     <message>
         <source>Ideas/Issues</source>
-        <translation type="unfinished"></translation>
+        <translation>Ideas/Issues</translation>
     </message>
     <message>
         <source>By who</source>
-        <translation type="unfinished"></translation>
+        <translation>By who</translation>
     </message>
     <message>
         <source>Slideshow is an application to automatically view your awesome pictures. It works folder-based, i.e. you select a folder which contains pictures and start the slideshow from the pulley menu. Simple!</source>
-        <translation type="unfinished"></translation>
+        <translation>Slideshow is an application to automatically view your awesome pictures. It works folder based, i.e. you select a folder which contains pictures and start the slideshow from the pulley menu. Simple!</translation>
     </message>
     <message>
         <source>Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)</source>
-        <translation type="unfinished"></translation>
+        <translation>Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)</translation>
     </message>
     <message>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Credits</translation>
     </message>
     <message>
         <source>Swedish translation by: Åke Engelbrektson</source>
-        <translation type="unfinished"></translation>
+        <translation>Swedish translation by: Åke Engelbrektson</translation>
     </message>
 </context>
 <context>
     <name>CoverPage</name>
     <message>
         <source>Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Slideshow</translation>
     </message>
 </context>
 <context>
     <name>MainPage</name>
     <message>
         <source>Start slideshow in current folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Start slideshow in current folder</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Settings</translation>
     </message>
     <message>
         <source>Go up</source>
-        <translation type="unfinished"></translation>
+        <translation>Go up</translation>
     </message>
     <message>
         <source>About</source>
+        <translation>About</translation>
+    </message>
+    <message>
+        <source>Start from here</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -82,38 +86,46 @@
     <name>SettingsPage</name>
     <message>
         <source>Slideshow interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Slideshow interval</translation>
     </message>
     <message>
         <source>Loop pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>Loop pictures</translation>
     </message>
     <message>
         <source>Slideshow starts over when reaching the end.</source>
-        <translation type="unfinished"></translation>
+        <translation>Slideshow starts over when reaching the end.</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Settings</translation>
     </message>
     <message>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>seconds</translation>
     </message>
     <message>
         <source>Stop when minimized</source>
-        <translation type="unfinished"></translation>
+        <translation>Stop when minimized</translation>
     </message>
     <message>
         <source>Slideshow will be stopped when pushed minimized.</source>
-        <translation type="unfinished"></translation>
+        <translation>Slideshow will be stopped when pushed minimized.</translation>
     </message>
     <message>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Language:</translation>
     </message>
     <message>
         <source>second</source>
+        <translation>second</translation>
+    </message>
+    <message>
+        <source>Random order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slideshow plays the pictures in a random order.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

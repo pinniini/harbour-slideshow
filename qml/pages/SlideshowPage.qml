@@ -43,13 +43,15 @@ Page {
     // Properties.
     property string imageSource: ""
     property FolderModel pictureModel: null
-    property int startIndex: 1
-    property int currentPictureIndex: startIndex
+    property int firstIndex: 1
+    property int currentPictureIndex: firstIndex
     property bool slideshowRunning: true
+    property int startIndex: -1
 
     // Settings.
     property int slideshowInterval: 5000
     property bool loop: false
+    property bool random: false
 
     // Signals.
     // Notify cover about image change.
@@ -71,21 +73,27 @@ Page {
                     if(!pictureModel.isFolder(i))
                     {
                         console.log("Found picture in index " + i)
-                        startIndex = i
-                        currentPictureIndex = startIndex
+                        firstIndex = i
+                        currentPictureIndex = firstIndex
                         break
                     }
                 }
+
+                // Check if slideshow should be started from the user selected picture.
+                if(startIndex != -1)
+                    currentPictureIndex = startIndex
 
                 imageSource = pictureModel.getPath(currentPictureIndex)
                 slideshowRunning = true
             }
         }
-        else if(status === PageStatus.Deactivating)
+        else if(status === PageStatus.Deactivating) // Deactivating, set defaults.
         {
             console.log("Page deactivating...")
             stopSlideshow()
-            currentPictureIndex = startIndex
+            currentPictureIndex = firstIndex
+            firstIndex = 1
+            startIndex = -1
             imageSource = ""
             imageChanged(imageSource)
         }
@@ -191,7 +199,7 @@ Page {
             // Reached the end of the model.
             if(currentPictureIndex === pictureModel.rowCount())
             {
-                currentPictureIndex = startIndex
+                currentPictureIndex = firstIndex
 
                 // If loop is off.
                 if(!loop)
@@ -228,5 +236,13 @@ Page {
     {
         slideshowRunning = true
         slideshowTimer.restart()
+    }
+
+    // Random number in given range.
+    // Got from:
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+    function getRandomNumber(min, max)
+    {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }

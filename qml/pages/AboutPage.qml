@@ -88,7 +88,7 @@ Page {
             Label {
                 text: qsTr("Joni Korhonen, also known as pinniini")
                 x: Theme.paddingMedium
-                wrapMode: Text.WordWrap
+                wrapMode: Text.Wrap
                 width: parent.width - Theme.paddingMedium
             }
 
