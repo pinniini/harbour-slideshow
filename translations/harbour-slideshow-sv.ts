@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>Start from here</source>
-        <translation type="unfinished"></translation>
+        <translation>Starta härifrån</translation>
     </message>
 </context>
 <context>
@@ -122,11 +122,11 @@
     </message>
     <message>
         <source>Random order</source>
-        <translation type="unfinished"></translation>
+        <translation>Blanda</translation>
     </message>
     <message>
         <source>Slideshow plays the pictures in a random order.</source>
-        <translation type="unfinished"></translation>
+        <translation>Slideshow spelar upp bilderna slumpmässigt</translation>
     </message>
 </context>
 </TS>
