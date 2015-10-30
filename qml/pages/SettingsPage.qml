@@ -47,8 +47,8 @@ Page {
     // Use these to prevent binding loop.
     property int intrvl: settings.interval
     property bool lp: settings.loop
+    property bool randm: settings.random
     property bool stp: settings.stopMinimized
-    property bool rndm: settings.random
 
     // Signals.
     // Notify about language change.
@@ -144,7 +144,7 @@ Page {
                 id: randomSwitch
                 text: qsTr("Random order")
                 description: qsTr("Slideshow plays the pictures in a random order.")
-                checked: rndm
+                checked: randm
 
                 onCheckedChanged: {
                     settings.random = checked

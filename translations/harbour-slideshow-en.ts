@@ -76,31 +76,31 @@
     <name>MainPage</name>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="89"/>
-        <location filename="../qml/pages/MainPage.qml" line="242"/>
+        <location filename="../qml/pages/MainPage.qml" line="268"/>
         <source>About</source>
         <translation>About</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="95"/>
-        <location filename="../qml/pages/MainPage.qml" line="243"/>
+        <location filename="../qml/pages/MainPage.qml" line="269"/>
         <source>Settings</source>
         <translation>Settings</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="101"/>
-        <location filename="../qml/pages/MainPage.qml" line="244"/>
+        <location filename="../qml/pages/MainPage.qml" line="270"/>
         <source>Start slideshow in current folder</source>
         <translation>Start slideshow in current folder</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="49"/>
-        <location filename="../qml/pages/MainPage.qml" line="250"/>
+        <location filename="../qml/pages/MainPage.qml" line="276"/>
         <source>Go up</source>
         <translation>Go up</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="50"/>
-        <location filename="../qml/pages/MainPage.qml" line="247"/>
+        <location filename="../qml/pages/MainPage.qml" line="273"/>
         <source>Start from here</source>
         <translation>Start from here</translation>
     </message>

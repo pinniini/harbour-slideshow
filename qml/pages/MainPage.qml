@@ -143,20 +143,16 @@ Page {
 
             // Context menu to start slideshow from the picture the user chooses.
             menu: isFolder == true ? null : contextMenu
-            // Context menu
-//            Component {
-//                id: contextMenu
-                ContextMenu {
-                    id: contextMenu
-                    MenuItem {
-                        id: contextStart
-                        text: contextStartText
-                        onClicked: {
-                            startSlideshow(index)
-                        }
+            ContextMenu {
+                id: contextMenu
+                MenuItem {
+                    id: contextStart
+                    text: contextStartText
+                    onClicked: {
+                        startSlideshow(index)
                     }
                 }
-//            }
+            }
 
             // Change folder on click.
             onClicked: {
@@ -225,11 +221,41 @@ Page {
     // Start slideshow with proper settings and selected index (-1 if started from the pulley menu).
     function startSlideshow(index)
     {
-        slideshowPage.pictureModel = folderModel
         slideshowPage.slideshowInterval = 1000 * settingsPage.slideSettings.interval
         slideshowPage.loop = settingsPage.slideSettings.loop
-        slideshowPage.random = settingsPage.slideSettings.random
-        slideshowPage.startIndex = index
+
+        var pictures = []
+        // Build picture array.
+        for(var i = folderModel.firstNonfolderIndex; i < folderModel.rowCount(); ++i)
+        {
+            pictures.push(folderModel.getPath(i))
+        }
+
+        // Randomize pictures if needed.
+        var randomizedArray = []
+        if(settingsPage.slideSettings.random)
+        {
+            // User selected the first picture.
+            if(index !== -1)
+            {
+                randomizedArray.push(pictures.splice(index - 1, 1).toString())
+            }
+
+            // Build randomized array as long as there are pictures left.
+            while(pictures.length > 0)
+            {
+                var ind = getRandomNumber(0, (pictures.length - 1))
+                randomizedArray.push(pictures.splice(ind, 1).toString())
+            }
+
+            console.log(randomizedArray[0])
+
+            // Set randomized pictures for the slideshow page.
+            slideshowPage.pictureArray = randomizedArray
+        }
+        else // Set pictures for the slideshow page.
+            slideshowPage.pictureArray = pictures
+
         pageStack.push(slideshowPage)
     }
 
@@ -248,5 +274,13 @@ Page {
 
         // Go up -text.
         goUpText = qsTr("Go up")
+    }
+
+    // Random number in given range.
+    // Got from:
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+    function getRandomNumber(min, max)
+    {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }

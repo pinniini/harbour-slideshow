@@ -42,16 +42,16 @@ Page {
 
     // Properties.
     property string imageSource: ""
-    property FolderModel pictureModel: null
-    property int firstIndex: 1
+    property int firstIndex: 0
     property int currentPictureIndex: firstIndex
     property bool slideshowRunning: true
-    property int startIndex: -1
+
+    // Picture array.
+    property var pictureArray: []
 
     // Settings.
     property int slideshowInterval: 5000
     property bool loop: false
-    property bool random: false
 
     // Signals.
     // Notify cover about image change.
@@ -62,38 +62,16 @@ Page {
         if(status === PageStatus.Activating)
         {
             console.log("Page activating...")
-            if(pictureModel.rowCount() > 1)
-            {
-                console.log("Pictures in the model...")
-
-                // Loop throug items in the folder.
-                for(var i = 0; i < pictureModel.rowCount(); ++i)
-                {
-                    // If item is not a folder, then it is the first picture in the folder.
-                    if(!pictureModel.isFolder(i))
-                    {
-                        console.log("Found picture in index " + i)
-                        firstIndex = i
-                        currentPictureIndex = firstIndex
-                        break
-                    }
-                }
-
-                // Check if slideshow should be started from the user selected picture.
-                if(startIndex != -1)
-                    currentPictureIndex = startIndex
-
-                imageSource = pictureModel.getPath(currentPictureIndex)
-                slideshowRunning = true
-            }
+            firstIndex = 0
+            currentPictureIndex = firstIndex
+            imageSource = pictureArray[firstIndex]
+            slideshowRunning = true
         }
         else if(status === PageStatus.Deactivating) // Deactivating, set defaults.
         {
             console.log("Page deactivating...")
             stopSlideshow()
             currentPictureIndex = firstIndex
-            firstIndex = 1
-            startIndex = -1
             imageSource = ""
             imageChanged(imageSource)
         }
@@ -197,21 +175,18 @@ Page {
             ++currentPictureIndex
 
             // Reached the end of the model.
-            if(currentPictureIndex === pictureModel.rowCount())
+            if(currentPictureIndex === pictureArray.length)
             {
                 currentPictureIndex = firstIndex
-
                 // If loop is off.
                 if(!loop)
                 {
                     stop()
-                    console.log("Loop is off, so stop...")
                     return
                 }
             }
 
-            imageSource = pictureModel.getPath(currentPictureIndex)
-            console.log("Picture changed...")
+            imageSource = pictureArray[currentPictureIndex]
         }
     }
 
@@ -236,13 +211,5 @@ Page {
     {
         slideshowRunning = true
         slideshowTimer.restart()
-    }
-
-    // Random number in given range.
-    // Got from:
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-    function getRandomNumber(min, max)
-    {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }

@@ -36,7 +36,7 @@
 #include <QSettings>
 
 Settings::Settings(QObject *parent) :
-    QObject(parent), m_interval(5), m_loop(true), m_random(false), m_stopMinimized(true), m_language("en")
+    QObject(parent)//, m_interval(5), m_loop(true), m_random(false), m_stopMinimized(true), m_language("en")
 {
     // Use QSettings for the settings.
     // CONFIG += sailfishapp takes care about organization and application name,
@@ -46,7 +46,7 @@ Settings::Settings(QObject *parent) :
     m_loop = settings.value("loop", true).toBool();
     m_random = settings.value("random", false).toBool();
     m_stopMinimized = settings.value("stopMinimized", true).toBool();
-    m_language = settings.value("language", "").toString();
+    m_language = settings.value("language", "en").toString();
 }
 
 /*

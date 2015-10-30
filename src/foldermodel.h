@@ -54,6 +54,7 @@ public:
 
     Q_PROPERTY(QString folder READ folder WRITE setFolder NOTIFY folderChanged)
     Q_PROPERTY(QString folderName READ folderName NOTIFY folderNameChanged)
+    Q_PROPERTY(int firstNonfolderIndex READ firstNonfolderIndex)
 
     // Folder getter/setter.
     QString folder() const;
@@ -67,6 +68,9 @@ public:
 
     // Get path from the given index.
     Q_INVOKABLE QString getPath(const int &index);
+
+    // Gets first item's, which is not folder, index.
+    int firstNonfolderIndex() const;
 
     // Must reimplement for the model to work.
     Q_INVOKABLE int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -87,6 +91,7 @@ private:
     QList<FolderItem *> m_folderItems;
     QString m_folder;
     QString m_folderName;
+    int m_firstNonfolderIndex;
 };
 
 #endif // FOLDERMODEL_H

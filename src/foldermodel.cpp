@@ -36,7 +36,7 @@
 #include <QDir>
 
 FolderModel::FolderModel(QObject *parent) :
-    QAbstractListModel(parent)
+    QAbstractListModel(parent), m_firstNonfolderIndex(-1)
 {
 
 }
@@ -47,6 +47,7 @@ FolderModel::~FolderModel()
     clearItems();
 }
 
+// ---------------------------------------------------------
 // Property getter/setter.
 
 // Get folder.
@@ -94,6 +95,12 @@ QString FolderModel::getPath(const int &index)
     return m_folderItems.at(index)->filePath();
 }
 
+// Gets first item's, which is not folder, index.
+int FolderModel::firstNonfolderIndex() const
+{
+    return m_firstNonfolderIndex;
+}
+
 // Row count.
 int FolderModel::rowCount(const QModelIndex &parent) const
 {
@@ -131,6 +138,7 @@ QVariant FolderModel::data(const QModelIndex &index, int role) const
 }
 
 
+// ---------------------------------------------------------
 // Protected part.
 
 // Role names.
@@ -144,6 +152,7 @@ QHash<int, QByteArray> FolderModel::roleNames() const
 }
 
 
+// ---------------------------------------------------------
 // Private part.
 
 // Read current folder.
@@ -179,6 +188,8 @@ void FolderModel::readFolder()
     if(folder.isRoot())
         list.pop_front();
 
+    bool firstNonfolderFound = false;
+
     // Add entries to the model.
     foreach (QFileInfo info, list)
     {
@@ -188,6 +199,13 @@ void FolderModel::readFolder()
         itm->setFilePath(info.absoluteFilePath());
         itm->setIsFolder(info.isDir());
         m_folderItems.append(itm);
+
+        // If first non folder not found and current item is not a folder.
+        if(!firstNonfolderFound && !info.isDir())
+        {
+            m_firstNonfolderIndex = (m_folderItems.count() - 1);
+            firstNonfolderFound = true;
+        }
     }
 
     endResetModel();
@@ -205,4 +223,7 @@ void FolderModel::clearItems()
 
     // Clear items list.
     m_folderItems.clear();
+
+    // Set first nonfolder to default.
+    m_firstNonfolderIndex = -1;
 }
