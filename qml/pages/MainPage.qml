@@ -243,7 +243,7 @@ Page {
         {
             console.log("Random enabled...")
             // User selected the first picture.
-            if(pictIndex !== -1)
+            if(pictIndex > -1)
             {
                 console.log("User selected the first picture...")
                 console.log(pictures[pictIndex].toString())
