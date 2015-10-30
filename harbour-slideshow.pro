@@ -22,7 +22,6 @@ SOURCES += src/harbour-slideshow.cpp \
 
 OTHER_FILES += qml/harbour-slideshow.qml \
     qml/cover/CoverPage.qml \
-    rpm/harbour-slideshow.changes.in \
     rpm/harbour-slideshow.spec \
     rpm/harbour-slideshow.yaml \
     translations/*.ts \
@@ -31,7 +30,8 @@ OTHER_FILES += qml/harbour-slideshow.qml \
     qml/pages/SlideshowPage.qml \
     qml/pages/SettingsPage.qml \
     qml/pages/AboutPage.qml \
-    qml/pages/ImagePage.qml
+    qml/pages/ImagePage.qml \
+    rpm/harbour-slideshow.changes
 
 # to disable building translations every time, comment out the
 # following CONFIG line
@@ -46,7 +46,7 @@ TRANSLATIONS += translations/harbour-slideshow-fi.ts \
     translations/harbour-slideshow-en.ts \
     translations/harbour-slideshow-de.ts
 
-VERSION = 1.0.1-1
+VERSION = 1.0.2-1
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 HEADERS += \

@@ -215,13 +215,6 @@ Page {
         }
     }
 
-    // Busy indicator to be shown while the image is still loading.
-//    BusyIndicator {
-//        id: busyInd
-//        anchors.centerIn: parent
-//        running: slideshowPicture.status !== Image.Ready ? (slideshowPicture.status === Image.Loading ? true : false) : false
-//    }
-
     // Timer to trigger image change.
     Timer {
         id: slideshowTimer
@@ -245,6 +238,9 @@ Page {
                     return
                 }
             }
+
+            // Notify cover about picture change.
+            imageChanged(pictureArray[currentPictureIndex])
 
             // Set picture visibilities.
             if(picture1Visible)
