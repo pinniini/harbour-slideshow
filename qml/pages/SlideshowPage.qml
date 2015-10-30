@@ -42,8 +42,10 @@ Page {
 
     // Properties.
     property string imageSource: ""
+    property string imageSource2: ""
     property int firstIndex: 0
     property int currentPictureIndex: firstIndex
+    property int startIndex: -1
     property bool slideshowRunning: true
 
     // Picture array.
@@ -52,6 +54,10 @@ Page {
     // Settings.
     property int slideshowInterval: 5000
     property bool loop: false
+
+    // Picture change stuff.
+    property bool firstLoaded: false
+    property bool picture1Visible: false
 
     // Signals.
     // Notify cover about image change.
@@ -63,8 +69,32 @@ Page {
         {
             console.log("Page activating...")
             firstIndex = 0
-            currentPictureIndex = firstIndex
-            imageSource = pictureArray[firstIndex]
+
+            if(startIndex <= -1)
+            {
+                currentPictureIndex = firstIndex
+                imageSource = pictureArray[firstIndex]
+            }
+            else // User selected first picture when not randomized.
+            {
+                currentPictureIndex = startIndex
+                imageSource = pictureArray[startIndex]
+            }
+
+            // Set second image if available.
+            if(pictureArray.length > 1 && startIndex <= -1)
+            {
+                imageSource2 = pictureArray[firstIndex + 1]
+            }
+            else if(pictureArray.length > 1 && startIndex > -1)
+            {
+                // User selected last picture as first picture.
+                if((startIndex + 1) >= pictureArray.length)
+                    imageSource2 = pictureArray[firstIndex]
+                else
+                    imageSource2 = pictureArray[startIndex + 1]
+            }
+
             slideshowRunning = true
         }
         else if(status === PageStatus.Deactivating) // Deactivating, set defaults.
@@ -73,6 +103,11 @@ Page {
             stopSlideshow()
             currentPictureIndex = firstIndex
             imageSource = ""
+            imageSource2 = ""
+            firstLoaded = false
+            picture1Visible = false
+            slideshowPicture.visible = true
+            slideshowPicture2.visible = false
             imageChanged(imageSource)
         }
     }
@@ -90,14 +125,38 @@ Page {
 
         source: imageSource
 
+        visible: true
+        opacity: visible ? 1.0 : 0.0
+        Behavior on opacity { FadeAnimator { duration: 1000 } }
+
         onStatusChanged: {
-            if(status == Image.Ready)
+            if(status == Image.Ready && !firstLoaded)
             {
                 console.log("Image ready, start timer...")
+                picture1Visible = true
+                firstLoaded = true
                 imageChanged(imageSource)
                 slideshowTimer.start()
             }
         }
+    }
+
+    // Second image.
+    Image {
+        id: slideshowPicture2
+        anchors.fill: parent
+        asynchronous: true
+        cache: false
+        clip: true
+        fillMode: Image.PreserveAspectFit
+        sourceSize.width: slideshowPage.width
+        sourceSize.height: slideshowPage.height
+
+        source: imageSource2
+
+        visible: false
+        opacity: visible ? 1.0 : 0.0
+        Behavior on opacity { FadeAnimator { duration: 1000 } }
     }
 
     /*
@@ -156,17 +215,17 @@ Page {
     }
 
     // Busy indicator to be shown while the image is still loading.
-    BusyIndicator {
-        id: busyInd
-        anchors.centerIn: parent
-        running: slideshowPicture.status !== Image.Ready ? (slideshowPicture.status === Image.Loading ? true : false) : false
-    }
+//    BusyIndicator {
+//        id: busyInd
+//        anchors.centerIn: parent
+//        running: slideshowPicture.status !== Image.Ready ? (slideshowPicture.status === Image.Loading ? true : false) : false
+//    }
 
     // Timer to trigger image change.
     Timer {
         id: slideshowTimer
         interval: slideshowInterval
-        repeat: false
+        repeat: true
 
         // Change image when timer triggers.
         onTriggered: {
@@ -186,7 +245,31 @@ Page {
                 }
             }
 
-            imageSource = pictureArray[currentPictureIndex]
+            // Set picture visibilities.
+            if(picture1Visible)
+            {
+                slideshowPicture.visible = false
+                slideshowPicture2.visible = true
+                picture1Visible = false
+
+                // Load next to first picture.
+                if((currentPictureIndex + 1) === pictureArray.length)
+                    imageSource = pictureArray[firstIndex]
+                else
+                    imageSource = pictureArray[currentPictureIndex + 1]
+            }
+            else
+            {
+                slideshowPicture.visible = true
+                slideshowPicture2.visible = false
+                picture1Visible = true
+
+                // Load next to first picture.
+                if((currentPictureIndex + 1) === pictureArray.length)
+                    imageSource2 = pictureArray[firstIndex]
+                else
+                    imageSource2 = pictureArray[currentPictureIndex + 1]
+            }
         }
     }
 

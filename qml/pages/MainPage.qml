@@ -223,6 +223,7 @@ Page {
     {
         slideshowPage.slideshowInterval = 1000 * settingsPage.slideSettings.interval
         slideshowPage.loop = settingsPage.slideSettings.loop
+        slideshowPage.startIndex = index - 1
 
         var pictures = []
         // Build picture array.
@@ -252,6 +253,9 @@ Page {
 
             // Set randomized pictures for the slideshow page.
             slideshowPage.pictureArray = randomizedArray
+
+            // User selected picture is first in the picture array.
+            slideshowPage.startIndex = -1
         }
         else // Set pictures for the slideshow page.
             slideshowPage.pictureArray = pictures
