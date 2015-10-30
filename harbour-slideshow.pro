@@ -46,7 +46,7 @@ TRANSLATIONS += translations/harbour-slideshow-fi.ts \
     translations/harbour-slideshow-en.ts \
     translations/harbour-slideshow-de.ts
 
-VERSION = 1.0-1
+VERSION = 1.0.1-1
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 HEADERS += \

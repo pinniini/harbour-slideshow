@@ -76,31 +76,31 @@
     <name>MainPage</name>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="89"/>
-        <location filename="../qml/pages/MainPage.qml" line="272"/>
+        <location filename="../qml/pages/MainPage.qml" line="280"/>
         <source>About</source>
         <translation>Om</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="95"/>
-        <location filename="../qml/pages/MainPage.qml" line="273"/>
+        <location filename="../qml/pages/MainPage.qml" line="281"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="101"/>
-        <location filename="../qml/pages/MainPage.qml" line="274"/>
+        <location filename="../qml/pages/MainPage.qml" line="282"/>
         <source>Start slideshow in current folder</source>
         <translation>Starta bildspel i aktuell mapp</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="49"/>
-        <location filename="../qml/pages/MainPage.qml" line="280"/>
+        <location filename="../qml/pages/MainPage.qml" line="288"/>
         <source>Go up</source>
         <translation>Upp en nivå</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="50"/>
-        <location filename="../qml/pages/MainPage.qml" line="277"/>
+        <location filename="../qml/pages/MainPage.qml" line="285"/>
         <source>Start from here</source>
         <translation>Starta härifrån</translation>
     </message>

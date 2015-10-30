@@ -68,6 +68,7 @@ Page {
         if(status === PageStatus.Activating)
         {
             console.log("Page activating...")
+            console.log("StartIndex: " + startIndex)
             firstIndex = 0
 
             if(startIndex <= -1)

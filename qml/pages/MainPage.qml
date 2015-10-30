@@ -223,7 +223,12 @@ Page {
     {
         slideshowPage.slideshowInterval = 1000 * settingsPage.slideSettings.interval
         slideshowPage.loop = settingsPage.slideSettings.loop
-        slideshowPage.startIndex = index - 1
+
+        console.log(index)
+        console.log(folderModel.firstNonfolderIndex)
+        var pictIndex = index - folderModel.firstNonfolderIndex
+
+        slideshowPage.startIndex = pictIndex
 
         var pictures = []
         // Build picture array.
@@ -236,10 +241,13 @@ Page {
         var randomizedArray = []
         if(settingsPage.slideSettings.random)
         {
+            console.log("Random enabled...")
             // User selected the first picture.
-            if(index !== -1)
+            if(pictIndex !== -1)
             {
-                randomizedArray.push(pictures.splice(index - 1, 1).toString())
+                console.log("User selected the first picture...")
+                console.log(pictures[pictIndex].toString())
+                randomizedArray.push(pictures.splice(pictIndex, 1).toString())
             }
 
             // Build randomized array as long as there are pictures left.

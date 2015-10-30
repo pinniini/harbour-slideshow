@@ -46,7 +46,7 @@ Settings::Settings(QObject *parent) :
     m_loop = settings.value("loop", true).toBool();
     m_random = settings.value("random", false).toBool();
     m_stopMinimized = settings.value("stopMinimized", true).toBool();
-    m_language = settings.value("language", "en").toString();
+    m_language = settings.value("language", "").toString();
 }
 
 /*
