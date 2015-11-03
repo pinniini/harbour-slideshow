@@ -128,7 +128,7 @@ Page {
 
         visible: true
         opacity: visible ? 1.0 : 0.0
-        Behavior on opacity { FadeAnimator { duration: 1000 } }
+        Behavior on opacity { FadeAnimation { duration: 1000 } }
 
         onStatusChanged: {
             if(status == Image.Ready && !firstLoaded)
@@ -157,7 +157,7 @@ Page {
 
         visible: false
         opacity: visible ? 1.0 : 0.0
-        Behavior on opacity { FadeAnimator { duration: 1000 } }
+        Behavior on opacity { FadeAnimation { duration: 1000 } }
     }
 
     /*
