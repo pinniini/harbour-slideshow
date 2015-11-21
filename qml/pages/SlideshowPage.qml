@@ -39,6 +39,7 @@ Page {
     id: slideshowPage
     allowedOrientations: Orientation.All
     showNavigationIndicator: !slideshowRunning
+    backNavigation: false
 
     // Properties.
     property string imageSource: ""
@@ -206,8 +207,40 @@ Page {
         id: slideshowToggleArea
         anchors.fill: parent
 
+        property int minMoveForSwipe: 10
+        property int mousePressStartX: 0
+        property bool isSwipe: false
+
+        onPressed: {
+            console.log("onPressed...")
+            mousePressStartX = mouse.x
+            isSwipe = false
+        }
+
+        onReleased: {
+            console.log("onReleased...")
+            var direction = mouse.x - mousePressStartX
+            var dist = Math.abs(direction)
+
+            // Swiped left -> next picture.
+            if(dist > minMoveForSwipe && direction < 0)
+            {
+                console.log("Swipe left...")
+                isSwipe = true
+            }
+            else if(dist > minMoveForSwipe && direction > 0) // Swiped right -> previous picture.
+            {
+                console.log("Swipe right...")
+                isSwipe = true
+            }
+        }
+
         // Toggle slideshow start/stop.
         onClicked: {
+            if(isSwipe)
+                return
+
+            console.log("onClicked...")
             if(slideshowRunning)
                 stopSlideshow()
             else
@@ -281,6 +314,7 @@ Page {
         // If running, stop.
         if(slideshowTimer.running)
         {
+            slideshowPage.backNavigation = true
             slideshowRunning = false
             slideshowTimer.stop()
         }
@@ -289,6 +323,7 @@ Page {
     // Star slideshow.
     function startSlideshow()
     {
+        slideshowPage.backNavigation = false
         slideshowRunning = true
         slideshowTimer.restart()
     }
