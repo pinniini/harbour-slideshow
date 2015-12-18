@@ -47,6 +47,7 @@ Settings::Settings(QObject *parent) :
     m_random = settings.value("random", false).toBool();
     m_stopMinimized = settings.value("stopMinimized", true).toBool();
     m_language = settings.value("language", "").toString();
+    m_showHidden = settings.value("showHidden", false).toBool();
 }
 
 /*
@@ -134,5 +135,25 @@ void Settings::setLanguage(const QString &language)
 
         QSettings settings;
         settings.setValue("language", m_language);
+    }
+}
+
+// Get showHidden.
+bool Settings::showHidden() const
+{
+    return m_showHidden;
+}
+
+// Set showHidden status.
+void Settings::setShowHidden(bool showHidden)
+{
+    // Check for change.
+    if(m_showHidden != showHidden)
+    {
+        m_showHidden = showHidden;
+        emit showHiddenChanged(m_showHidden);
+
+        QSettings settings;
+        settings.setValue("showHidden", m_showHidden);
     }
 }

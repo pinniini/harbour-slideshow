@@ -63,3 +63,6 @@ icon256.path  = /usr/share/icons/hicolor/256x256/apps
 icon256.files = 256x256/harbour-slideshow.png
 
 INSTALLS = icon108 icon128 icon256
+
+DISTFILES += \
+    qml/models/ImageModel.qml

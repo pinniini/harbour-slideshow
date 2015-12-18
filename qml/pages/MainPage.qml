@@ -34,6 +34,7 @@
 import QtQuick 2.1
 import Sailfish.Silica 1.0
 import harbour.slideshow.FolderModel 1.0
+import "../models"
 
 Page {
     id: mainPage
@@ -188,6 +189,12 @@ Page {
     }
 
 
+    // Test model.
+    ImageModel {
+        id: testModel
+    }
+
+
     /*
       Function definitions.
       */
@@ -231,11 +238,24 @@ Page {
         slideshowPage.startIndex = pictIndex
 
         var pictures = []
+        var prevObje = null
         // Build picture array.
         for(var i = folderModel.firstNonfolderIndex; i < folderModel.rowCount(); ++i)
         {
+            var obje = {'imageSource': folderModel.getPath(i), 'previousImage': prevObje, 'nextImage': null}
+            prevObje = obje
+            testModel.append(obje)
+
             pictures.push(folderModel.getPath(i))
         }
+
+        // Test:
+        console.log("Test model test logs...")
+        if(testModel.get(0).previousImage === undefined)
+            console.log("First image's previous is undefined...")
+        else
+            console.log(testModel.get(0).previousImage.imageSource)
+        console.log(testModel.get(1).previousImage.imageSource)
 
         // Randomize pictures if needed.
         var randomizedArray = []

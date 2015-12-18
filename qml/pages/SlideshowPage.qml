@@ -52,6 +52,8 @@ Page {
     // Picture array.
     property var pictureArray: []
 
+    property ListModel pictureModel: null
+
     // Settings.
     property int slideshowInterval: 5000
     property bool loop: false
@@ -98,6 +100,7 @@ Page {
             }
 
             slideshowRunning = true
+            backNavigation = false
         }
         else if(status === PageStatus.Deactivating) // Deactivating, set defaults.
         {
@@ -112,6 +115,12 @@ Page {
             slideshowPicture2.visible = false
             imageChanged(imageSource)
         }
+    }
+
+    PageHeader {
+        id: header
+        title: ""
+        visible: !slideshowRunning
     }
 
     // Image.
@@ -227,11 +236,13 @@ Page {
             {
                 console.log("Swipe left...")
                 isSwipe = true
+                nextPicture()
             }
             else if(dist > minMoveForSwipe && direction > 0) // Swiped right -> previous picture.
             {
                 console.log("Swipe right...")
                 isSwipe = true
+                previousPicture()
             }
         }
 
@@ -258,48 +269,49 @@ Page {
         onTriggered: {
             console.log("Change picture...")
 
-            ++currentPictureIndex
+            nextPicture()
+//            ++currentPictureIndex
 
-            // Reached the end of the model.
-            if(currentPictureIndex === pictureArray.length)
-            {
-                currentPictureIndex = firstIndex
-                // If loop is off.
-                if(!loop)
-                {
-                    stop()
-                    return
-                }
-            }
+//            // Reached the end of the model.
+//            if(currentPictureIndex === pictureArray.length)
+//            {
+//                currentPictureIndex = firstIndex
+//                // If loop is off.
+//                if(!loop)
+//                {
+//                    stop()
+//                    return
+//                }
+//            }
 
-            // Notify cover about picture change.
-            imageChanged(pictureArray[currentPictureIndex])
+//            // Notify cover about picture change.
+//            imageChanged(pictureArray[currentPictureIndex])
 
-            // Set picture visibilities.
-            if(picture1Visible)
-            {
-                slideshowPicture.visible = false
-                slideshowPicture2.visible = true
-                picture1Visible = false
+//            // Set picture visibilities.
+//            if(picture1Visible)
+//            {
+//                slideshowPicture.visible = false
+//                slideshowPicture2.visible = true
+//                picture1Visible = false
 
-                // Load next to first picture.
-                if((currentPictureIndex + 1) === pictureArray.length)
-                    imageSource = pictureArray[firstIndex]
-                else
-                    imageSource = pictureArray[currentPictureIndex + 1]
-            }
-            else
-            {
-                slideshowPicture.visible = true
-                slideshowPicture2.visible = false
-                picture1Visible = true
+//                // Load next to first picture.
+//                if((currentPictureIndex + 1) === pictureArray.length)
+//                    imageSource = pictureArray[firstIndex]
+//                else
+//                    imageSource = pictureArray[currentPictureIndex + 1]
+//            }
+//            else
+//            {
+//                slideshowPicture.visible = true
+//                slideshowPicture2.visible = false
+//                picture1Visible = true
 
-                // Load next to first picture.
-                if((currentPictureIndex + 1) === pictureArray.length)
-                    imageSource2 = pictureArray[firstIndex]
-                else
-                    imageSource2 = pictureArray[currentPictureIndex + 1]
-            }
+//                // Load next to first picture.
+//                if((currentPictureIndex + 1) === pictureArray.length)
+//                    imageSource2 = pictureArray[firstIndex]
+//                else
+//                    imageSource2 = pictureArray[currentPictureIndex + 1]
+//            }
         }
     }
 
@@ -326,5 +338,109 @@ Page {
         slideshowPage.backNavigation = false
         slideshowRunning = true
         slideshowTimer.restart()
+    }
+
+    // Change to next picture.
+    function nextPicture()
+    {
+        console.log("nextPicture()")
+
+        ++currentPictureIndex
+
+        // Reached the end of the model.
+        if(currentPictureIndex === pictureArray.length)
+        {
+            currentPictureIndex = firstIndex
+            // If loop is off.
+            if(!loop)
+            {
+                slideshowTimer.stop()
+                return
+            }
+        }
+
+        // Notify cover about picture change.
+        imageChanged(pictureArray[currentPictureIndex])
+
+        // Set picture visibilities.
+        if(picture1Visible)
+        {
+            slideshowPicture.visible = false
+            slideshowPicture2.visible = true
+            picture1Visible = false
+
+            // Load next to first picture.
+            if((currentPictureIndex + 1) === pictureArray.length)
+                imageSource = pictureArray[firstIndex]
+            else
+                imageSource = pictureArray[currentPictureIndex + 1]
+        }
+        else
+        {
+            slideshowPicture.visible = true
+            slideshowPicture2.visible = false
+            picture1Visible = true
+
+            // Load next to first picture.
+            if((currentPictureIndex + 1) === pictureArray.length)
+                imageSource2 = pictureArray[firstIndex]
+            else
+                imageSource2 = pictureArray[currentPictureIndex + 1]
+        }
+
+        if(slideshowRunning)
+            slideshowTimer.restart()
+    }
+
+    // Change to previous picture.
+    function previousPicture()
+    {
+        console.log("previousPicture()")
+
+        --currentPictureIndex
+
+        // Reached the start of the model.
+        if(currentPictureIndex === -1)
+        {
+            currentPictureIndex = pictureArray.length - 1
+            // If loop is off.
+            if(!loop)
+            {
+                currentPictureIndex = 0
+                return
+            }
+        }
+
+        // Notify cover about picture change.
+        imageChanged(pictureArray[currentPictureIndex])
+
+        // Set picture visibilities.
+        if(picture1Visible)
+        {
+            slideshowPicture.visible = false
+            slideshowPicture2.visible = true
+            picture1Visible = false
+
+            // Load next to first picture.
+            if((currentPictureIndex + 1) === pictureArray.length)
+                imageSource = pictureArray[firstIndex]
+            else
+                imageSource = pictureArray[currentPictureIndex + 1]
+        }
+        else
+        {
+            slideshowPicture.visible = true
+            slideshowPicture2.visible = false
+            picture1Visible = true
+
+            // Load next to first picture.
+            if((currentPictureIndex + 1) === pictureArray.length)
+                imageSource2 = pictureArray[firstIndex]
+            else
+                imageSource2 = pictureArray[currentPictureIndex + 1]
+        }
+
+        if(slideshowRunning)
+            slideshowTimer.restart()
     }
 }

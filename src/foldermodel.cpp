@@ -36,7 +36,7 @@
 #include <QDir>
 
 FolderModel::FolderModel(QObject *parent) :
-    QAbstractListModel(parent), m_firstNonfolderIndex(-1)
+    QAbstractListModel(parent), m_firstNonfolderIndex(-1), m_showHidden(false)
 {
 
 }
@@ -100,6 +100,27 @@ int FolderModel::firstNonfolderIndex() const
 {
     return m_firstNonfolderIndex;
 }
+
+// Get show hidden status.
+bool FolderModel::showHidden() const
+{
+    return m_showHidden;
+}
+
+// Set show hidden status.
+void FolderModel::setShowHidden(const bool showHidden)
+{
+    if(m_showHidden == showHidden)
+        return;
+
+    m_showHidden = showHidden;
+    readFolder();
+    emit showHiddenChanged(m_showHidden);
+}
+
+
+// ---------------------------------------------------------
+// Inherited and must be implemented to work.
 
 // Row count.
 int FolderModel::rowCount(const QModelIndex &parent) const
@@ -176,6 +197,11 @@ void FolderModel::readFolder()
 
     // Set filters, name filters and sorting.
     folder.setFilter(QDir::AllDirs | QDir::Files | QDir::NoDot | QDir::Readable);
+
+    // Check if hidden files should be shown.
+    if(m_showHidden)
+        folder.setFilter(folder.filter() | QDir::Hidden);
+
     folder.setSorting(QDir::Name | QDir::DirsFirst);
     QStringList filters;
     filters << "*.jpg" << "*.png";

@@ -28,10 +28,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ideas/Issues</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>By who</source>
         <translation type="unfinished"></translation>
     </message>
@@ -49,6 +45,14 @@
     </message>
     <message>
         <source>Swedish translation by: Åke Engelbrektson</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ideas/Issues/Want to help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can also help by translating the app to a new language or by checking the current translations for any mistakes. The app can be translated in Transifex or by sending pull requests in github.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -126,6 +130,26 @@
     </message>
     <message>
         <source>Slideshow plays the pictures in a random order.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show hidden files/folders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden files and folders are shown while browsing the folders.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slideshow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User interface</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -49,6 +49,7 @@ Page {
     property bool lp: settings.loop
     property bool randm: settings.random
     property bool stp: settings.stopMinimized
+    property bool shwHidn: settings.showHidden
 
     // Signals.
     // Notify about language change.
@@ -103,12 +104,18 @@ Page {
             bottom: parent.bottom
         }
 
+        clip: true
         contentHeight: column.height
 
         Column {
             id: column
             spacing: 10
             width: parent.width
+
+            SectionHeader {
+                id: slideshowSectionHeader
+                text: qsTr("Slideshow")
+            }
 
             Slider {
                 id: intervalSlider
@@ -162,6 +169,11 @@ Page {
                 }
             }
 
+            SectionHeader {
+                id: uiSectionHeader
+                text: qsTr("User interface")
+            }
+
             ComboBox {
                 id: languageCombo
                 label: qsTr("Language:")
@@ -195,6 +207,24 @@ Page {
                     }
                 }
             }
+
+            SectionHeader {
+                id: fileBrowserSectionHeader
+                text: qsTr("File browser")
+            }
+
+            TextSwitch {
+                id: showHidden
+                text: qsTr("Show hidden files/folders")
+                description: qsTr("Hidden files and folders are shown while browsing the folders.")
+                checked: shwHidn
+
+                onCheckedChanged: {
+                    console.log("ShowHidden changed: " + checked)
+                    settings.showHidden = checked
+                    folderModel.showHidden = checked
+                }
+            }
         }
     }
 
@@ -207,7 +237,8 @@ Page {
         // Page header.
         pageHeader.title = qsTr("Settings")
 
-        // Settings.
+        // Slideshow settings.
+        slideshowSectionHeader.text = qsTr("Slideshow")
         intervalSlider.label = qsTr("Slideshow interval")
         intervalSlider.second = qsTr("second")
         intervalSlider.seconds = qsTr("seconds")
@@ -217,7 +248,15 @@ Page {
         randomSwitch.description = qsTr("Slideshow plays the pictures in a random order.")
         stopSwitch.text = qsTr("Stop when minimized")
         stopSwitch.description = qsTr("Slideshow will be stopped when pushed minimized.")
+
+        // UI settings.
+        uiSectionHeader.text = qsTr("User interface")
         languageCombo.label = qsTr("Language:")
+
+        // File browser settings.
+        fileBrowserSectionHeader.text = qsTr("File browser")
+        showHidden.text = qsTr("Show hidden files/folders")
+        showHidden.description = qsTr("Hidden files and folders are shown while browsing the folders.")
 
         // Emit translate signal.
         translate()

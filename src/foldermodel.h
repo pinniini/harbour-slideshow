@@ -55,6 +55,7 @@ public:
     Q_PROPERTY(QString folder READ folder WRITE setFolder NOTIFY folderChanged)
     Q_PROPERTY(QString folderName READ folderName NOTIFY folderNameChanged)
     Q_PROPERTY(int firstNonfolderIndex READ firstNonfolderIndex)
+    Q_PROPERTY(bool showHidden READ showHidden WRITE setShowHidden NOTIFY showHiddenChanged)
 
     // Folder getter/setter.
     QString folder() const;
@@ -72,6 +73,10 @@ public:
     // Gets first item's, which is not folder, index.
     int firstNonfolderIndex() const;
 
+    // Show hidden stuff.
+    bool showHidden() const;
+    void setShowHidden(const bool showHidden);
+
     // Must reimplement for the model to work.
     Q_INVOKABLE int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
@@ -79,6 +84,7 @@ public:
 signals:
     void folderChanged(const QString folder);
     void folderNameChanged(const QString folderName);
+    void showHiddenChanged(const bool showHidden);
 
 protected:
     QHash<int, QByteArray> roleNames() const;
@@ -92,6 +98,7 @@ private:
     QString m_folder;
     QString m_folderName;
     int m_firstNonfolderIndex;
+    bool m_showHidden;
 };
 
 #endif // FOLDERMODEL_H

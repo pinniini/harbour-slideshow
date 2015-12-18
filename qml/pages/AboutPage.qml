@@ -39,12 +39,14 @@ Page {
     allowedOrientations: Orientation.All
 
     property string issuesText: qsTr("Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)")
+    property string translationsText: qsTr("You can also help by translating the app to a new language or by checking the current translations for any mistakes. The app can be translated in Transifex or by sending pull requests in github.")
 
     // React on status changes.
     onStatusChanged: {
         if(status === PageStatus.Activating)
         {
             issueLabel.text = Theme.highlightText(issuesText, "github", Theme.highlightColor)
+            translationsLabel.text = Theme.highlightText(translationsText, "Transifex", Theme.highlightColor)
         }
     }
 
@@ -135,7 +137,7 @@ Page {
             }
 
             SectionHeader {
-                text: qsTr("Ideas/Issues")
+                text: qsTr("Ideas/Issues/Want to help")
             }
 
             Label {
@@ -144,11 +146,22 @@ Page {
                 wrapMode: Text.Wrap
                 width: parent.width - Theme.paddingMedium
                 x: Theme.paddingMedium
-                //text: Theme.highlightText(qsTr("Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)"), "github", Theme.highlightColor)
-                //text: qsTr("Found bugs? Got some great improvement ideas? Please report them to <a style=\"color: inherit; text-decoration: underline;\" href=\"https://github.com/pinniini/harbour-slideshow\">github</a> and I am happy to look them through :)")
+
                 MouseArea {
                     anchors.fill: parent
                     onClicked: Qt.openUrlExternally("https://github.com/pinniini/harbour-slideshow/issues")
+                }
+            }
+
+            Label {
+                id: translationsLabel
+                wrapMode: Text.Wrap
+                width: parent.width - Theme.paddingMedium
+                x: Theme.paddingMedium
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: Qt.openUrlExternally("https://www.transifex.com/pinniini/harbour-slideshow")
                 }
             }
         }
