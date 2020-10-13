@@ -34,6 +34,8 @@
 #include "foldermodel.h"
 
 #include <QDir>
+#include <QImageReader>
+#include <QDebug>
 
 FolderModel::FolderModel(QObject *parent) :
     QAbstractListModel(parent), m_firstNonfolderIndex(-1), m_showHidden(false)
@@ -202,9 +204,14 @@ void FolderModel::readFolder()
     if(m_showHidden)
         folder.setFilter(folder.filter() | QDir::Hidden);
 
+    qDebug() << QImageReader::supportedImageFormats();
+
     folder.setSorting(QDir::Name | QDir::DirsFirst);
     QStringList filters;
-    filters << "*.jpg" << "*.png";
+    foreach (QByteArray format, QImageReader::supportedImageFormats())
+    {
+        filters << "*." + QString(format);
+    }
     folder.setNameFilters(filters);
 
     // Read folder entries.
