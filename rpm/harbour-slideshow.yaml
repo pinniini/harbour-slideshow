@@ -1,22 +1,19 @@
 Name: harbour-slideshow
 Summary: Slideshow application
-Version: 1.0.4
+Version: 2.0
 Release: 1
 # The contents of the Group field should be one of the groups listed here:
-# http://gitorious.org/meego-developer-tools/spectacle/blobs/master/data/GROUPS
+# https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
 Group: Qt/Qt
-URL: https://github.com/pinniini/harbour-slideshow
-License: BSD
+URL: http://example.org/
+License: LICENSE
 # This must be generated before uploading a package to a remote build service.
 # Usually this line does not need to be modified.
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |
-  Slideshow application to show your awesome pictures.
-Configure: none
-# The qtc5 builder inserts macros to allow QtCreator to have fine
-# control over qmake/make execution
-Builder: qtc5
+  Short description of my Sailfish OS Application
+Builder: qmake5
 
 # This section specifies build dependencies that are resolved using pkgconfig.
 # This is the preferred way of specifying build dependencies for your package.
@@ -39,12 +36,7 @@ Files:
   - '%{_bindir}'
   - '%{_datadir}/%{name}'
   - '%{_datadir}/applications/%{name}.desktop'
-  - '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
-  - '%{_datadir}/icons/hicolor/108x108/apps/%{name}.png'
-  - '%{_datadir}/icons/hicolor/128x128/apps/%{name}.png'
-  - '%{_datadir}/icons/hicolor/256x256/apps/%{name}.png'
-  - '%{_datadir}/%{name}/translations'
+  - '%{_datadir}/icons/hicolor/*/apps/%{name}.png'
 
 # For more information about yaml and what's supported in Sailfish OS
 # build system, please see https://wiki.merproject.org/wiki/Spectacle
-
