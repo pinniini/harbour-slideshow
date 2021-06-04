@@ -56,7 +56,7 @@
     <name>CoverPage</name>
     <message>
         <source>My Cover</source>
-        <translation type="unfinished"></translation>
+        <translation>Mein Cover</translation>
     </message>
 </context>
 </TS>

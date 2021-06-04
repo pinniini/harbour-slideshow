@@ -4,7 +4,11 @@ import "pages"
 
 ApplicationWindow
 {
-    initialPage: Component { FirstPage { } }
+    initialPage: Component { SlideshowListPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
+
+    ListModel {
+        id: slideshowListModel
+    }
 }
