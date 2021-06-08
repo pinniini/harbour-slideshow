@@ -14,10 +14,13 @@ TARGET = harbour-slideshow
 
 CONFIG += sailfishapp
 
-SOURCES += src/harbour-slideshow.cpp
+SOURCES += src/harbour-slideshow.cpp \
+    src/settings.cpp \
+    src/translationhandler.cpp
 
 DISTFILES += qml/harbour-slideshow.qml \
     qml/cover/CoverPage.qml \
+    qml/pages/SettingsPage.qml \
     qml/pages/SlideshowListPage.qml \
     qml/pages/SlideshowPage.qml \
     rpm/harbour-slideshow.changes.in \
@@ -40,3 +43,7 @@ CONFIG += sailfishapp_i18n_idbased
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-slideshow-en.ts \
     translations/harbour-slideshow-fi.ts
+
+HEADERS += \
+    src/settings.h \
+    src/translationhandler.h

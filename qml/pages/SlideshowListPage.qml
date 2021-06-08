@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
@@ -7,12 +7,21 @@ Page {
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.All
 
+    Connections {
+        target: TranslationHandler
+        onTranslateUI: {
+            translateUi()
+        }
+    }
+
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaListView {
+        id: slideshowList
         anchors.fill: parent
 
         model: slideshowListModel
         ViewPlaceholder {
+            id: slideshowListPlaceHolder
             text: qsTrId("slideshowlist-no-slideshows")
             enabled: slideshowListModel.count == 0
         }
@@ -24,6 +33,13 @@ Page {
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             MenuItem {
+                id: slideshowListMenuSettings
+                text: qsTrId("menu-settings")
+                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+            }
+
+            MenuItem {
+                id: slideshowListMenuAddSlideshow
                 text: qsTrId("menu-add-slideshow")
                 onClicked: {
                     var dialog = pageStack.push(Qt.resolvedUrl("SlideshowPage.qml"))
@@ -50,6 +66,22 @@ Page {
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingMedium
             }
+
+            menu: ContextMenu {
+                MenuItem {
+                    text: qsTrId("menu-start-slideshow")
+                    onClicked: {
+                        console.log("Start slideshow...")
+                    }
+                }
+            }
         }
+    }
+
+    function translateUi() {
+        slideshowListPlaceHolder.text = qsTrId("slideshowlist-no-slideshows")
+        slideshowList.headerItem.title = qsTrId("slideshowlist-header")
+        slideshowListMenuSettings.text = qsTrId("menu-settings")
+        slideshowListMenuAddSlideshow.text = qsTrId("menu-add-slideshow")
     }
 }

@@ -51,6 +51,44 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message id="label-settings">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="label-language">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="menu-settings">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-header-general">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="second">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="seconds">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-interval-valueText" numerus="yes">
+        <source></source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message id="settings-slideshow-interval-label">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-header-ui">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>
