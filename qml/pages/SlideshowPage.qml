@@ -1,7 +1,9 @@
-import QtQuick 2.2
+import QtQuick 2.5
 import Sailfish.Silica 1.0
 import Sailfish.Pickers 1.0
 import Nemo.Thumbnailer 1.0
+
+import "../js/database.js" as DB
 
 Dialog {
     id: slideshowDialog
@@ -9,13 +11,57 @@ Dialog {
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.All
 
+    property bool editMode: false
+    property int slideshowId: -1
+
     property string slideshowName: ""
     property string selectedMusicFiles
     property string selectedImageFiles
+    property int imageWidth: Math.floor(slideshowDialog.width / 5)
+    property var slideshow
+
+    Component.onCompleted: {
+        if (editMode && slideshowId > 0) {
+            var show = DB.getSlideshow(slideshowId)
+            if (show) {
+                backgroundMusicModel.clear()
+                imageListModel.clear()
+
+                slideshowNameField.text = show.name
+
+                for (var mi = 0; mi < show.music.length; ++mi) {
+                    var mus = show.music[mi]
+                    backgroundMusicModel.append({'fileName': mus.fileName, 'url': mus.url})
+                }
+
+                for (var ii = 0; ii < show.images.length; ++ii) {
+                    var img = show.images[ii]
+                    imageListModel.append({'fileName': img.fileName, 'url': img.url})
+                }
+            }
+
+            slideshowNameField.focus = false
+        }
+    }
 
     onDone: {
         if (result == DialogResult.Accepted) {
             slideshowName = slideshowNameField.text
+            var show = {'id': editMode ? slideshowId : -1, 'name': slideshowName, 'music': [], 'images': []}
+
+            for (var mi = 0; mi < backgroundMusicModel.count; ++mi) {
+                var mf = backgroundMusicModel.get(mi)
+                var music = {'fileName': mf.fileName, 'url': mf.url, 'slideshowId': editMode ? slideshowId : -1}
+                show.music.push(music)
+            }
+
+            for (var ii = 0; ii < imageListModel.count; ++ii) {
+                var img = imageListModel.get(ii)
+                var image = {'fileName': img.fileName, 'url': img.url, 'slideshowId': editMode ? slideshowId : -1}
+                show.images.push(image)
+            }
+
+            slideshow = show
         }
     }
 
@@ -48,12 +94,6 @@ Dialog {
             }
 
             MenuItem {
-                id: menuQuickStartSlideshow
-                text: qsTrId("menu-quickstart-slideshow")
-                onClicked: console.log("Quick Start slideshow, i.e. select folder and play...")
-            }
-
-            MenuItem {
                 id: menuMusic
                 text: qsTrId("menu-add-music")
                 onClicked: pageStack.push(multiMusicPickerDialog)
@@ -68,12 +108,14 @@ Dialog {
             MenuItem {
                 id: menuStartSlideshow
                 text: qsTrId("menu-start-slideshow")
-                onClicked: console.log("Start slideshow...")
+                onClicked: {
+                    console.log("Start slideshow...")
+                    pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': imageListModel})
+                }
             }
         }
 
-        contentHeight: contentColumn.height //parent.height
-
+        contentHeight: contentColumn.height
 
         Column {
             id: contentColumn
@@ -82,102 +124,109 @@ Dialog {
 
             DialogHeader {id: header}
 
-        TextField {
-            id: slideshowNameField
-            focus: true
-            label: qsTrId("slideshow-name-label")
-            placeholderText: qsTrId("slideshow-name-placeholder")
-            text: slideshowName
-            Keys.onEnterPressed: {
-                focus = false
+            TextField {
+                id: slideshowNameField
+                focus: true
+                label: qsTrId("slideshow-name-label")
+                placeholderText: qsTrId("slideshow-name-placeholder")
+                text: slideshowName
+                Keys.onEnterPressed: {
+                    focus = false
+                }
+                Keys.onReturnPressed: {
+                    focus = false
+                }
+                width: parent.width - Theme.paddingMedium
             }
-            Keys.onReturnPressed: {
-                focus = false
+
+            SectionHeader {
+                id: slideshowBackgroundMusicLabel
+                text: qsTrId("slideshow-background-music")
             }
-            width: parent.width - Theme.paddingMedium
-        }
 
-        SectionHeader {
-            id: slideshowBackgroundMusicLabel
-            text: qsTrId("slideshow-background-music")
-        }
-
-        SilicaListView {
-            id: musicList
-            width: parent.width
-            height: slideshowDialog.height * 0.2
-            model: backgroundMusicModel
-            clip: true
-
-            delegate: ListItem {
-                id: musicDelegate
-                contentHeight: Theme.itemSizeSmall
+            SilicaListView {
+                id: musicList
                 width: parent.width
+                height: slideshowDialog.height * 0.2
+                model: backgroundMusicModel
+                clip: true
 
-                Label {
-                    text: model.fileName
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.left: parent.left
-                    anchors.leftMargin: Theme.paddingMedium
+                delegate: ListItem {
+                    id: musicDelegate
+                    width: parent.width
+                    height: Theme.itemSizeExtraSmall
+
+                    Label {
+                        text: model.fileName
+                        font.pixelSize: Theme.fontSizeSmall
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: Theme.paddingMedium
+                    }
                 }
             }
-        }
 
-        SectionHeader {
-            id: slideshowImagesLabel
-            text: qsTrId("slideshow-images")
-        }
+            SectionHeader {
+                id: slideshowImagesLabel
+                text: qsTrId("slideshow-images")
+            }
 
-        SilicaGridView {
-            id: imageGrid
+            SilicaGridView {
+                id: imageGrid
 
-            property Item expandedItem
+                property Item expandedItem
 
-            width: parent.width
-            height: slideshowDialog.height * 0.4
-            model: imageListModel
-            clip: true
+                width: parent.width
+                height: slideshowDialog.height * 0.4
+                model: imageListModel
+                clip: true
+                cellWidth: slideshowDialog.imageWidth
+                cellHeight: slideshowDialog.imageWidth
 
-            delegate: Image {
-                id: dummy
-                width: 100
-                height: thumbnail.isExpanded ? thumbnail.height + gridContextMenu.height : thumbnail.height
-                z: thumbnail.isExpanded ? 1000 : 1
+                delegate: Item {
+                    id: dummy
+                    width: slideshowDialog.imageWidth
+                    height: thumbnail.isExpanded ? thumbnail.height + gridContextMenu.height : thumbnail.height
+                    z: thumbnail.isExpanded ? 1000 : 1
 
-                Thumbnail {
-                    id: thumbnail
+                    Thumbnail {
+                        id: thumbnail
 
-                    property bool isExpanded: imageGrid.expandedItem === thumbnail
+                        property bool isExpanded: imageGrid.expandedItem === thumbnail
 
-                    anchors {
-                        left: parent.left
-                        top: parent.top
+                        anchors {
+                            left: parent.left
+                            top: parent.top
+                        }
+
+                        source: url
+                        width: slideshowDialog.imageWidth
+                        height: slideshowDialog.imageWidth
+                        sourceSize.width: width
+                        sourceSize.height: height
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onPressAndHold: {
+                                imageGrid.expandedItem = thumbnail
+                                gridContextMenu.open(dummy)
+                            }
+                        }
                     }
+                }
 
-                    source: url
-                    width: 100
-                    height: 100
-                    sourceSize.width: width
-                    sourceSize.height: height
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onPressAndHold: {
-                            imageGrid.expandedItem = thumbnail
-                            gridContextMenu.open(dummy)
+                ContextMenu {
+                    id: gridContextMenu
+                    MenuItem {
+                        text: qsTrId("slideshow-imagelist-menu-remove")
+                        onClicked: {
+                            console.log("Remove image from the slideshow...")
+                            console.log("Image index:", index)
+//                            imageListModel.remove(index)
                         }
                     }
                 }
             }
-
-            ContextMenu {
-                id: gridContextMenu
-                MenuItem {
-                    text: qsTrId("slideshow-imagelist-menu-remove")
-                    onClicked: console.log("Remove image from the slideshow...")
-                }
-            }
-        }
         }
     }
 
@@ -188,8 +237,8 @@ Dialog {
                 selectedMusicFiles = ""
                 var urls = []
                 var index = 0;
-                while (index < 15)
-                {
+                //while (index < 15)
+                //{
                     for (var i = 0; i < selectedContent.count; ++i) {
                         var url = selectedContent.get(i).url
                         var fileName = selectedContent.get(i).fileName
@@ -197,8 +246,8 @@ Dialog {
                         //urls.push(selectedContent.get(i).url)
                         backgroundMusicModel.append({'fileName': fileName, 'url': url})
                     }
-                    ++index;
-                }
+                //    ++index;
+                //}
                 //selectedMusicFiles = urls.join(", ")
             }
 
@@ -213,16 +262,16 @@ Dialog {
                 selectedImageFiles = ""
                 var urls = []
                 var index = 0;
-                while (index < 15)
-                {
+                //while (index < 15)
+                //{
                     for (var i = 0; i < selectedContent.count; ++i) {
                         var url = selectedContent.get(i).url
                         var fileName = selectedContent.get(i).fileName
                         // Handle selection
                         imageListModel.append({'fileName': fileName, 'url': url})
                     }
-                    ++index;
-                }
+                //    ++index;
+                //}
             }
 
             onRejected: selectedImageFiles = ""
@@ -231,7 +280,6 @@ Dialog {
 
     function translateUi() {
         menuSettings.text = qsTrId("menu-settings")
-        menuQuickStartSlideshow.text = qsTrId("menu-quickstart-slideshow")
         menuMusic.text = qsTrId("menu-add-music")
         menuPictures.text = qsTrId("menu-add-files")
         menuStartSlideshow.text = qsTrId("menu-start-slideshow")

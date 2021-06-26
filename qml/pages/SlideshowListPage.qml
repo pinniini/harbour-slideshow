@@ -1,11 +1,21 @@
-import QtQuick 2.2
+import QtQuick 2.5
 import Sailfish.Silica 1.0
+import Sailfish.Pickers 1.0
+
+import "../js/database.js" as DB
 
 Page {
     id: page
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.All
+
+    property int editIndex: -1
+
+    Component.onCompleted: {
+        // Load slideshows
+        loadSlideshows();
+    }
 
     Connections {
         target: TranslationHandler
@@ -39,12 +49,21 @@ Page {
             }
 
             MenuItem {
+                id: menuQuickStartSlideshow
+                text: qsTrId("menu-quickstart-slideshow")
+                onClicked: {
+                    console.log("Quick Start slideshow, i.e. select folder and play...")
+                    pageStack.push(quickFolderPickerDialog)
+                }
+            }
+
+            MenuItem {
                 id: slideshowListMenuAddSlideshow
                 text: qsTrId("menu-add-slideshow")
                 onClicked: {
                     var dialog = pageStack.push(Qt.resolvedUrl("SlideshowPage.qml"))
                     dialog.accepted.connect(function() {
-                        slideshowListModel.append({'name': dialog.slideshowName})
+                        addSlideshow(dialog.slideshow);
                     })
                 }
             }
@@ -57,7 +76,13 @@ Page {
             width: parent.width
 
             onClicked: {
-
+                editIndex = index
+                var show = slideshowListModel.get(index)
+                var dialog = pageStack.push(Qt.resolvedUrl("SlideshowPage.qml"), {'editMode': true, 'slideshowId': show.id})
+                dialog.accepted.connect(function() {
+                    //addSlideshow(dialog.slideshow);
+                    updateSlideshow(dialog.slideshow);
+                })
             }
 
             Label {
@@ -78,10 +103,54 @@ Page {
         }
     }
 
+    Component {
+        id: quickFolderPickerDialog
+        FolderPickerDialog {
+            title: qsTrId("quick-folderpicker-title")
+            onAccepted: {
+                console.log("Run slideshow from selected folder:", selectedPath)
+            }
+        }
+    }
+
     function translateUi() {
         slideshowListPlaceHolder.text = qsTrId("slideshowlist-no-slideshows")
         slideshowList.headerItem.title = qsTrId("slideshowlist-header")
         slideshowListMenuSettings.text = qsTrId("menu-settings")
         slideshowListMenuAddSlideshow.text = qsTrId("menu-add-slideshow")
+    }
+
+    function loadSlideshows() {
+        slideshowListModel.clear()
+
+        var shows = DB.getSlideshowNames()
+        if (shows && shows.length > 0) {
+            var count = shows.length;
+            for (var i = 0; i < count; ++i) {
+                var show = shows[i];
+                var sho = {'id': show.id, 'name': show.name};
+                slideshowListModel.append(sho);
+            }
+        }
+    }
+
+    function addSlideshow(slideshow) {
+        console.log("Adding slideshow:", slideshow.name);
+        var slideId = DB.writeSlideshow(slideshow);
+        console.log("Id for slideshow:", slideId);
+
+        if (slideId > 0) {
+            slideshowListModel.append({'id': slideId, 'name': slideshow.name})
+        }
+    }
+
+    function updateSlideshow(slideshow) {
+        console.log("Updating slideshow:", slideshow.id, slideshow.name)
+        if (DB.updateSlideshow(slideshow)) {
+            console.log("Updating slideshow succeeded...");
+            slideshowListModel.setProperty(editIndex, 'name', slideshow.name)
+        } else {
+            console.log("Updating slideshow failed...");
+        }
     }
 }

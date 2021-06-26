@@ -19,7 +19,10 @@ SOURCES += src/harbour-slideshow.cpp \
     src/translationhandler.cpp
 
 DISTFILES += qml/harbour-slideshow.qml \
+    qml/constants.js \
     qml/cover/CoverPage.qml \
+    qml/js/database.js \
+    qml/pages/PlaySlideshowPage.qml \
     qml/pages/SettingsPage.qml \
     qml/pages/SlideshowListPage.qml \
     qml/pages/SlideshowPage.qml \

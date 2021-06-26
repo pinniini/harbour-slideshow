@@ -69,17 +69,11 @@
     </message>
     <message id="second">
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation>sekunti</translation>
     </message>
     <message id="seconds">
         <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="settings-interval-valueText" numerus="yes">
-        <source></source>
-        <translation type="unfinished">
-            <numerusform>%n sekunti(a)</numerusform>
-        </translation>
+        <translation>sekuntia</translation>
     </message>
     <message id="settings-slideshow-interval-label">
         <source></source>
@@ -89,12 +83,33 @@
         <source></source>
         <translation>Käyttöliittymä</translation>
     </message>
-</context>
-<context>
-    <name>CoverPage</name>
-    <message>
-        <source>My Cover</source>
-        <translation>Mein Cover</translation>
+    <message id="settings-loop">
+        <source></source>
+        <translation>Kierrätä kuvia</translation>
+    </message>
+    <message id="settings-loop-description">
+        <source></source>
+        <translation>Esitys alkaa alusta, kun loppu on saavutettu.</translation>
+    </message>
+    <message id="settings-random">
+        <source></source>
+        <translation>Satunnainen järjestys</translation>
+    </message>
+    <message id="settings-random-description">
+        <source></source>
+        <translation>Esitys toistaa kuvat satunnaisessa järjestyksessä.</translation>
+    </message>
+    <message id="settings-stop-background">
+        <source></source>
+        <translation>Pysäytä, kun ohjelma pienennetään</translation>
+    </message>
+    <message id="settings-stop-background-description">
+        <source></source>
+        <translation>Esitys pysäytetään, kun ohjelma pienennetään.</translation>
+    </message>
+    <message id="quick-folderpicker-title">
+        <source></source>
+        <translation>Valitse kansio</translation>
     </message>
 </context>
 </TS>

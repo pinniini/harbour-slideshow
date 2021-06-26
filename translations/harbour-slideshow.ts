@@ -75,12 +75,6 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="settings-interval-valueText" numerus="yes">
-        <source></source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-        </translation>
-    </message>
     <message id="settings-slideshow-interval-label">
         <source></source>
         <translation type="unfinished"></translation>
@@ -89,11 +83,32 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>CoverPage</name>
-    <message>
-        <source>My Cover</source>
+    <message id="settings-loop">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-loop-description">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-random">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-random-description">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-stop-background">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-stop-background-description">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="quick-folderpicker-title">
+        <source></source>
         <translation type="unfinished"></translation>
     </message>
 </context>
