@@ -15,8 +15,6 @@ Dialog {
     property int slideshowId: -1
 
     property string slideshowName: ""
-    property string selectedMusicFiles
-    property string selectedImageFiles
     property int imageWidth: Math.floor(slideshowDialog.width / 5)
     property var slideshow
 
@@ -100,6 +98,12 @@ Dialog {
             }
 
             MenuItem {
+                id: menuFilesystemPictures
+                text: qsTrId("menu-add-files-filesystem")
+                onClicked: pageStack.push(filesystemImagePickerDialog)
+            }
+
+            MenuItem {
                 id: menuPictures
                 text: qsTrId("menu-add-files")
                 onClicked: pageStack.push(multiImagePickerDialog)
@@ -110,7 +114,7 @@ Dialog {
                 text: qsTrId("menu-start-slideshow")
                 onClicked: {
                     console.log("Start slideshow...")
-                    pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': imageListModel})
+                    pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': imageListModel, 'musicModel': backgroundMusicModel})
                 }
             }
         }
@@ -154,7 +158,7 @@ Dialog {
                 delegate: ListItem {
                     id: musicDelegate
                     width: parent.width
-                    height: Theme.itemSizeExtraSmall
+                    contentHeight: Theme.itemSizeExtraSmall
 
                     Label {
                         text: model.fileName
@@ -162,6 +166,17 @@ Dialog {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: Theme.paddingMedium
+                    }
+
+                    menu: ContextMenu {
+                        MenuItem {
+                            text: qsTrId("slideshow-imagelist-menu-remove")
+                            onClicked: {
+                                console.log("Remove music from the slideshow...")
+                                console.log("Music index:", index)
+                                backgroundMusicModel.remove(index)
+                            }
+                        }
                     }
                 }
             }
@@ -209,6 +224,7 @@ Dialog {
                             anchors.fill: parent
                             onPressAndHold: {
                                 imageGrid.expandedItem = thumbnail
+                                gridContextMenu.index = index
                                 gridContextMenu.open(dummy)
                             }
                         }
@@ -217,12 +233,16 @@ Dialog {
 
                 ContextMenu {
                     id: gridContextMenu
+
+                    property int index: -1
+
                     MenuItem {
                         text: qsTrId("slideshow-imagelist-menu-remove")
                         onClicked: {
                             console.log("Remove image from the slideshow...")
-                            console.log("Image index:", index)
-//                            imageListModel.remove(index)
+                            console.log("Image index:", gridContextMenu.index)
+                            imageListModel.remove(gridContextMenu.index)
+                            gridContextMenu.index = -1
                         }
                     }
                 }
@@ -234,24 +254,15 @@ Dialog {
         id: multiMusicPickerDialog
         MultiMusicPickerDialog {
             onAccepted: {
-                selectedMusicFiles = ""
                 var urls = []
                 var index = 0;
-                //while (index < 15)
-                //{
-                    for (var i = 0; i < selectedContent.count; ++i) {
-                        var url = selectedContent.get(i).url
-                        var fileName = selectedContent.get(i).fileName
-                        // Handle selection
-                        //urls.push(selectedContent.get(i).url)
-                        backgroundMusicModel.append({'fileName': fileName, 'url': url})
-                    }
-                //    ++index;
-                //}
-                //selectedMusicFiles = urls.join(", ")
+                for (var i = 0; i < selectedContent.count; ++i) {
+                    var url = selectedContent.get(i).url
+                    var fileName = selectedContent.get(i).fileName
+                    // Handle selection
+                    backgroundMusicModel.append({'fileName': fileName, 'url': url})
+                }
             }
-
-            onRejected: selectedMusicFiles = ""
         }
     }
 
@@ -259,22 +270,32 @@ Dialog {
         id: multiImagePickerDialog
         MultiImagePickerDialog {
             onAccepted: {
-                selectedImageFiles = ""
                 var urls = []
                 var index = 0;
-                //while (index < 15)
-                //{
-                    for (var i = 0; i < selectedContent.count; ++i) {
-                        var url = selectedContent.get(i).url
-                        var fileName = selectedContent.get(i).fileName
-                        // Handle selection
-                        imageListModel.append({'fileName': fileName, 'url': url})
-                    }
-                //    ++index;
-                //}
+                for (var i = 0; i < selectedContent.count; ++i) {
+                    var url = selectedContent.get(i).url
+                    var fileName = selectedContent.get(i).fileName
+                    // Handle selection
+                    imageListModel.append({'fileName': fileName, 'url': url})
+                }
             }
+        }
+    }
 
-            onRejected: selectedImageFiles = ""
+    Component {
+        id: filesystemImagePickerDialog
+        MultiFilePickerDialog {
+            nameFilters: imageFileFilters
+            onAccepted: {
+                console.log("File system image picker accepted...")
+                var urls = []
+                for (var i = 0; i < selectedContent.count; ++i) {
+                    var url = selectedContent.get(i).url
+                    var fileName = selectedContent.get(i).fileName
+                    // Handle selection
+                    imageListModel.append({'fileName': fileName, 'url': url})
+                }
+            }
         }
     }
 

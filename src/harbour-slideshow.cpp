@@ -2,6 +2,9 @@
 #include <QtQuick>
 //#endif
 #include <QDebug>
+#include <QImageReader>
+#include <QStringList>
+#include <QByteArray>
 
 #include <sailfishapp.h>
 
@@ -43,10 +46,19 @@ int main(int argc, char *argv[])
     // Translator
     TranslationHandler *handler = new TranslationHandler(nullptr);
 
+    // Supported image formats
+    QStringList filters;
+    foreach (QByteArray format, QImageReader::supportedImageFormats())
+    {
+        filters << "*." + QString(format);
+    }
+    qDebug() << "Supported image formats (as filters):" << filters;
+
     QString appVersion = "2.0.0";
     view->rootContext()->setContextProperty("Settings", settings);
     view->rootContext()->setContextProperty("TranslationHandler", handler);
     view->rootContext()->setContextProperty("appVersion", appVersion);
+    view->rootContext()->setContextProperty("imageFileFilters", filters);
     view->setSource(SailfishApp::pathToMainQml());
     view->show();
     return a->exec();

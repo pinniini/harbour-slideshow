@@ -111,5 +111,9 @@
         <source></source>
         <translation>Select folder</translation>
     </message>
+    <message id="menu-add-files-filesystem">
+        <source></source>
+        <translation>Add picture files</translation>
+    </message>
 </context>
 </TS>

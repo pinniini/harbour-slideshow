@@ -24,6 +24,13 @@ Page {
         }
     }
 
+    ListModel {
+        id: playingSlideshowImageModel
+    }
+    ListModel {
+        id: playingSlideshowMusicModel
+    }
+
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaListView {
         id: slideshowList
@@ -97,6 +104,10 @@ Page {
                     text: qsTrId("menu-start-slideshow")
                     onClicked: {
                         console.log("Start slideshow...")
+                        var show = slideshowListModel.get(index)
+                        if (generatePlayingModels(show.id)) {
+                            pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
+                        }
                     }
                 }
             }
@@ -152,5 +163,27 @@ Page {
         } else {
             console.log("Updating slideshow failed...");
         }
+    }
+
+    function generatePlayingModels(slideshowId) {
+        var show = DB.getSlideshow(slideshowId)
+        if (show) {
+            playingSlideshowImageModel.clear()
+            playingSlideshowMusicModel.clear()
+
+            for (var mi = 0; mi < show.music.length; ++mi) {
+                var mus = show.music[mi]
+                playingSlideshowMusicModel.append({'fileName': mus.fileName, 'url': mus.url})
+            }
+
+            for (var ii = 0; ii < show.images.length; ++ii) {
+                var img = show.images[ii]
+                playingSlideshowImageModel.append({'fileName': img.fileName, 'url': img.url})
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

@@ -1,5 +1,6 @@
 import QtQuick 2.5
 import Sailfish.Silica 1.0
+import Nemo.KeepAlive 1.2
 import "../constants.js" as Constants
 
 Page {
@@ -8,12 +9,16 @@ Page {
     showNavigationIndicator: !slideshowRunning
     backNavigation: !slideshowRunning
 
+    // The effective value will be restricted by ApplicationWindow.allowedOrientations
+    allowedOrientations: Orientation.All
+
     // Properties.
     property string imageSource: ""
     property string imageSource2: ""
     property int imageIndex: -1
     property bool slideshowRunning: true
     property ListModel imageModel
+    property ListModel musicModel
     property bool firstLoaded: false
 
     // Settings.
@@ -39,19 +44,36 @@ Page {
             }
 
             slideshowRunning = true
+            blanking.preventBlanking = true
         }
         else if(status === PageStatus.Deactivating) // Deactivating, set defaults.
         {
             console.log("Page deactivating...")
             imageIndex = -1;
             imageChanged("")
+            blanking.preventBlanking = false
         }
+    }
+
+    Component.onDestruction: {
+        console.log("PlaySlideshowPage destroyed...")
+        blanking.preventBlanking = false
+    }
+
+    DisplayBlanking {
+        id: blanking
     }
 
     PageHeader {
         id: header
         title: ""
         visible: !slideshowRunning
+    }
+
+    Rectangle {
+        id: background
+        anchors.fill: parent
+        color: Theme.colorScheme == Theme.LightOnDark ? "black" : "white"
     }
 
     // Image.
@@ -152,36 +174,36 @@ Page {
         property int mousePressStartX: 0
         property bool isSwipe: false
 
-        onPressed: {
-            console.log("onPressed...")
-            mousePressStartX = mouse.x
-            isSwipe = false
-        }
+//        onPressed: {
+//            console.log("onPressed...")
+//            mousePressStartX = mouse.x
+//            isSwipe = false
+//        }
 
-        onReleased: {
-            console.log("onReleased...")
-            var direction = mouse.x - mousePressStartX
-            var dist = Math.abs(direction)
+//        onReleased: {
+//            console.log("onReleased...")
+//            var direction = mouse.x - mousePressStartX
+//            var dist = Math.abs(direction)
 
-            // Swiped left -> next picture.
-            if(dist > minMoveForSwipe && direction < 0)
-            {
-                console.log("Swipe left...")
-                isSwipe = true
-//                nextPicture()
-            }
-            else if(dist > minMoveForSwipe && direction > 0) // Swiped right -> previous picture.
-            {
-                console.log("Swipe right...")
-                isSwipe = true
-//                previousPicture()
-            }
-        }
+//            // Swiped left -> next picture.
+//            if(dist > minMoveForSwipe && direction < 0)
+//            {
+//                console.log("Swipe left...")
+//                isSwipe = true
+////                nextPicture()
+//            }
+//            else if(dist > minMoveForSwipe && direction > 0) // Swiped right -> previous picture.
+//            {
+//                console.log("Swipe right...")
+//                isSwipe = true
+////                previousPicture()
+//            }
+//        }
 
         // Toggle slideshow start/stop.
         onClicked: {
-            if(isSwipe)
-                return
+//            if(isSwipe)
+//                return
 
             console.log("onClicked...")
             toggleSlideshow()
@@ -208,16 +230,20 @@ Page {
 
     function toggleSlideshow() {
         slideshowRunning = !slideshowRunning
+        blanking.preventBlanking = slideshowRunning
     }
 
     function nextPicture() {
         console.log("nextPicture()")
         ++imageIndex
 
+        blanking.preventBlanking = true
+
         if (imageIndex == imageModel.count) {
             imageIndex = 0;
             if (!loop) {
                 slideshowRunning = false;
+                blanking.preventBlanking = slideshowRunning
                 return;
             }
         }

@@ -111,5 +111,9 @@
         <source></source>
         <translation>Valitse kansio</translation>
     </message>
+    <message id="menu-add-files-filesystem">
+        <source></source>
+        <translation>Lisää kuvatiedostoja</translation>
+    </message>
 </context>
 </TS>
