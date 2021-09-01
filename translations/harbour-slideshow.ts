@@ -115,5 +115,9 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message id="menu-add-files-folder">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

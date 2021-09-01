@@ -17,7 +17,7 @@
     </message>
     <message id="menu-add-files">
         <source></source>
-        <translation>Lisää kuvia</translation>
+        <translation>Lisää kuvia galleriasta</translation>
     </message>
     <message id="menu-quickstart-slideshow">
         <source></source>
@@ -114,6 +114,10 @@
     <message id="menu-add-files-filesystem">
         <source></source>
         <translation>Lisää kuvatiedostoja</translation>
+    </message>
+    <message id="menu-add-files-folder">
+        <source></source>
+        <translation>Lisää kuvat kansiosta</translation>
     </message>
 </context>
 </TS>

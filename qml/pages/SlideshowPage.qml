@@ -18,6 +18,8 @@ Dialog {
     property int imageWidth: Math.floor(slideshowDialog.width / 5)
     property var slideshow
 
+    property var playSlideshowPage
+
     Component.onCompleted: {
         if (editMode && slideshowId > 0) {
             var show = DB.getSlideshow(slideshowId)
@@ -72,6 +74,14 @@ Dialog {
         }
     }
 
+//    Connections {
+//        id: slideshowConnections
+//        target: null
+//        onImageChanged: {
+//            console.log("Image changed, current image:", url)
+//        }
+//    }
+
     ListModel {
         id: backgroundMusicModel
     }
@@ -98,6 +108,12 @@ Dialog {
             }
 
             MenuItem {
+                id: menuFolderPictures
+                text: qsTrId("menu-add-files-folder")
+                onClicked: pageStack.push(folderPickerDialog)
+            }
+
+            MenuItem {
                 id: menuFilesystemPictures
                 text: qsTrId("menu-add-files-filesystem")
                 onClicked: pageStack.push(filesystemImagePickerDialog)
@@ -114,7 +130,9 @@ Dialog {
                 text: qsTrId("menu-start-slideshow")
                 onClicked: {
                     console.log("Start slideshow...")
-                    pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': imageListModel, 'musicModel': backgroundMusicModel})
+                    playSlideshowPage = pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': imageListModel, 'musicModel': backgroundMusicModel})
+//                    slideshowConnections.target = playSlideshowPage
+                    mainSlideshowConnections.target = playSlideshowPage
                 }
             }
         }
@@ -299,9 +317,28 @@ Dialog {
         }
     }
 
+    Component {
+        id: folderPickerDialog
+        FolderPickerDialog {
+            id: imageFolderDialog
+            title: qsTrId("quick-folderpicker-title")
+            onAccepted: {
+                console.log("Add pictures from the selected folder:", selectedPath)
+                var files = FolderLoader.readFilesInFolder(selectedPath)
+                if (files && files.length > 0) {
+                    for (var i = 0; i < files.length; ++i) {
+                        imageListModel.append({'fileName': files[i], 'url': files[i]})
+                    }
+                }
+            }
+        }
+    }
+
     function translateUi() {
         menuSettings.text = qsTrId("menu-settings")
         menuMusic.text = qsTrId("menu-add-music")
+        menuFolderPictures.text = qsTrId("quick-folderpicker-title")
+        menuFilesystemPictures.text = qsTrId("menu-add-files-filesystem")
         menuPictures.text = qsTrId("menu-add-files")
         menuStartSlideshow.text = qsTrId("menu-start-slideshow")
         slideshowNameField.label = qsTrId("slideshow-name-label")

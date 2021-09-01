@@ -15,6 +15,7 @@ TARGET = harbour-slideshow
 CONFIG += sailfishapp
 
 SOURCES += src/harbour-slideshow.cpp \
+    src/folderloader.cpp \
     src/settings.cpp \
     src/translationhandler.cpp
 
@@ -48,5 +49,6 @@ TRANSLATIONS += translations/harbour-slideshow-en.ts \
     translations/harbour-slideshow-fi.ts
 
 HEADERS += \
+    src/folderloader.h \
     src/settings.h \
     src/translationhandler.h

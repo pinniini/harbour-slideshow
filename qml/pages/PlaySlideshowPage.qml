@@ -16,7 +16,9 @@ Page {
     property string imageSource: ""
     property string imageSource2: ""
     property int imageIndex: -1
-    property bool slideshowRunning: true
+    property bool slideshowRunning: false
+    onSlideshowRunningChanged: slideshowRunningToggled(slideshowRunning)
+
     property ListModel imageModel
     property ListModel musicModel
     property bool firstLoaded: false
@@ -28,6 +30,8 @@ Page {
     // Signals.
     // Notify cover about image change.
     signal imageChanged(string url)
+    // Notify about slideshow running status change.
+    signal slideshowRunningToggled(bool runningStatus)
 
     // React on status changes.
     onStatusChanged: {
@@ -45,12 +49,14 @@ Page {
 
             slideshowRunning = true
             blanking.preventBlanking = true
+            slideshowRunningToggled(slideshowRunning)
         }
         else if(status === PageStatus.Deactivating) // Deactivating, set defaults.
         {
             console.log("Page deactivating...")
             imageIndex = -1;
             imageChanged("")
+            slideshowRunning = false
             blanking.preventBlanking = false
         }
     }

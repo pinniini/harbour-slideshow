@@ -11,6 +11,7 @@ Page {
     allowedOrientations: Orientation.All
 
     property int editIndex: -1
+    property bool quickFolderSelected: false
 
     Component.onCompleted: {
         // Load slideshows
@@ -56,9 +57,10 @@ Page {
             }
 
             MenuItem {
-                id: menuQuickStartSlideshow
+                id: slideshowListMenuQuickStartSlideshow
                 text: qsTrId("menu-quickstart-slideshow")
                 onClicked: {
+                    quickFolderSelected = false
                     console.log("Quick Start slideshow, i.e. select folder and play...")
                     pageStack.push(quickFolderPickerDialog)
                 }
@@ -106,7 +108,7 @@ Page {
                         console.log("Start slideshow...")
                         var show = slideshowListModel.get(index)
                         if (generatePlayingModels(show.id)) {
-                            pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
+                            mainSlideshowConnections.target = pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
                         }
                     }
                 }
@@ -117,10 +119,29 @@ Page {
     Component {
         id: quickFolderPickerDialog
         FolderPickerDialog {
+            id: folderPickerDialog
             title: qsTrId("quick-folderpicker-title")
             onAccepted: {
                 console.log("Run slideshow from selected folder:", selectedPath)
+                if (generateQuickPlayModels(selectedPath)) {
+                    quickFolderSelected = true;
+                    //pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
+                }
             }
+            onStatusChanged: {
+                console.log("folderPickerDialog status:", status, quickFolderSelected)
+                if (status === PageStatus.Inactive && quickFolderSelected) {
+                    pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
+                    quickFolderSelected = false
+                }
+            }
+//            Component.onDestroyed: {
+//                console.log("folderPickerDialog-onDestroyed status:", status, quickFolderSelected)
+//                if (status === PageStatus.Inactive && quickFolderSelected) {
+//                    pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
+//                    quickFolderSelected = false
+//                }
+//            }
         }
     }
 
@@ -128,7 +149,9 @@ Page {
         slideshowListPlaceHolder.text = qsTrId("slideshowlist-no-slideshows")
         slideshowList.headerItem.title = qsTrId("slideshowlist-header")
         slideshowListMenuSettings.text = qsTrId("menu-settings")
+        slideshowListMenuQuickStartSlideshow.text = qsTrId("menu-quickstart-slideshow")
         slideshowListMenuAddSlideshow.text = qsTrId("menu-add-slideshow")
+        folderPickerDialog.title = qsTrId("quick-folderpicker-title")
     }
 
     function loadSlideshows() {
@@ -185,5 +208,22 @@ Page {
         }
 
         return false;
+    }
+
+    function generateQuickPlayModels(folderPath) {
+        playingSlideshowImageModel.clear()
+        playingSlideshowMusicModel.clear()
+
+        var files = FolderLoader.readFilesInFolder(folderPath)
+        if (files && files.length > 0) {
+            for (var i = 0; i < files.length; ++i) {
+                playingSlideshowImageModel.append({'fileName': files[i], 'url': files[i]})
+            }
+
+            return true;
+        } else {
+            console.log("No supported image files in selected folder...");
+            return false;
+        }
     }
 }

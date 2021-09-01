@@ -4,6 +4,7 @@ import Sailfish.Silica 1.0
 CoverBackground {
     id: coverPage
     property string imageSource: ""
+    property bool slideshowRunning: false
 
     // Default cover when slideshow is not running.
     Column {
@@ -42,27 +43,32 @@ CoverBackground {
     // Cover actions.
     CoverActionList {
         id: coverActions
-        enabled: false //imageSource != "" ? (!mainPage.stopOnMinimize) : false
+        enabled: imageSource != "" //? (!mainPage.stopOnMinimize) : false
 
         // Toggle slideshow.
-//        CoverAction {
-//            iconSource: mainPage.slideshowPlaying ? "image://theme/icon-cover-pause" : "image://theme/icon-cover-play"
-//            onTriggered: {
-//                mainPage.coverToggleSlideshow()
-//            }
-//        }
+        CoverAction {
+            iconSource: slideshowRunning ? "image://theme/icon-cover-pause" : "image://theme/icon-cover-play"
+            onTriggered: {
+                toggleSlideshow()
+            }
+        }
     }
 
-//    Connections {
-//        target: playSlideshowPage
-//        onImageChanged: {
-//            imageSource = url
-//        }
-//    }
-
-    // Set current image.
+    // Slot to set current image.
     function setImage(source)
     {
-        imageSource = source
+        if (imageSource !== source) {
+            imageSource = source
+        }
+        slideshowRunning = imageSource !== ""
+    }
+
+    // Slot to follow slideshow running status
+    function toggleSlideshowRunning(runningStatus) {
+        slideshowRunning = runningStatus
+    }
+
+    function toggleSlideshow() {
+        mainSlideshowConnections.target.toggleSlideshow()
     }
 }
