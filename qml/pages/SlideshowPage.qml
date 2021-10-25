@@ -4,6 +4,8 @@ import Sailfish.Pickers 1.0
 import Nemo.Thumbnailer 1.0
 
 import "../js/database.js" as DB
+import "../constants.js" as Constants
+import fi.pinniini.slideshow 1.0
 
 Dialog {
     id: slideshowDialog
@@ -88,6 +90,13 @@ Dialog {
 
     ListModel {
         id: imageListModel
+    }
+
+    FolderLoader {
+        id: folderLoader
+        onFileLoadedFromFolder: {
+            imageListModel.append({'fileName': filePath, 'url': filePath})
+        }
     }
 
     SilicaFlickable {
@@ -321,15 +330,17 @@ Dialog {
         id: folderPickerDialog
         FolderPickerDialog {
             id: imageFolderDialog
+            path: Settings.getBooleanSetting(Constants.selectFolderFromRootKey, false) ? "/" : StandardPaths.home
             title: qsTrId("quick-folderpicker-title")
             onAccepted: {
                 console.log("Add pictures from the selected folder:", selectedPath)
-                var files = FolderLoader.readFilesInFolder(selectedPath)
-                if (files && files.length > 0) {
-                    for (var i = 0; i < files.length; ++i) {
-                        imageListModel.append({'fileName': files[i], 'url': files[i]})
-                    }
-                }
+                folderLoader.readFilesInFolder(selectedPath)
+//                var files = FolderLoader.readFilesInFolder(selectedPath)
+//                if (files && files.length > 0) {
+//                    for (var i = 0; i < files.length; ++i) {
+//                        imageListModel.append({'fileName': files[i], 'url': files[i]})
+//                    }
+//                }
             }
         }
     }

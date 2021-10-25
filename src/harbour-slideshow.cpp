@@ -56,14 +56,16 @@ int main(int argc, char *argv[])
     qDebug() << "Supported image formats (as filters):" << filters;
 
     // Folder loader
-    FolderLoader *folderLoader = new FolderLoader(nullptr);
+//    FolderLoader *folderLoader = new FolderLoader(nullptr);
+
+    qmlRegisterType<FolderLoader>("fi.pinniini.slideshow", 1, 0, "FolderLoader");
 
     QString appVersion = "2.0.0";
     view->rootContext()->setContextProperty("Settings", settings);
     view->rootContext()->setContextProperty("TranslationHandler", handler);
     view->rootContext()->setContextProperty("appVersion", appVersion);
     view->rootContext()->setContextProperty("imageFileFilters", filters);
-    view->rootContext()->setContextProperty("FolderLoader", folderLoader);
+//    view->rootContext()->setContextProperty("FolderLoader", folderLoader);
     view->setSource(SailfishApp::pathToMainQml());
     view->show();
     return a->exec();

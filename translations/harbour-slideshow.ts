@@ -119,5 +119,53 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message id="settings-select-folder-from-root">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-select-folder-from-root-description">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="about">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="about-info-header">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="about-info">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="version">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="about-by-who-header">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="about-licence-header">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="about-code-header">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="about-contributing-header">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="about-issues">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-slideshow-volume-label">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

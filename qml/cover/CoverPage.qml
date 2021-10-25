@@ -35,6 +35,9 @@ CoverBackground {
         anchors.margins: 5
         source: imageSource
         asynchronous: true
+        autoTransform: true
+        cache: false
+        clip: true
         fillMode: Image.PreserveAspectFit
         sourceSize.width: coverPage.width
         sourceSize.height: coverPage.height

@@ -1,6 +1,7 @@
 import QtQuick 2.5
 import Sailfish.Silica 1.0
 import Nemo.KeepAlive 1.2
+import QtMultimedia 5.6
 import "../constants.js" as Constants
 
 Page {
@@ -17,7 +18,16 @@ Page {
     property string imageSource2: ""
     property int imageIndex: -1
     property bool slideshowRunning: false
-    onSlideshowRunningChanged: slideshowRunningToggled(slideshowRunning)
+    onSlideshowRunningChanged: {
+        console.log("SlideshowRunning status changed: " + slideshowRunning)
+        if (slideshowRunning) {
+            backgroundMusic.play()
+        } else {
+            backgroundMusic.pause()
+        }
+
+        slideshowRunningToggled(slideshowRunning)
+    }
 
     property ListModel imageModel
     property ListModel musicModel
@@ -26,6 +36,8 @@ Page {
     // Settings.
     property int slideshowInterval: Settings.getIntSetting(Constants.intervalKey, 5) * 1000
     property bool loop: Settings.getBooleanSetting(Constants.loopKey, true)
+    property bool loopMusic: Settings.getBooleanSetting(Constants.loopMusicKey, true)
+    property int volume: Settings.getIntSetting(Constants.volumeKey, 50) / 100
 
     // Signals.
     // Notify cover about image change.
@@ -44,6 +56,14 @@ Page {
                 imageSource = imageModel.get(imageIndex).url
                 if (imageModel.count > 1) {
                     imageSource2 = imageModel.get(imageIndex + 1).url
+                }
+            }
+
+            if (musicModel.count > 0) {
+                backgroundPlaylist.clear()
+                for (var i = 0; i < musicModel.count; ++i) {
+                    console.log("Add music file to playlist: " + musicModel.get(i).url)
+                    backgroundPlaylist.addItem(musicModel.get(i).url)
                 }
             }
 
@@ -68,6 +88,17 @@ Page {
 
     DisplayBlanking {
         id: blanking
+    }
+
+    Audio {
+        id: backgroundMusic
+        autoPlay: false
+        audioRole: Audio.MusicRole
+        volume: volume
+        playlist: Playlist {
+            id: backgroundPlaylist
+            playbackMode: loopMusic ? Playlist.Loop : Playlist.Sequential
+        }
     }
 
     PageHeader {

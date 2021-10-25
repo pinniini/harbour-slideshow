@@ -3,6 +3,8 @@ import Sailfish.Silica 1.0
 import Sailfish.Pickers 1.0
 
 import "../js/database.js" as DB
+import "../constants.js" as Constants
+import fi.pinniini.slideshow 1.0
 
 Page {
     id: page
@@ -11,11 +13,24 @@ Page {
     allowedOrientations: Orientation.All
 
     property int editIndex: -1
-    property bool quickFolderSelected: false
+    property bool quickStartSlideshow: false
+    property string quickStartSlideshowFolderPath: ""
 
     Component.onCompleted: {
         // Load slideshows
         loadSlideshows();
+    }
+
+    onStatusChanged: {
+        if (status === PageStatus.Active && quickStartSlideshow && quickStartSlideshowFolderPath.length > 0
+                && playingSlideshowImageModel.count > 0) {
+            quickStartSlideshow = false
+            quickStartSlideshowFolderPath = ""
+            quickSlideshowBusyIndicator.running = false
+            mainPullDownMenu.enabled = true
+            mainPullDownMenu.busy = false
+            pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
+        }
     }
 
     Connections {
@@ -30,6 +45,42 @@ Page {
     }
     ListModel {
         id: playingSlideshowMusicModel
+    }
+
+    FolderLoader {
+        id: folderLoader
+        onFilesLoadedFromFolder: {
+            console.log("Files loaded from folder...")
+            console.log("File count: " + filePaths.length)
+
+            if (filePaths && filePaths.length > 0) {
+                for (var i = 0; i < filePaths.length; ++i) {
+                    playingSlideshowImageModel.append({'fileName': filePaths[i], 'url': filePaths[i]})
+                }
+
+                if (page.status === PageStatus.Active) {
+                    quickStartSlideshow = false
+                    quickStartSlideshowFolderPath = ""
+                    quickSlideshowBusyIndicator.running = false
+                    mainPullDownMenu.enabled = true
+                    mainPullDownMenu.busy = false
+//                    if (pageStack.nextPage(page) === null) {
+//                        console.log("Empty next page...")
+                        pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
+//                    } else {
+//                        console.log("Replace above...")
+//                        pageStack.replaceAbove(page, Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
+//                    }
+                }
+            } else {
+                quickStartSlideshow = false
+                quickStartSlideshowFolderPath = ""
+                quickSlideshowBusyIndicator.running = false
+                mainPullDownMenu.enabled = true
+                mainPullDownMenu.busy = false
+                console.log("No supported image files in selected folder...");
+            }
+        }
     }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
@@ -50,6 +101,14 @@ Page {
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
+            id: mainPullDownMenu
+
+            MenuItem {
+                id: slideshowListMenuAbout
+                text: qsTrId("about")
+                onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
+            }
+
             MenuItem {
                 id: slideshowListMenuSettings
                 text: qsTrId("menu-settings")
@@ -60,7 +119,8 @@ Page {
                 id: slideshowListMenuQuickStartSlideshow
                 text: qsTrId("menu-quickstart-slideshow")
                 onClicked: {
-                    quickFolderSelected = false
+                    quickStartSlideshow = false
+                    quickStartSlideshowFolderPath = ""
                     console.log("Quick Start slideshow, i.e. select folder and play...")
                     pageStack.push(quickFolderPickerDialog)
                 }
@@ -89,7 +149,6 @@ Page {
                 var show = slideshowListModel.get(index)
                 var dialog = pageStack.push(Qt.resolvedUrl("SlideshowPage.qml"), {'editMode': true, 'slideshowId': show.id})
                 dialog.accepted.connect(function() {
-                    //addSlideshow(dialog.slideshow);
                     updateSlideshow(dialog.slideshow);
                 })
             }
@@ -116,42 +175,39 @@ Page {
         }
     }
 
+    BusyIndicator {
+        id: quickSlideshowBusyIndicator
+        running: false
+        size: BusyIndicatorSize.Large
+        anchors.centerIn: parent
+    }
+
     Component {
         id: quickFolderPickerDialog
         FolderPickerDialog {
             id: folderPickerDialog
+            path: Settings.getBooleanSetting(Constants.selectFolderFromRootKey, false) ? "/" : StandardPaths.home
             title: qsTrId("quick-folderpicker-title")
             onAccepted: {
                 console.log("Run slideshow from selected folder:", selectedPath)
-                if (generateQuickPlayModels(selectedPath)) {
-                    quickFolderSelected = true;
-                    //pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
-                }
+                //if (generateQuickPlayModels(selectedPath)) {
+                quickStartSlideshow = true;
+                quickStartSlideshowFolderPath = selectedPath
+                generateQuickPlayModels(selectedPath);
+                    //pageStack.replaceAbove(page, Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
+                //}
             }
-            onStatusChanged: {
-                console.log("folderPickerDialog status:", status, quickFolderSelected)
-                if (status === PageStatus.Inactive && quickFolderSelected) {
-                    pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
-                    quickFolderSelected = false
-                }
-            }
-//            Component.onDestroyed: {
-//                console.log("folderPickerDialog-onDestroyed status:", status, quickFolderSelected)
-//                if (status === PageStatus.Inactive && quickFolderSelected) {
-//                    pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
-//                    quickFolderSelected = false
-//                }
-//            }
         }
     }
 
     function translateUi() {
         slideshowListPlaceHolder.text = qsTrId("slideshowlist-no-slideshows")
         slideshowList.headerItem.title = qsTrId("slideshowlist-header")
+        slideshowListMenuAbout.text = qsTrId("about")
         slideshowListMenuSettings.text = qsTrId("menu-settings")
         slideshowListMenuQuickStartSlideshow.text = qsTrId("menu-quickstart-slideshow")
         slideshowListMenuAddSlideshow.text = qsTrId("menu-add-slideshow")
-        folderPickerDialog.title = qsTrId("quick-folderpicker-title")
+        //folderPickerDialog.title = qsTrId("quick-folderpicker-title")
     }
 
     function loadSlideshows() {
@@ -213,17 +269,23 @@ Page {
     function generateQuickPlayModels(folderPath) {
         playingSlideshowImageModel.clear()
         playingSlideshowMusicModel.clear()
+        quickSlideshowBusyIndicator.running = true
+        mainPullDownMenu.enabled = false
+        mainPullDownMenu.busy = true
 
-        var files = FolderLoader.readFilesInFolder(folderPath)
-        if (files && files.length > 0) {
-            for (var i = 0; i < files.length; ++i) {
-                playingSlideshowImageModel.append({'fileName': files[i], 'url': files[i]})
-            }
+        console.log("Start reading files from folder...")
+        folderLoader.readFilesInFolder(folderPath)
 
-            return true;
-        } else {
-            console.log("No supported image files in selected folder...");
-            return false;
-        }
+//        var files = FolderLoader.readFilesInFolder(folderPath)
+//        if (files && files.length > 0) {
+//            for (var i = 0; i < files.length; ++i) {
+//                playingSlideshowImageModel.append({'fileName': files[i], 'url': files[i]})
+//            }
+
+//            return true;
+//        } else {
+//            console.log("No supported image files in selected folder...");
+//            return false;
+//        }
     }
 }

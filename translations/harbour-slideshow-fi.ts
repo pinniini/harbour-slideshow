@@ -119,5 +119,53 @@
         <source></source>
         <translation>Lisää kuvat kansiosta</translation>
     </message>
+    <message id="settings-select-folder-from-root">
+        <source></source>
+        <translation>Valitse kansio alkaen juurihakemistosta</translation>
+    </message>
+    <message id="settings-select-folder-from-root-description">
+        <source></source>
+        <translation>Kansion valinta aloitetaan juurihakemistosta (&quot;/&quot;).</translation>
+    </message>
+    <message id="about">
+        <source></source>
+        <translation>Tietoja</translation>
+    </message>
+    <message id="about-info-header">
+        <source></source>
+        <translation>Info</translation>
+    </message>
+    <message id="about-info">
+        <source></source>
+        <translation>Slideshow-sovelluksella pystyt esittelemään kuviasi kuvaesityksinä. Voit joko valita suoraan kansion ja näyttää sen kuvat. Tai voit luoda ja tallentaa kuvaesityksiä valitsemistasi kuvista ja taustamusiikista.</translation>
+    </message>
+    <message id="version">
+        <source></source>
+        <translation>Versio %1</translation>
+    </message>
+    <message id="about-by-who-header">
+        <source></source>
+        <translation>Kehittäjä(t)</translation>
+    </message>
+    <message id="about-licence-header">
+        <source></source>
+        <translation>Lisenssi</translation>
+    </message>
+    <message id="about-code-header">
+        <source></source>
+        <translation>Lähdekoodi</translation>
+    </message>
+    <message id="about-contributing-header">
+        <source></source>
+        <translation>Ideoita/Ongelmia/Haluatko auttaa</translation>
+    </message>
+    <message id="about-issues">
+        <source></source>
+        <translation>Löysitkö virheitä? Onko sinulla hyviä kehitysideoita? Raportoi ne github:iin, niin katson ne läpi mielelläni :)</translation>
+    </message>
+    <message id="settings-slideshow-volume-label">
+        <source></source>
+        <translation>Taustamusiikin äänenvoimakkuuden taso</translation>
+    </message>
 </context>
 </TS>

@@ -119,5 +119,53 @@
         <source></source>
         <translation>Add pictures from folder</translation>
     </message>
+    <message id="settings-select-folder-from-root">
+        <source></source>
+        <translation>Select folder from root</translation>
+    </message>
+    <message id="settings-select-folder-from-root-description">
+        <source></source>
+        <translation>Navigation starts from root (&quot;/&quot;) when selecting folder.</translation>
+    </message>
+    <message id="about">
+        <source></source>
+        <translation>About</translation>
+    </message>
+    <message id="about-info-header">
+        <source></source>
+        <translation>Info</translation>
+    </message>
+    <message id="about-info">
+        <source></source>
+        <translation>Slideshow is an application to automatically view your awesome pictures. You can quickly select a folder which contains pictures and start the slideshow. Or you can create and save a slideshow containing selected pictures and background music.</translation>
+    </message>
+    <message id="version">
+        <source></source>
+        <translation>Version %1</translation>
+    </message>
+    <message id="about-by-who-header">
+        <source></source>
+        <translation>By who</translation>
+    </message>
+    <message id="about-licence-header">
+        <source></source>
+        <translation>Licence</translation>
+    </message>
+    <message id="about-code-header">
+        <source></source>
+        <translation>Code</translation>
+    </message>
+    <message id="about-contributing-header">
+        <source></source>
+        <translation>Contributing</translation>
+    </message>
+    <message id="about-issues">
+        <source></source>
+        <translation>Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)</translation>
+    </message>
+    <message id="settings-slideshow-volume-label">
+        <source></source>
+        <translation>Background music volume</translation>
+    </message>
 </context>
 </TS>
