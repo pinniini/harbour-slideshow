@@ -163,9 +163,13 @@
         <source></source>
         <translation>Löysitkö virheitä? Onko sinulla hyviä kehitysideoita? Raportoi ne github:iin, niin katson ne läpi mielelläni :)</translation>
     </message>
-    <message id="settings-slideshow-volume-label">
+    <message id="settings-loop-background-music">
         <source></source>
-        <translation>Taustamusiikin äänenvoimakkuuden taso</translation>
+        <translation>Kierrätä taustamusiikkia</translation>
+    </message>
+    <message id="settings-loop-background-music-description">
+        <source></source>
+        <translation>Taustamusiikin toisto aloitetaan alusta, kun soittolista on käyty läpi.</translation>
     </message>
 </context>
 </TS>

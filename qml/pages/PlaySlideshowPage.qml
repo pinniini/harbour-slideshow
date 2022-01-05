@@ -31,13 +31,13 @@ Page {
 
     property ListModel imageModel
     property ListModel musicModel
+    property var slideshowOrderArray: []
     property bool firstLoaded: false
 
     // Settings.
     property int slideshowInterval: Settings.getIntSetting(Constants.intervalKey, 5) * 1000
     property bool loop: Settings.getBooleanSetting(Constants.loopKey, true)
     property bool loopMusic: Settings.getBooleanSetting(Constants.loopMusicKey, true)
-    property int volume: Settings.getIntSetting(Constants.volumeKey, 50) / 100
 
     // Signals.
     // Notify cover about image change.
@@ -50,12 +50,28 @@ Page {
         if(status === PageStatus.Activating)
         {
             console.log("Page activating...")
+            console.log(slideshowOrderArray)
+
+            if (slideshowOrderArray.length != imageModel.count) {
+                console.error("Order array's and image model's sizes does not match. Expect wonky behavior...")
+            }
+
+            if (slideshowOrderArray.length == 0) {
+//                slideshowOrderArray.length = imageModel.count
+                for (var j = 0; j < imageModel.count; ++j) {
+//                    slideshowOrderArray[i] = i
+                    slideshowOrderArray.push(j)
+                }
+                console.log(slideshowOrderArray)
+            }
 
             if (imageModel.count > 0) {
                 imageIndex = 0;
-                imageSource = imageModel.get(imageIndex).url
+//                imageSource = imageModel.get(imageIndex).url
+                imageSource = imageModel.get(slideshowOrderArray[imageIndex]).url
                 if (imageModel.count > 1) {
-                    imageSource2 = imageModel.get(imageIndex + 1).url
+//                    imageSource2 = imageModel.get(imageIndex + 1).url
+                    imageSource2 = imageModel.get(slideshowOrderArray[imageIndex + 1]).url
                 }
             }
 
@@ -94,7 +110,6 @@ Page {
         id: backgroundMusic
         autoPlay: false
         audioRole: Audio.MusicRole
-        volume: volume
         playlist: Playlist {
             id: backgroundPlaylist
             playbackMode: loopMusic ? Playlist.Loop : Playlist.Sequential
@@ -202,48 +217,56 @@ Page {
 
     // -------------------------------------------
 
+//    MouseArea {
+//        id: previousImageArea
+//        anchors {
+//            left: parent.left
+//            top: parent.top
+//            bottom: parent.bottom
+//        }
+//        width: parent.width / 5
+
+//        onClicked: {
+//            console.log("Move to previous image...")
+//        }
+//    }
+
     // Handle start/stop by click.
     MouseArea {
         id: slideshowToggleArea
-        anchors.fill: parent
-
-        property int minMoveForSwipe: 10
-        property int mousePressStartX: 0
-        property bool isSwipe: false
-
-//        onPressed: {
-//            console.log("onPressed...")
-//            mousePressStartX = mouse.x
-//            isSwipe = false
-//        }
-
-//        onReleased: {
-//            console.log("onReleased...")
-//            var direction = mouse.x - mousePressStartX
-//            var dist = Math.abs(direction)
-
-//            // Swiped left -> next picture.
-//            if(dist > minMoveForSwipe && direction < 0)
-//            {
-//                console.log("Swipe left...")
-//                isSwipe = true
-////                nextPicture()
-//            }
-//            else if(dist > minMoveForSwipe && direction > 0) // Swiped right -> previous picture.
-//            {
-//                console.log("Swipe right...")
-//                isSwipe = true
-////                previousPicture()
-//            }
-//        }
+        anchors {
+//            left: previousImageArea.right
+            left: parent.left
+            top: parent.top
+            right: nextImageArea.left
+            bottom: parent.bottom
+        }
 
         // Toggle slideshow start/stop.
         onClicked: {
-//            if(isSwipe)
-//                return
-
             console.log("onClicked...")
             toggleSlideshow()
+        }
+    }
+
+    MouseArea {
+        id: nextImageArea
+        anchors {
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+        }
+        width: parent.width / 5
+
+        onClicked: {
+            console.log("Move to next image...")
+
+            // If slideshow is running then restart timer on picture change.
+            if (slideshowRunning) {
+                slideshowTimer.restart()
+            }
+
+            nextPicture()
         }
     }
 
@@ -285,7 +308,8 @@ Page {
             }
         }
 
-        imageChanged(imageModel.get(imageIndex).url)
+//        imageChanged(imageModel.get(imageIndex).url)
+        imageChanged(imageModel.get(slideshowOrderArray[imageIndex]).url)
 
         // Set picture visibilities.
         if(slideshowPicture.visible)
@@ -295,9 +319,9 @@ Page {
 
             // Load next to first picture.
             if((imageIndex + 1) === imageModel.count)
-                imageSource = imageModel.get(0).url
+                imageSource = imageModel.get(slideshowOrderArray[0]).url
             else
-                imageSource = imageModel.get(imageIndex + 1).url
+                imageSource = imageModel.get(slideshowOrderArray[imageIndex + 1]).url
         }
         else
         {
@@ -306,9 +330,9 @@ Page {
 
             // Load next to first picture.
             if((imageIndex + 1) === imageModel.count)
-                imageSource2 = imageModel.get(0).url
+                imageSource2 = imageModel.get(slideshowOrderArray[0]).url
             else
-                imageSource2 = imageModel.get(imageIndex + 1).url
+                imageSource2 = imageModel.get(slideshowOrderArray[imageIndex + 1]).url
         }
     }
 }

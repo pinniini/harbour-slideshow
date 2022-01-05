@@ -76,14 +76,6 @@ Dialog {
         }
     }
 
-//    Connections {
-//        id: slideshowConnections
-//        target: null
-//        onImageChanged: {
-//            console.log("Image changed, current image:", url)
-//        }
-//    }
-
     ListModel {
         id: backgroundMusicModel
     }
@@ -139,8 +131,7 @@ Dialog {
                 text: qsTrId("menu-start-slideshow")
                 onClicked: {
                     console.log("Start slideshow...")
-                    playSlideshowPage = pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': imageListModel, 'musicModel': backgroundMusicModel})
-//                    slideshowConnections.target = playSlideshowPage
+                    playSlideshowPage = pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': imageListModel, 'musicModel': backgroundMusicModel, 'slideshowOrderArray': getSlideshowOrder()})
                     mainSlideshowConnections.target = playSlideshowPage
                 }
             }
@@ -234,7 +225,7 @@ Dialog {
                     Thumbnail {
                         id: thumbnail
 
-                        property bool isExpanded: imageGrid.expandedItem === thumbnail
+                        property bool isExpanded: imageGrid.expandedItem == thumbnail
 
                         anchors {
                             left: parent.left
@@ -253,6 +244,9 @@ Dialog {
                                 imageGrid.expandedItem = thumbnail
                                 gridContextMenu.index = index
                                 gridContextMenu.open(dummy)
+                            }
+                            onClicked: {
+                                pageStack.push(Qt.resolvedUrl("ImagePage.qml"), {'imageUrl': url})
                             }
                         }
                     }
@@ -335,12 +329,6 @@ Dialog {
             onAccepted: {
                 console.log("Add pictures from the selected folder:", selectedPath)
                 folderLoader.readFilesInFolder(selectedPath)
-//                var files = FolderLoader.readFilesInFolder(selectedPath)
-//                if (files && files.length > 0) {
-//                    for (var i = 0; i < files.length; ++i) {
-//                        imageListModel.append({'fileName': files[i], 'url': files[i]})
-//                    }
-//                }
             }
         }
     }
@@ -356,5 +344,9 @@ Dialog {
         slideshowNameField.placeholderText = qsTrId("slideshow-name-placeholder")
         slideshowBackgroundMusicLabel.text = qsTrId("slideshow-background-music")
         slideshowImagesLabel.text = qsTrId("slideshow-images")
+    }
+
+    function getSlideshowOrder() {
+        return Constants.getSlideshowOrder(imageListModel.count, Settings.getBooleanSetting(Constants.randomKey, false))
     }
 }

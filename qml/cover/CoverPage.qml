@@ -6,26 +6,13 @@ CoverBackground {
     property string imageSource: ""
     property bool slideshowRunning: false
 
-    // Default cover when slideshow is not running.
-    Column {
-        id: content
-        anchors.centerIn: parent
-        spacing: Theme.paddingSmall
+    // Background
+    Image {
+        id: iconImage
+        anchors.fill: parent
+        fillMode: Image.PreserveAspectFit
+        source: "../graphics/cover_background.png"
         visible: imageSource == ""
-
-        // Icon.
-        Image {
-            id: iconImage
-            anchors.horizontalCenter: parent.horizontalCenter
-            source: "../graphics/harbour-slideshow.png"
-        }
-
-        // App name.
-        Label {
-            id: label
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: "Slideshow"
-        }
     }
 
     // Slideshow image.

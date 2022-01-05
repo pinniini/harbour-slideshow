@@ -29,7 +29,7 @@ Page {
             quickSlideshowBusyIndicator.running = false
             mainPullDownMenu.enabled = true
             mainPullDownMenu.busy = false
-            pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
+            mainSlideshowConnections.target = pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel, 'slideshowOrderArray': getSlideshowOrder()})
         }
     }
 
@@ -66,7 +66,7 @@ Page {
                     mainPullDownMenu.busy = false
 //                    if (pageStack.nextPage(page) === null) {
 //                        console.log("Empty next page...")
-                        pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
+                        mainSlideshowConnections.target = pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel, 'slideshowOrderArray': getSlideshowOrder()})
 //                    } else {
 //                        console.log("Replace above...")
 //                        pageStack.replaceAbove(page, Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
@@ -167,7 +167,7 @@ Page {
                         console.log("Start slideshow...")
                         var show = slideshowListModel.get(index)
                         if (generatePlayingModels(show.id)) {
-                            mainSlideshowConnections.target = pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel})
+                            mainSlideshowConnections.target = pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel, 'slideshowOrderArray': getSlideshowOrder()})
                         }
                     }
                 }
@@ -287,5 +287,9 @@ Page {
 //            console.log("No supported image files in selected folder...");
 //            return false;
 //        }
+    }
+
+    function getSlideshowOrder() {
+        return Constants.getSlideshowOrder(playingSlideshowImageModel.count, Settings.getBooleanSetting(Constants.randomKey, false))
     }
 }

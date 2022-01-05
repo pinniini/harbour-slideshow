@@ -13,9 +13,8 @@ Page {
     property bool lp: Settings.getBooleanSetting(Constants.loopKey, true)
     property bool randm: Settings.getBooleanSetting(Constants.randomKey, false)
     property bool stp: Settings.getBooleanSetting(Constants.stopMinimizedKey, true)
-    //property bool loopMusic: Settings.getBooleanSetting(Constants.loopMusicKey, true)
     property bool selectFolderFromRoot: Settings.getBooleanSetting(Constants.selectFolderFromRootKey, false)
-    property int volume: Settings.getIntSetting(Constants.volumeKey, 50)
+    property bool loopMusic: Settings.getBooleanSetting(Constants.loopMusicKey, true)
 
     Component.onCompleted: {
         var language = Settings.getStringSetting(Constants.languageKey, Qt.locale().name.substring(0,2))
@@ -142,17 +141,6 @@ Page {
                 }
             }
 
-//            TextSwitch {
-//                id: loopMusicSwitch
-//                text: qsTrId("settings-loop-background-music")
-//                description: qsTrId("settings-loop-background-music-description")
-//                checked: loopMusic
-
-//                onCheckedChanged: {
-//                    Settings.setSetting(Constants.loopMusicKey, checked)
-//                }
-//            }
-
             TextSwitch {
                 id: selectFolderFromRootSwitch
                 text: qsTrId("settings-select-folder-from-root")
@@ -164,18 +152,14 @@ Page {
                 }
             }
 
-            Slider {
-                id: volumeSlider
-                width: parent.width
-                minimumValue: 0
-                maximumValue: 100
-                value: volume
-                stepSize: 1
-                valueText: value
-                label: qsTrId("settings-slideshow-volume-label")
+            TextSwitch {
+                id: loopMusicSwitch
+                text: qsTrId("settings-loop-background-music")
+                description: qsTrId("settings-loop-background-music-description")
+                checked: loopMusic
 
-                onValueChanged: {
-                    Settings.setSetting(Constants.volumeKey, value)
+                onCheckedChanged: {
+                    Settings.setSetting(Constants.loopMusicKey, checked)
                 }
             }
         }
@@ -202,7 +186,8 @@ Page {
         stopSwitch.description = qsTrId("settings-stop-background-description")
         selectFolderFromRootSwitch.text = qsTrId("settings-select-folder-from-root")
         selectFolderFromRootSwitch.description = qsTrId("settings-select-folder-from-root-description")
-        volumeSlider.label = qsTrId("settings-slideshow-volume-label")
+        loopMusicSwitch.text = qsTrId("settings-loop-background-music")
+        loopMusicSwitch.description = qsTrId("settings-loop-background-music-description")
 
         // UI
         settingsHeaderUI.text = qsTrId("settings-header-ui")

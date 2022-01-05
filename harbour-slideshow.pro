@@ -25,6 +25,7 @@ DISTFILES += qml/harbour-slideshow.qml \
     qml/cover/CoverPage.qml \
     qml/js/database.js \
     qml/pages/AboutPage.qml \
+    qml/pages/ImagePage.qml \
     qml/pages/PlaySlideshowPage.qml \
     qml/pages/SettingsPage.qml \
     qml/pages/SlideshowListPage.qml \

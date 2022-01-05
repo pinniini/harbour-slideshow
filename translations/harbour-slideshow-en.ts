@@ -113,11 +113,11 @@
     </message>
     <message id="menu-add-files-filesystem">
         <source></source>
-        <translation>Add picture files</translation>
+        <translation>Add pictures from filesystem</translation>
     </message>
     <message id="menu-add-files-folder">
         <source></source>
-        <translation>Add pictures from folder</translation>
+        <translation>Add folder containing pictures</translation>
     </message>
     <message id="settings-select-folder-from-root">
         <source></source>
@@ -163,9 +163,13 @@
         <source></source>
         <translation>Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)</translation>
     </message>
-    <message id="settings-slideshow-volume-label">
+    <message id="settings-loop-background-music">
         <source></source>
-        <translation>Background music volume</translation>
+        <translation>Loop background music</translation>
+    </message>
+    <message id="settings-loop-background-music-description">
+        <source></source>
+        <translation>Loop background music list.</translation>
     </message>
 </context>
 </TS>

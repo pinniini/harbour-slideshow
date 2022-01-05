@@ -163,7 +163,11 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="settings-slideshow-volume-label">
+    <message id="settings-loop-background-music">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-loop-background-music-description">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
