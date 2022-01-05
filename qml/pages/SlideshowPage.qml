@@ -164,14 +164,28 @@ Dialog {
             SectionHeader {
                 id: slideshowBackgroundMusicLabel
                 text: qsTrId("slideshow-background-music")
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (musicList.height == 0) {
+                            musicList.height = musicList.contentHeight
+                        } else if (musicList.height == musicList.contentHeight) {
+                            musicList.height = 0
+                        }
+                    }
+                }
             }
 
             SilicaListView {
                 id: musicList
                 width: parent.width
-                height: slideshowDialog.height * 0.2
+//                height: slideshowDialog.height * 0.2
+                height: contentHeight
                 model: backgroundMusicModel
                 clip: true
+
+                Behavior on height { SmoothedAnimation { duration: 300 } }
 
                 delegate: ListItem {
                     id: musicDelegate
@@ -202,6 +216,16 @@ Dialog {
             SectionHeader {
                 id: slideshowImagesLabel
                 text: qsTrId("slideshow-images")
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (imageGrid.height == 0) {
+                            imageGrid.height = imageGrid.contentHeight
+                        } else if (imageGrid.height == imageGrid.contentHeight) {
+                            imageGrid.height = 0
+                        }
+                    }
+                }
             }
 
             SilicaGridView {
@@ -210,11 +234,14 @@ Dialog {
                 property Item expandedItem
 
                 width: parent.width
-                height: slideshowDialog.height * 0.4
+//                height: slideshowDialog.height * 0.4
+                height: contentHeight
                 model: imageListModel
                 clip: true
                 cellWidth: slideshowDialog.imageWidth
                 cellHeight: slideshowDialog.imageWidth
+
+                Behavior on height { SmoothedAnimation { duration: 300 } }
 
                 delegate: Item {
                     id: dummy
