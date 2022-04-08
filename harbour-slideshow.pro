@@ -17,6 +17,7 @@ CONFIG += sailfishapp
 SOURCES += src/harbour-slideshow.cpp \
     src/folderloader.cpp \
     src/folderworker.cpp \
+    src/migrator.cpp \
     src/settings.cpp \
     src/translationhandler.cpp
 
@@ -54,5 +55,6 @@ TRANSLATIONS += translations/harbour-slideshow-en.ts \
 HEADERS += \
     src/folderloader.h \
     src/folderworker.h \
+    src/migrator.h \
     src/settings.h \
     src/translationhandler.h

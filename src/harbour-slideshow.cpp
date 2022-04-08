@@ -8,6 +8,7 @@
 
 #include <sailfishapp.h>
 
+#include "migrator.h"
 #include "translationhandler.h"
 #include "settings.h"
 #include "folderloader.h"
@@ -17,12 +18,27 @@ int main(int argc, char *argv[])
     QScopedPointer<QGuiApplication> a(SailfishApp::application(argc, argv));
     QScopedPointer<QQuickView> view(SailfishApp::createView());
 
+    a->setOrganizationDomain("pinniini.fi");
+    a->setOrganizationName("fi.pinniini"); // needed for Sailjail
+    a->setApplicationName("Slideshow");
+
+    Migrator migrator;
+    bool migrationStatus = migrator.migrate();
+    QString migrationError = "";
+    if (!migrationStatus)
+    {
+        migrationError = migrator.lastError();
+        qDebug() << "Error occured while migrating configurations to comply with SailJail." << migrationError;
+    }
+
+    // Settings
+    Settings *settings = new Settings(nullptr);
+
     QTranslator translator;
-    Settings setts;
     QString sysLocale = QLocale::system().name();
     sysLocale.resize(2);
     bool translationsLoaded = true;
-    QString locale = setts.getStringSetting("language", sysLocale);
+    QString locale = settings->getStringSetting("language", sysLocale);
     if(!translator.load("harbour-slideshow-" + locale, SailfishApp::pathTo("translations").toLocalFile()))
     {
         qDebug() << "Could not load locale: " + locale;
@@ -40,9 +56,6 @@ int main(int argc, char *argv[])
     }
 
     a->installTranslator(&translator);
-
-    // Settings
-    Settings *settings = new Settings(nullptr);
 
     // Translator
     TranslationHandler *handler = new TranslationHandler(nullptr);
@@ -65,6 +78,9 @@ int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("TranslationHandler", handler);
     view->rootContext()->setContextProperty("appVersion", appVersion);
     view->rootContext()->setContextProperty("imageFileFilters", filters);
+    view->rootContext()->setContextProperty("MigrationStatus", migrationStatus);
+    view->rootContext()->setContextProperty("MigrationError", migrationError);
+
 //    view->rootContext()->setContextProperty("FolderLoader", folderLoader);
     view->setSource(SailfishApp::pathToMainQml());
     view->show();
