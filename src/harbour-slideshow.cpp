@@ -22,14 +22,14 @@ int main(int argc, char *argv[])
     a->setOrganizationName("fi.pinniini"); // needed for Sailjail
     a->setApplicationName("Slideshow");
 
-    Migrator migrator;
-    bool migrationStatus = migrator.migrate();
-    QString migrationError = "";
-    if (!migrationStatus)
-    {
-        migrationError = migrator.lastError();
-        qDebug() << "Error occured while migrating configurations to comply with SailJail." << migrationError;
-    }
+//    Migrator migrator;
+//    bool migrationStatus = migrator.migrate();
+//    QString migrationError = "";
+//    if (!migrationStatus)
+//    {
+//        migrationError = migrator.lastError();
+//        qDebug() << "Error occured while migrating configurations to comply with SailJail." << migrationError;
+//    }
 
     // Settings
     Settings *settings = new Settings(nullptr);
@@ -78,8 +78,8 @@ int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("TranslationHandler", handler);
     view->rootContext()->setContextProperty("appVersion", appVersion);
     view->rootContext()->setContextProperty("imageFileFilters", filters);
-    view->rootContext()->setContextProperty("MigrationStatus", migrationStatus);
-    view->rootContext()->setContextProperty("MigrationError", migrationError);
+//    view->rootContext()->setContextProperty("MigrationStatus", migrationStatus);
+//    view->rootContext()->setContextProperty("MigrationError", migrationError);
 
 //    view->rootContext()->setContextProperty("FolderLoader", folderLoader);
     view->setSource(SailfishApp::pathToMainQml());

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QVariant>
+#include <QSettings>
 
 class Settings : public QObject
 {
@@ -15,9 +16,8 @@ public:
     Q_INVOKABLE bool getBooleanSetting(QString key, bool defaultValue);
     Q_INVOKABLE int getIntSetting(QString key, int defaultValue);
 
-signals:
-
-public slots:
+private:
+    QSettings *_settings;
 };
 
 #endif // SETTINGS_H
