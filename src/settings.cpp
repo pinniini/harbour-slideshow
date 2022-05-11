@@ -5,10 +5,11 @@
 #include <QSettings>
 #include <QDebug>
 #include <QStandardPaths>
+#include <QDir>
 
 Settings::Settings(QObject *parent) : QObject(parent)
 {
-    Migrator migrator;
+    Migrator migrator("harbour-slideshow");
     bool migrationStatus = migrator.migrate();
     QString migrationError = "";
     if (!migrationStatus)
@@ -18,30 +19,26 @@ Settings::Settings(QObject *parent) : QObject(parent)
     }
 
     _settings = new QSettings(
-            QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + "/" + QCoreApplication::applicationName() + ".conf",
+            migrator.configFile(),
             QSettings::IniFormat);
 }
 
 void Settings::setSetting(QString key, QVariant value)
 {
-//    QSettings settings;
     _settings->setValue(key, value);
 }
 
 QString Settings::getStringSetting(QString key, QString defaultValue)
 {
-//    QSettings settings;
     return _settings->value(key, defaultValue).toString();
 }
 
 bool Settings::getBooleanSetting(QString key, bool defaultValue)
 {
-//    QSettings settings;
     return _settings->value(key, defaultValue).toBool();
 }
 
 int Settings::getIntSetting(QString key, int defaultValue)
 {
-//    QSettings settings;
     return _settings->value(key, defaultValue).toInt();
 }

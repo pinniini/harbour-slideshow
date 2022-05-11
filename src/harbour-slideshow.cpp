@@ -22,15 +22,6 @@ int main(int argc, char *argv[])
     a->setOrganizationName("fi.pinniini"); // needed for Sailjail
     a->setApplicationName("Slideshow");
 
-//    Migrator migrator;
-//    bool migrationStatus = migrator.migrate();
-//    QString migrationError = "";
-//    if (!migrationStatus)
-//    {
-//        migrationError = migrator.lastError();
-//        qDebug() << "Error occured while migrating configurations to comply with SailJail." << migrationError;
-//    }
-
     // Settings
     Settings *settings = new Settings(nullptr);
 
@@ -68,9 +59,6 @@ int main(int argc, char *argv[])
     }
     qDebug() << "Supported image formats (as filters):" << filters;
 
-    // Folder loader
-//    FolderLoader *folderLoader = new FolderLoader(nullptr);
-
     qmlRegisterType<FolderLoader>("fi.pinniini.slideshow", 1, 0, "FolderLoader");
 
     QString appVersion = "2.0.0";
@@ -81,7 +69,6 @@ int main(int argc, char *argv[])
 //    view->rootContext()->setContextProperty("MigrationStatus", migrationStatus);
 //    view->rootContext()->setContextProperty("MigrationError", migrationError);
 
-//    view->rootContext()->setContextProperty("FolderLoader", folderLoader);
     view->setSource(SailfishApp::pathToMainQml());
     view->show();
     return a->exec();

@@ -6,12 +6,15 @@
 class Migrator
 {
 public:
-    Migrator();
+    Migrator(QString oldAppName);
 
     bool migrate();
     QString lastError();
+    QString configFile() const;
+    QString dataPath() const;
 
 private:
+    QString _oldAppName;
     QString _lastError;
 };
 
