@@ -129,6 +129,7 @@ Dialog {
             MenuItem {
                 id: menuStartSlideshow
                 text: qsTrId("menu-start-slideshow")
+                enabled: imageListModel.count > 0
                 onClicked: {
                     console.log("Start slideshow...")
                     playSlideshowPage = pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': imageListModel, 'musicModel': backgroundMusicModel, 'slideshowOrderArray': getSlideshowOrder()})
@@ -164,9 +165,31 @@ Dialog {
             SectionHeader {
                 id: slideshowBackgroundMusicLabel
                 text: qsTrId("slideshow-background-music")
+                width: parent.width - x*3 - musicHeaderDown.width
+
+                Image {
+                    id: musicHeaderDown
+                    source: "image://theme/icon-s-down"
+                    height: Theme.iconSizeSmallPlus
+                    width: height
+                    rotation: musicList.height != 0 ? 180 : 0
+                    anchors {
+                        top: parent.top
+                        topMargin: Theme.paddingLarge
+                        left: parent.right
+                        leftMargin: Theme.horizontalPageMargin
+                    }
+                }
 
                 MouseArea {
-                    anchors.fill: parent
+                    enabled: backgroundMusicModel.count > 0
+                    anchors {
+                        left: parent.left
+                        top: parent.top
+                        right: musicHeaderDown.right
+                        bottom: parent.bottom
+                    }
+
                     onClicked: {
                         if (musicList.height == 0) {
                             musicList.height = musicList.contentHeight
@@ -216,8 +239,35 @@ Dialog {
             SectionHeader {
                 id: slideshowImagesLabel
                 text: qsTrId("slideshow-images")
+                width: parent.width - x*3 - imagesHeaderDown.width
+
+                Image {
+                    id: imagesHeaderDown
+                    source: "image://theme/icon-s-down"
+                    height: Theme.iconSizeSmallPlus
+                    width: height
+                    rotation: imageGrid.height != 0 ? 180 : 0
+                    anchors {
+                        top: parent.top
+                        topMargin: Theme.paddingLarge
+                        left: parent.right
+                        leftMargin: Theme.horizontalPageMargin
+                    }
+
+                    Behavior on rotation {
+                        NumberAnimation {duration: 300; easing.type: Easing.InOutQuad }
+                    }
+                }
+
                 MouseArea {
-                    anchors.fill: parent
+                    enabled: imageListModel.count > 0
+                    anchors {
+                        left: parent.left
+                        top: parent.top
+                        right: imagesHeaderDown.right
+                        bottom: parent.bottom
+                    }
+
                     onClicked: {
                         if (imageGrid.height == 0) {
                             imageGrid.height = imageGrid.contentHeight

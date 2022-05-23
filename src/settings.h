@@ -9,7 +9,7 @@ class Settings : public QObject
 {
     Q_OBJECT
 public:
-    explicit Settings(QObject *parent = nullptr);
+    explicit Settings(QString configFile, QObject *parent = nullptr);
 
     Q_INVOKABLE void setSetting(QString key, QVariant value);
     Q_INVOKABLE QString getStringSetting(QString key, QString defaultValue);
@@ -17,6 +17,7 @@ public:
     Q_INVOKABLE int getIntSetting(QString key, int defaultValue);
 
 private:
+    QString _configFile;
     QSettings *_settings;
 };
 

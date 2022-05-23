@@ -22,8 +22,18 @@ int main(int argc, char *argv[])
     a->setOrganizationName("fi.pinniini"); // needed for Sailjail
     a->setApplicationName("Slideshow");
 
+    // Migrate configs and data.
+    Migrator migrator("harbour-slideshow");
+    bool migrationStatus = migrator.migrate();
+    QString migrationError = "";
+    if (!migrationStatus)
+    {
+        migrationError = migrator.lastError();
+        qDebug() << "Error occured while migrating configurations to comply with SailJail." << migrationError;
+    }
+
     // Settings
-    Settings *settings = new Settings(nullptr);
+    Settings *settings = new Settings(migrator.configFile(), nullptr);
 
     QTranslator translator;
     QString sysLocale = QLocale::system().name();

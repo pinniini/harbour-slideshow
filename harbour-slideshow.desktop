@@ -14,4 +14,4 @@ Name=Slideshow
 [X-Sailjail]
 OrganizationName=fi.pinniini
 ApplicationName=Slideshow
-Permissions=Audio;MediaIndexing;UserDirs;
+Permissions=Audio;MediaIndexing;UserDirs;RemovableMedia;

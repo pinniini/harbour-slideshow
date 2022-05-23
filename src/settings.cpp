@@ -7,19 +7,11 @@
 #include <QStandardPaths>
 #include <QDir>
 
-Settings::Settings(QObject *parent) : QObject(parent)
+Settings::Settings(QString configFile, QObject *parent)
+    : QObject(parent), _configFile(configFile)
 {
-    Migrator migrator("harbour-slideshow");
-    bool migrationStatus = migrator.migrate();
-    QString migrationError = "";
-    if (!migrationStatus)
-    {
-        migrationError = migrator.lastError();
-        qDebug() << "Error occured while migrating configurations to comply with SailJail." << migrationError;
-    }
-
     _settings = new QSettings(
-            migrator.configFile(),
+            _configFile,
             QSettings::IniFormat);
 }
 
