@@ -16,6 +16,9 @@ Page {
     property bool quickStartSlideshow: false
     property string quickStartSlideshowFolderPath: ""
 
+    // NOTE: used to translate slideshows context menu items.
+    property bool translationToggle: false
+
     Component.onCompleted: {
         // Load slideshows
         loadSlideshows();
@@ -37,6 +40,7 @@ Page {
         target: TranslationHandler
         onTranslateUI: {
             translateUi()
+            page.translationToggle = !page.translationToggle
         }
     }
 
@@ -162,6 +166,8 @@ Page {
 
             menu: ContextMenu {
                 MenuItem {
+                    property bool translationToggle: page.translationToggle
+
                     text: qsTrId("menu-start-slideshow")
                     onClicked: {
                         console.log("Start slideshow...")
@@ -169,6 +175,10 @@ Page {
                         if (generatePlayingModels(show.id)) {
                             mainSlideshowConnections.target = pageStack.push(Qt.resolvedUrl("PlaySlideshowPage.qml"), {'imageModel': playingSlideshowImageModel, 'musicModel': playingSlideshowMusicModel, 'slideshowOrderArray': getSlideshowOrder()})
                         }
+                    }
+
+                    onTranslationToggleChanged: {
+                        text = qsTrId("menu-start-slideshow")
                     }
                 }
             }

@@ -22,6 +22,9 @@ Dialog {
 
     property var playSlideshowPage
 
+    // NOTE: used to translate context menu items.
+    property bool translationToggle: false
+
     Component.onCompleted: {
         if (editMode && slideshowId > 0) {
             var show = DB.getSlideshow(slideshowId)
@@ -73,6 +76,7 @@ Dialog {
         target: TranslationHandler
         onTranslateUI: {
             translateUi()
+            slideshowDialog.translationToggle = !slideshowDialog.translationToggle
         }
     }
 
@@ -225,11 +229,17 @@ Dialog {
 
                     menu: ContextMenu {
                         MenuItem {
+                            property bool translationToggle: page.translationToggle
+
                             text: qsTrId("slideshow-imagelist-menu-remove")
                             onClicked: {
                                 console.log("Remove music from the slideshow...")
                                 console.log("Music index:", index)
                                 backgroundMusicModel.remove(index)
+                            }
+
+                            onTranslationToggleChanged: {
+                                text = qsTrId("slideshow-imagelist-menu-remove")
                             }
                         }
                     }
@@ -335,12 +345,18 @@ Dialog {
                     property int index: -1
 
                     MenuItem {
+                        property bool translationToggle: page.translationToggle
+
                         text: qsTrId("slideshow-imagelist-menu-remove")
                         onClicked: {
                             console.log("Remove image from the slideshow...")
                             console.log("Image index:", gridContextMenu.index)
                             imageListModel.remove(gridContextMenu.index)
                             gridContextMenu.index = -1
+                        }
+
+                        onTranslationToggleChanged: {
+                            text = qsTrId("slideshow-imagelist-menu-remove")
                         }
                     }
                 }
