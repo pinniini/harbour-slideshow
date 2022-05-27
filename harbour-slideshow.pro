@@ -22,6 +22,7 @@ SOURCES += src/harbour-slideshow.cpp \
     src/translationhandler.cpp
 
 DISTFILES += qml/harbour-slideshow.qml \
+    qml/components/CollapsingHeader.qml \
     qml/constants.js \
     qml/cover/CoverPage.qml \
     qml/js/database.js \

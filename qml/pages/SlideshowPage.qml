@@ -6,6 +6,7 @@ import Nemo.Thumbnailer 1.0
 import "../js/database.js" as DB
 import "../constants.js" as Constants
 import fi.pinniini.slideshow 1.0
+import "../components"
 
 Dialog {
     id: slideshowDialog
@@ -166,48 +167,19 @@ Dialog {
                 width: parent.width - Theme.paddingMedium
             }
 
-            SectionHeader {
-                id: slideshowBackgroundMusicLabel
-                text: qsTrId("slideshow-background-music")
-                width: parent.width - x*3 - musicHeaderDown.width
-
-                Image {
-                    id: musicHeaderDown
-                    source: "image://theme/icon-s-down"
-                    height: Theme.iconSizeSmallPlus
-                    width: height
-                    rotation: musicList.height != 0 ? 180 : 0
-                    anchors {
-                        top: parent.top
-                        topMargin: Theme.paddingLarge
-                        left: parent.right
-                        leftMargin: Theme.horizontalPageMargin
-                    }
-                }
-
-                MouseArea {
-                    enabled: backgroundMusicModel.count > 0
-                    anchors {
-                        left: parent.left
-                        top: parent.top
-                        right: musicHeaderDown.right
-                        bottom: parent.bottom
-                    }
-
-                    onClicked: {
-                        if (musicList.height == 0) {
-                            musicList.height = musicList.contentHeight
-                        } else if (musicList.height == musicList.contentHeight) {
-                            musicList.height = 0
-                        }
-                    }
-                }
+            CollapsingHeader {
+                id: slideshowBackgroundMusicCollapsingHeader
+                text: qsTrId("slideshow-background-music") + "(" + backgroundMusicModel.count + ")"
+                collapsingItem: musicList
+                collapsingItemMaxHeight: musicList.contentHeight
+                interactive: backgroundMusicModel.count > 0
+                menuItems: [clearMusic]
+                MenuItem { id: clearMusic; text: qsTrId("menu-clear"); onClicked: { console.log("Clearing music..."); backgroundMusicModel.clear(); } }
             }
 
             SilicaListView {
                 id: musicList
                 width: parent.width
-//                height: slideshowDialog.height * 0.2
                 height: contentHeight
                 model: backgroundMusicModel
                 clip: true
@@ -246,44 +218,22 @@ Dialog {
                 }
             }
 
-            SectionHeader {
-                id: slideshowImagesLabel
-                text: qsTrId("slideshow-images")
-                width: parent.width - x*3 - imagesHeaderDown.width
+            CollapsingHeader {
+                id: slideshowImagesCollapsingHeader
+                text: qsTrId("slideshow-images") + "(" + imageListModel.count + ")"
+                collapsingItem: imageGrid
+                collapsingItemMaxHeight: imageGrid.contentHeight
+                interactive: imageListModel.count > 0
+                menuItems: [clearImages]
 
-                Image {
-                    id: imagesHeaderDown
-                    source: "image://theme/icon-s-down"
-                    height: Theme.iconSizeSmallPlus
-                    width: height
-                    rotation: imageGrid.height != 0 ? 180 : 0
-                    anchors {
-                        top: parent.top
-                        topMargin: Theme.paddingLarge
-                        left: parent.right
-                        leftMargin: Theme.horizontalPageMargin
-                    }
-
-                    Behavior on rotation {
-                        NumberAnimation {duration: 300; easing.type: Easing.InOutQuad }
-                    }
-                }
-
-                MouseArea {
-                    enabled: imageListModel.count > 0
-                    anchors {
-                        left: parent.left
-                        top: parent.top
-                        right: imagesHeaderDown.right
-                        bottom: parent.bottom
-                    }
-
+                MenuItem {
+                    id: clearImages
+                    text: qsTrId("menu-clear")
                     onClicked: {
-                        if (imageGrid.height == 0) {
-                            imageGrid.height = imageGrid.contentHeight
-                        } else if (imageGrid.height == imageGrid.contentHeight) {
-                            imageGrid.height = 0
-                        }
+                        console.log("Clearing images...")
+//                        slideshowImagesCollapsingHeader.headerRemorse.execute(slideshowImagesCollapsingHeader, "Removing", function() {imageListModel.clear() });
+                        slideshowImagesCollapsingHeader.executeRemorse(qsTrId("action-clearing-images"), function() {imageListModel.clear()})
+//                        imageListModel.clear()
                     }
                 }
             }
@@ -294,7 +244,6 @@ Dialog {
                 property Item expandedItem
 
                 width: parent.width
-//                height: slideshowDialog.height * 0.4
                 height: contentHeight
                 model: imageListModel
                 clip: true
@@ -435,8 +384,10 @@ Dialog {
         menuStartSlideshow.text = qsTrId("menu-start-slideshow")
         slideshowNameField.label = qsTrId("slideshow-name-label")
         slideshowNameField.placeholderText = qsTrId("slideshow-name-placeholder")
-        slideshowBackgroundMusicLabel.text = qsTrId("slideshow-background-music")
-        slideshowImagesLabel.text = qsTrId("slideshow-images")
+        slideshowImagesCollapsingHeader.text = qsTrId("slideshow-images") + "(" + imageListModel.count + ")"
+        clearImages.text = qsTrId("menu-clear")
+        slideshowBackgroundMusicCollapsingHeader.text = qsTrId("slideshow-background-music") + "(" + backgroundMusicModel.count + ")"
+        clearMusic.text = qsTrId("menu-clear")
     }
 
     function getSlideshowOrder() {

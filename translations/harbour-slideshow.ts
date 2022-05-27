@@ -171,5 +171,13 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message id="menu-clear">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="action-clearing-images">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

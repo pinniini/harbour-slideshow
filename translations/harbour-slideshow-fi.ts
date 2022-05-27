@@ -171,5 +171,13 @@
         <source></source>
         <translation>Taustamusiikin toisto aloitetaan alusta, kun soittolista on käyty läpi.</translation>
     </message>
+    <message id="menu-clear">
+        <source></source>
+        <translation>Tyhjennä</translation>
+    </message>
+    <message id="action-clearing-images">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
