@@ -26,6 +26,8 @@ Dialog {
     // NOTE: used to translate context menu items.
     property bool translationToggle: false
 
+    property Item remorse
+
     Component.onCompleted: {
         if (editMode && slideshowId > 0) {
             var show = DB.getSlideshow(slideshowId)
@@ -174,7 +176,14 @@ Dialog {
                 collapsingItemMaxHeight: musicList.contentHeight
                 interactive: backgroundMusicModel.count > 0
                 menuItems: [clearMusic]
-                MenuItem { id: clearMusic; text: qsTrId("menu-clear"); onClicked: { console.log("Clearing music..."); backgroundMusicModel.clear(); } }
+                MenuItem {
+                    id: clearMusic
+                    text: qsTrId("menu-clear")
+                    onClicked: {
+                        console.log("Clearing music...");
+                        slideshowDialog.remorse = Remorse.popupAction(slideshowDialog, qsTrId("action-clearing-music"), function() {backgroundMusicModel.clear()})
+                    }
+                }
             }
 
             SilicaListView {
@@ -231,9 +240,7 @@ Dialog {
                     text: qsTrId("menu-clear")
                     onClicked: {
                         console.log("Clearing images...")
-//                        slideshowImagesCollapsingHeader.headerRemorse.execute(slideshowImagesCollapsingHeader, "Removing", function() {imageListModel.clear() });
-                        slideshowImagesCollapsingHeader.executeRemorse(qsTrId("action-clearing-images"), function() {imageListModel.clear()})
-//                        imageListModel.clear()
+                        slideshowDialog.remorse = Remorse.popupAction(slideshowDialog, qsTrId("action-clearing-images"), function() {imageListModel.clear()})
                     }
                 }
             }

@@ -177,7 +177,15 @@
     </message>
     <message id="action-clearing-images">
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation>Poistetaan kuvia</translation>
+    </message>
+    <message id="action-clearing-music">
+        <source></source>
+        <translation>Poistetaan taustamusiikkia</translation>
+    </message>
+    <message id="image-info-error">
+        <source></source>
+        <translation>Virhe ladattaessa kuvaa.</translation>
     </message>
 </context>
 </TS>

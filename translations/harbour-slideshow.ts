@@ -179,5 +179,13 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message id="action-clearing-music">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="image-info-error">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

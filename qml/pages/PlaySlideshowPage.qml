@@ -57,9 +57,7 @@ Page {
             }
 
             if (slideshowOrderArray.length == 0) {
-//                slideshowOrderArray.length = imageModel.count
                 for (var j = 0; j < imageModel.count; ++j) {
-//                    slideshowOrderArray[i] = i
                     slideshowOrderArray.push(j)
                 }
                 console.log(slideshowOrderArray)
@@ -67,10 +65,8 @@ Page {
 
             if (imageModel.count > 0) {
                 imageIndex = 0;
-//                imageSource = imageModel.get(imageIndex).url
                 imageSource = imageModel.get(slideshowOrderArray[imageIndex]).url
                 if (imageModel.count > 1) {
-//                    imageSource2 = imageModel.get(imageIndex + 1).url
                     imageSource2 = imageModel.get(slideshowOrderArray[imageIndex + 1]).url
                 }
             }
@@ -155,6 +151,15 @@ Page {
                 slideshowTimer.start()
             }
         }
+
+        Label {
+            id: infoLabel
+            anchors.centerIn: parent
+            width: parent.width - Theme.horizontalPageMargin*2
+            wrapMode: Text.WordWrap
+            text: qsTrId("image-info-error") + " " + imageSource
+            visible: slideshowPicture.status == Image.Error
+        }
     }
 
     // Second image.
@@ -174,6 +179,15 @@ Page {
         visible: false
         opacity: visible ? 1.0 : 0.0
         Behavior on opacity { FadeAnimation { duration: 1000 } }
+
+        Label {
+            id: infoLabel2
+            anchors.centerIn: parent
+            width: parent.width - Theme.horizontalPageMargin*2
+            wrapMode: Text.WordWrap
+            text: qsTrId("image-info-error") + " " + imageSource
+            visible: slideshowPicture2.status == Image.Error
+        }
     }
 
     /*
@@ -216,20 +230,6 @@ Page {
     }
 
     // -------------------------------------------
-
-//    MouseArea {
-//        id: previousImageArea
-//        anchors {
-//            left: parent.left
-//            top: parent.top
-//            bottom: parent.bottom
-//        }
-//        width: parent.width / 5
-
-//        onClicked: {
-//            console.log("Move to previous image...")
-//        }
-//    }
 
     // Handle start/stop by click.
     MouseArea {

@@ -177,7 +177,15 @@
     </message>
     <message id="action-clearing-images">
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation>Clearing pictures</translation>
+    </message>
+    <message id="action-clearing-music">
+        <source></source>
+        <translation>Clearing music</translation>
+    </message>
+    <message id="image-info-error">
+        <source></source>
+        <translation>Error occured while loading the picture.</translation>
     </message>
 </context>
 </TS>
