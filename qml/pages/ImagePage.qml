@@ -1,5 +1,6 @@
 import QtQuick 2.5
 import Sailfish.Silica 1.0
+import "../constants.js" as Constants
 
 Page {
     id: imagePage
@@ -9,6 +10,7 @@ Page {
     property string imageUrl: ""
     property real scaleFactor: 1.0
     property real zoomLevel: 2
+    property bool hiresImages: Settings.getBooleanSetting(Constants.hiresImagesKey, true)
 
     SilicaFlickable {
         id: viewerFlick
@@ -33,6 +35,10 @@ Page {
                 fillMode: Image.PreserveAspectFit
                 width: imagePage.width * scaleFactor
                 height: width / (sourceSize.width / sourceSize.height)
+                sourceSize {
+                    width: hiresImages ? undefined : imagePage.width
+                    height: hiresImages ? undefined : imagePage.height
+                }
 
                 Behavior on width {
                     id: zoomBehavior

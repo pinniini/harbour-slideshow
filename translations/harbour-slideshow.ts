@@ -47,10 +47,6 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="slideshow-imagelist-menu-remove">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
     <message id="label-settings">
         <source></source>
         <translation type="unfinished"></translation>
@@ -60,10 +56,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="menu-settings">
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="settings-header-general">
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -184,6 +176,26 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="image-info-error">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-hires-images">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-hires-images-description">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-header-slideshow">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="settings-header-imageViewer">
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="slideshow-menu-remove">
         <source></source>
         <translation type="unfinished"></translation>
     </message>

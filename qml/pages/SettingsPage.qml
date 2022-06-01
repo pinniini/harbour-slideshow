@@ -15,6 +15,7 @@ Page {
     property bool stp: Settings.getBooleanSetting(Constants.stopMinimizedKey, true)
     property bool selectFolderFromRoot: Settings.getBooleanSetting(Constants.selectFolderFromRootKey, false)
     property bool loopMusic: Settings.getBooleanSetting(Constants.loopMusicKey, true)
+    property bool hiresImages: Settings.getBooleanSetting(Constants.hiresImagesKey, true)
 
     Component.onCompleted: {
         var language = Settings.getStringSetting(Constants.languageKey, Qt.locale().name.substring(0,2))
@@ -85,8 +86,8 @@ Page {
             }
 
             SectionHeader {
-                id: settingsHeaderGeneral
-                text: qsTrId("settings-header-general")
+                id: settingsHeaderSlideshow
+                text: qsTrId("settings-header-slideshow")
             }
 
             Slider {
@@ -142,6 +143,17 @@ Page {
             }
 
             TextSwitch {
+                id: loopMusicSwitch
+                text: qsTrId("settings-loop-background-music")
+                description: qsTrId("settings-loop-background-music-description")
+                checked: loopMusic
+
+                onCheckedChanged: {
+                    Settings.setSetting(Constants.loopMusicKey, checked)
+                }
+            }
+
+            TextSwitch {
                 id: selectFolderFromRootSwitch
                 text: qsTrId("settings-select-folder-from-root")
                 description: qsTrId("settings-select-folder-from-root-description")
@@ -152,14 +164,19 @@ Page {
                 }
             }
 
+            SectionHeader {
+                id: settingsHeaderImageViewer
+                text: qsTrId("settings-header-imageViewer")
+            }
+
             TextSwitch {
-                id: loopMusicSwitch
-                text: qsTrId("settings-loop-background-music")
-                description: qsTrId("settings-loop-background-music-description")
-                checked: loopMusic
+                id: hiresImagesSwitch
+                text: qsTrId("settings-hires-images")
+                description: qsTrId("settings-hires-images-description")
+                checked: hiresImages
 
                 onCheckedChanged: {
-                    Settings.setSetting(Constants.loopMusicKey, checked)
+                    Settings.setSetting(Constants.hiresImagesKey, checked)
                 }
             }
         }
@@ -173,8 +190,8 @@ Page {
     function translateUi() {
         pageHeader.title = qsTrId("label-settings")
 
-        // General
-        settingsHeaderGeneral.text = qsTrId("settings-header-general")
+        // Slideshow
+        settingsHeaderSlideshow.text = qsTrId("settings-header-slideshow")
         intervalSlider.second = qsTrId("second")
         intervalSlider.seconds = qsTrId("seconds")
         intervalSlider.label = qsTrId("settings-slideshow-interval-label")
@@ -188,6 +205,11 @@ Page {
         selectFolderFromRootSwitch.description = qsTrId("settings-select-folder-from-root-description")
         loopMusicSwitch.text = qsTrId("settings-loop-background-music")
         loopMusicSwitch.description = qsTrId("settings-loop-background-music-description")
+
+        // Image viewe
+        settingsHeaderImageViewer.text = qsTrId("settings-header-imageViewer")
+        hiresImagesSwitch.text = qsTrId("settings-hires-images")
+        hiresImagesSwitch.description = qsTrId("settings-hires-images-description")
 
         // UI
         settingsHeaderUI.text = qsTrId("settings-header-ui")

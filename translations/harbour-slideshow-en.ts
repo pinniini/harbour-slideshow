@@ -47,9 +47,9 @@
         <source></source>
         <translation>Slideshows</translation>
     </message>
-    <message id="slideshow-imagelist-menu-remove">
+    <message id="slideshow-menu-remove">
         <source></source>
-        <translation>Remove picture</translation>
+        <translation>Remove</translation>
     </message>
     <message id="label-settings">
         <source></source>
@@ -62,10 +62,6 @@
     <message id="menu-settings">
         <source></source>
         <translation>Settings</translation>
-    </message>
-    <message id="settings-header-general">
-        <source></source>
-        <translation>General</translation>
     </message>
     <message id="second">
         <source></source>
@@ -186,6 +182,22 @@
     <message id="image-info-error">
         <source></source>
         <translation>Error occured while loading the picture.</translation>
+    </message>
+    <message id="settings-hires-images">
+        <source></source>
+        <translation>High resolution images</translation>
+    </message>
+    <message id="settings-hires-images-description">
+        <source></source>
+        <translation>Load images in full resolution to image viewer. Unchecking this increases image load performance.</translation>
+    </message>
+    <message id="settings-header-slideshow">
+        <source></source>
+        <translation>Slideshow</translation>
+    </message>
+    <message id="settings-header-imageViewer">
+        <source></source>
+        <translation>Image viewer</translation>
     </message>
 </context>
 </TS>

@@ -47,9 +47,9 @@
         <source></source>
         <translation>Kuvaesitykset</translation>
     </message>
-    <message id="slideshow-imagelist-menu-remove">
+    <message id="slideshow-menu-remove">
         <source></source>
-        <translation>Poista kuva</translation>
+        <translation>Poista</translation>
     </message>
     <message id="label-settings">
         <source></source>
@@ -62,10 +62,6 @@
     <message id="menu-settings">
         <source></source>
         <translation>Asetukset</translation>
-    </message>
-    <message id="settings-header-general">
-        <source></source>
-        <translation>Yleiset</translation>
     </message>
     <message id="second">
         <source></source>
@@ -186,6 +182,22 @@
     <message id="image-info-error">
         <source></source>
         <translation>Virhe ladattaessa kuvaa.</translation>
+    </message>
+    <message id="settings-hires-images">
+        <source></source>
+        <translation>Korkean tarkkuuden kuvat</translation>
+    </message>
+    <message id="settings-hires-images-description">
+        <source></source>
+        <translation>Kuva ladataan korkealla tarkkuudella kuvakatselijaan. Kuva ladataan nopeammin, jos tämä otetaan pois käytöstä.</translation>
+    </message>
+    <message id="settings-header-slideshow">
+        <source></source>
+        <translation>Kuvaesitys</translation>
+    </message>
+    <message id="settings-header-imageViewer">
+        <source></source>
+        <translation>Kuvakatselija</translation>
     </message>
 </context>
 </TS>

@@ -212,7 +212,7 @@ Dialog {
                         MenuItem {
                             property bool translationToggle: page.translationToggle
 
-                            text: qsTrId("slideshow-imagelist-menu-remove")
+                            text: qsTrId("slideshow-menu-remove")
                             onClicked: {
                                 console.log("Remove music from the slideshow...")
                                 console.log("Music index:", index)
@@ -220,7 +220,7 @@ Dialog {
                             }
 
                             onTranslationToggleChanged: {
-                                text = qsTrId("slideshow-imagelist-menu-remove")
+                                text = qsTrId("slideshow-menu-remove")
                             }
                         }
                     }
@@ -303,7 +303,7 @@ Dialog {
                     MenuItem {
                         property bool translationToggle: page.translationToggle
 
-                        text: qsTrId("slideshow-imagelist-menu-remove")
+                        text: qsTrId("slideshow-menu-remove")
                         onClicked: {
                             console.log("Remove image from the slideshow...")
                             console.log("Image index:", gridContextMenu.index)
@@ -312,7 +312,7 @@ Dialog {
                         }
 
                         onTranslationToggleChanged: {
-                            text = qsTrId("slideshow-imagelist-menu-remove")
+                            text = qsTrId("slideshow-menu-remove")
                         }
                     }
                 }

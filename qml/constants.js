@@ -7,6 +7,7 @@ var randomKey = "random";
 var stopMinimizedKey = "stopMinimized";
 var loopMusicKey = "loopBackgroundMusic";
 var selectFolderFromRootKey = "selectFolderFromRoot";
+var hiresImagesKey = "hiresImages"
 
 // Random number in given range.
 // Got from:
