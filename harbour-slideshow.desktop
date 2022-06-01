@@ -11,3 +11,7 @@ Name=Slideshow
 # a different app name in German locale (de).
 # Name[de]=harbour-slideshow
 
+[X-Sailjail]
+OrganizationName=fi.pinniini
+ApplicationName=Slideshow
+Permissions=Audio;MediaIndexing;UserDirs;RemovableMedia;

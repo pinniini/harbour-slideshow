@@ -1,212 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fi">
+<TS version="2.1">
 <context>
-    <name>AboutPage</name>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="42"/>
-        <source>You can also help by translating the app to a new language or by checking the current translations for any mistakes. The app can be translated in Transifex or by sending pull requests in github.</source>
-        <translation>Voit myös auttaa kääntämällä ohjelman uudelle kielelle tai tarkastamalla nykyisiä käännöksiä virheiden varalta. Ohjelman voi kääntää Transifex:ssä tai lähettämällä muutokset github:iin.</translation>
+    <name></name>
+    <message id="slideshowlist-no-slideshows">
+        <source></source>
+        <translation>Ei valmiita kuvaesityksiä...</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="67"/>
-        <source>About Slideshow</source>
-        <translation>Tietoja Slideshow:sta</translation>
+    <message id="menu-add-slideshow">
+        <source></source>
+        <translation>Luo kuvaesitys</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="71"/>
-        <source>Info</source>
-        <translation>Info</translation>
+    <message id="menu-add-music">
+        <source></source>
+        <translation>Lisää taustamusiikkia</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="75"/>
-        <source>Slideshow is an application to automatically view your awesome pictures. It works folder-based, i.e. you select a folder which contains pictures and start the slideshow from the pulley menu. Simple!</source>
-        <translation>Slideshow on ohjelma mahtavien kuviesi automaattiseen näyttämiseen. Se toimii kansiopohjaisesti, eli valitset kansion ja käynnistät esityksen ylävalikosta. Yksinkertaista!</translation>
+    <message id="menu-add-files">
+        <source></source>
+        <translation>Lisää kuvia galleriasta</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="82"/>
-        <source>Version </source>
-        <translation>Versio </translation>
+    <message id="menu-quickstart-slideshow">
+        <source></source>
+        <translation>Aloita pikaesitys</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="87"/>
-        <source>By who</source>
-        <translation>Tekijä</translation>
+    <message id="menu-start-slideshow">
+        <source></source>
+        <translation>Aloita kuvaesitys</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="91"/>
-        <source>Joni Korhonen, also known as pinniini</source>
-        <translation>Joni Korhonen, tunnetaan myös nimellä pinniini</translation>
+    <message id="slideshow-background-music">
+        <source></source>
+        <translation>Taustamusiikki</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="98"/>
-        <source>License</source>
-        <translation>Lisenssi</translation>
+    <message id="slideshow-images">
+        <source></source>
+        <translation>Kuvat</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="112"/>
-        <source>Code</source>
-        <translation>Koodi</translation>
+    <message id="slideshow-name-label">
+        <source></source>
+        <translation>Nimi</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="128"/>
-        <source>Credits</source>
-        <translation>Kiitokset</translation>
+    <message id="slideshow-name-placeholder">
+        <source></source>
+        <translation>Kuvaesityksen nimi</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="136"/>
-        <source>Swedish translation by: Åke Engelbrektson</source>
-        <translation>Ruotsinkieliset käännökset: Åke Engelbrektson</translation>
+    <message id="slideshowlist-header">
+        <source></source>
+        <translation>Kuvaesitykset</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="140"/>
-        <source>Ideas/Issues/Want to help</source>
-        <translation>Ideoita/Ongelmia/Haluatko auttaa</translation>
+    <message id="slideshow-menu-remove">
+        <source></source>
+        <translation>Poista</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="41"/>
-        <source>Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)</source>
-        <translation>Löysitkö virheitä? Onko sinulla hyviä kehitysideoita? Raportoi ne github:iin, niin katson ne läpi mielelläni :)</translation>
-    </message>
-</context>
-<context>
-    <name>CoverPage</name>
-    <message>
-        <location filename="../qml/cover/CoverPage.qml" line="59"/>
-        <source>Slideshow</source>
-        <translation>Slideshow</translation>
-    </message>
-</context>
-<context>
-    <name>MainPage</name>
-    <message>
-        <location filename="../qml/pages/MainPage.qml" line="90"/>
-        <location filename="../qml/pages/MainPage.qml" line="300"/>
-        <source>About</source>
-        <translation>Tietoja</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/MainPage.qml" line="96"/>
-        <location filename="../qml/pages/MainPage.qml" line="301"/>
-        <source>Settings</source>
+    <message id="label-settings">
+        <source></source>
         <translation>Asetukset</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/MainPage.qml" line="102"/>
-        <location filename="../qml/pages/MainPage.qml" line="302"/>
-        <source>Start slideshow in current folder</source>
-        <translation>Käynnistä esitys nykyisessä kansiossa</translation>
+    <message id="label-language">
+        <source></source>
+        <translation>Kieli</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/MainPage.qml" line="50"/>
-        <location filename="../qml/pages/MainPage.qml" line="308"/>
-        <source>Go up</source>
-        <translation>Avaa ylempi taso</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/MainPage.qml" line="51"/>
-        <location filename="../qml/pages/MainPage.qml" line="305"/>
-        <source>Start from here</source>
-        <translation>Aloita tästä</translation>
-    </message>
-</context>
-<context>
-    <name>SettingsPage</name>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="79"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="238"/>
-        <source>Settings</source>
+    <message id="menu-settings">
+        <source></source>
         <translation>Asetukset</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="117"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="241"/>
-        <source>Slideshow</source>
-        <translation>Slideshow</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="123"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="243"/>
-        <source>second</source>
+    <message id="second">
+        <source></source>
         <translation>sekunti</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="124"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="244"/>
-        <source>seconds</source>
+    <message id="seconds">
+        <source></source>
         <translation>sekuntia</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="132"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="242"/>
-        <source>Slideshow interval</source>
-        <translation>Esityksen ajastus</translation>
+    <message id="settings-slideshow-interval-label">
+        <source></source>
+        <translation>Kuvien aikaväli</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="141"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="245"/>
-        <source>Loop pictures</source>
-        <translation>Kierrätä kuvia</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="142"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="246"/>
-        <source>Slideshow starts over when reaching the end.</source>
-        <translation>Esitys alkaa alusta, kun loppu on saavutettu.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="152"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="247"/>
-        <source>Random order</source>
-        <translation>Satunnainen järjestys</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="153"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="248"/>
-        <source>Slideshow plays the pictures in a random order.</source>
-        <translation>Esitys toistaa kuvat satunnaisessa järjestyksessä.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="163"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="249"/>
-        <source>Stop when minimized</source>
-        <translation>Pysäytä, kun ohjelma pienennetään</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="164"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="250"/>
-        <source>Slideshow will be stopped when pushed minimized.</source>
-        <translation>Esitys pysäytetään, kun ohjelma pienennetään.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="174"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="253"/>
-        <source>User interface</source>
+    <message id="settings-header-ui">
+        <source></source>
         <translation>Käyttöliittymä</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="179"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="254"/>
-        <source>Language:</source>
-        <translation>Kieli:</translation>
+    <message id="settings-loop">
+        <source></source>
+        <translation>Kierrätä kuvia</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="213"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="257"/>
-        <source>File browser</source>
-        <translation>Tiedostoselain</translation>
+    <message id="settings-loop-description">
+        <source></source>
+        <translation>Esitys alkaa alusta, kun loppu on saavutettu.</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="218"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="258"/>
-        <source>Show hidden files/folders</source>
-        <translation>Näytä piilotetut tiedostot/kansiot</translation>
+    <message id="settings-random">
+        <source></source>
+        <translation>Satunnainen järjestys</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="219"/>
-        <location filename="../qml/pages/SettingsPage.qml" line="259"/>
-        <source>Hidden files and folders are shown while browsing the folders.</source>
-        <translation>Piilotetut tiedostot ja kansiot näytetään tiedostoja selattaessa.</translation>
+    <message id="settings-random-description">
+        <source></source>
+        <translation>Esitys toistaa kuvat satunnaisessa järjestyksessä.</translation>
+    </message>
+    <message id="settings-stop-background">
+        <source></source>
+        <translation>Pysäytä, kun ohjelma pienennetään</translation>
+    </message>
+    <message id="settings-stop-background-description">
+        <source></source>
+        <translation>Esitys pysäytetään, kun ohjelma pienennetään.</translation>
+    </message>
+    <message id="quick-folderpicker-title">
+        <source></source>
+        <translation>Valitse kansio</translation>
+    </message>
+    <message id="menu-add-files-filesystem">
+        <source></source>
+        <translation>Lisää kuvatiedostoja</translation>
+    </message>
+    <message id="menu-add-files-folder">
+        <source></source>
+        <translation>Lisää kuvat kansiosta</translation>
+    </message>
+    <message id="settings-select-folder-from-root">
+        <source></source>
+        <translation>Valitse kansio alkaen juurihakemistosta</translation>
+    </message>
+    <message id="settings-select-folder-from-root-description">
+        <source></source>
+        <translation>Kansion valinta aloitetaan juurihakemistosta (&quot;/&quot;).</translation>
+    </message>
+    <message id="about">
+        <source></source>
+        <translation>Tietoja</translation>
+    </message>
+    <message id="about-info-header">
+        <source></source>
+        <translation>Info</translation>
+    </message>
+    <message id="about-info">
+        <source></source>
+        <translation>Slideshow-sovelluksella pystyt esittelemään kuviasi kuvaesityksinä. Voit joko valita suoraan kansion ja näyttää sen kuvat. Tai voit luoda ja tallentaa kuvaesityksiä valitsemistasi kuvista ja taustamusiikista.</translation>
+    </message>
+    <message id="version">
+        <source></source>
+        <translation>Versio %1</translation>
+    </message>
+    <message id="about-by-who-header">
+        <source></source>
+        <translation>Kehittäjä(t)</translation>
+    </message>
+    <message id="about-licence-header">
+        <source></source>
+        <translation>Lisenssi</translation>
+    </message>
+    <message id="about-code-header">
+        <source></source>
+        <translation>Lähdekoodi</translation>
+    </message>
+    <message id="about-contributing-header">
+        <source></source>
+        <translation>Ideoita/Ongelmia/Haluatko auttaa</translation>
+    </message>
+    <message id="about-issues">
+        <source></source>
+        <translation>Löysitkö virheitä? Onko sinulla hyviä kehitysideoita? Raportoi ne github:iin, niin katson ne läpi mielelläni :)</translation>
+    </message>
+    <message id="settings-loop-background-music">
+        <source></source>
+        <translation>Kierrätä taustamusiikkia</translation>
+    </message>
+    <message id="settings-loop-background-music-description">
+        <source></source>
+        <translation>Taustamusiikin toisto aloitetaan alusta, kun soittolista on käyty läpi.</translation>
+    </message>
+    <message id="menu-clear">
+        <source></source>
+        <translation>Tyhjennä</translation>
+    </message>
+    <message id="action-clearing-images">
+        <source></source>
+        <translation>Poistetaan kuvia</translation>
+    </message>
+    <message id="action-clearing-music">
+        <source></source>
+        <translation>Poistetaan taustamusiikkia</translation>
+    </message>
+    <message id="image-info-error">
+        <source></source>
+        <translation>Virhe ladattaessa kuvaa.</translation>
+    </message>
+    <message id="settings-hires-images">
+        <source></source>
+        <translation>Korkean tarkkuuden kuvat</translation>
+    </message>
+    <message id="settings-hires-images-description">
+        <source></source>
+        <translation>Kuva ladataan korkealla tarkkuudella kuvakatselijaan. Kuva ladataan nopeammin, jos tämä otetaan pois käytöstä.</translation>
+    </message>
+    <message id="settings-header-slideshow">
+        <source></source>
+        <translation>Kuvaesitys</translation>
+    </message>
+    <message id="settings-header-imageViewer">
+        <source></source>
+        <translation>Kuvakatselija</translation>
     </message>
 </context>
 </TS>

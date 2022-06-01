@@ -4,39 +4,15 @@
 # Add new changelog entries following the format below.
 # Add newest entries to the top of the list.
 # Separate entries from eachother with a blank line.
+#
+# Alternatively, if your changelog is automatically generated (e.g. with
+# the git-change-log command provided with Sailfish OS SDK), create a
+# harbour-slideshow.changes.run script to let mb2 run the required commands for you.
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Fri Oct 30 2015 Joni Korhonen <joni.h.korhonen@gmail.com> 1.0.3-1
-- Fixed random slideshow after refactoring the slideshow page
-
-* Fri Oct 30 2015 Joni Korhonen <joni.h.korhonen@gmail.com> 1.0.2-1
-- Fixed the broken cover after refactoring the slideshow page
-
-* Fri Oct 30 2015 Joni Korhonen <joni.h.korhonen@gmail.com> 1.0.1-1
-- Critical fixes for the slideshow page (due to refactoring the slideshow page)
-
-* Fri Oct 30 2015 Joni Korhonen <joni.h.korhonen@gmail.com> 1.0-1
-- Added translations (finnish and swedish)
-- Added random order for the slideshow
-- User selectable first image
-
-* Fri Oct 27 2015 Joni Korhonen <joni.h.korhonen@gmail.com> 0.8-1
-- Translation support
-- Added recommended icon sizes
-- Added option to start the slideshow from the user selected picture
-- Option for random playback in the settings (not currently implemented)
-
-* Fri Oct 9 2015 Joni Korhonen <joni.h.korhonen@gmail.com> 0.7-1
-- Added translations
-
-* Mon Oct 5 2015 Joni Korhonen <joni.h.korhonen@gmail.com> 0.6-1
-- Fixed github issues #1, #4
-- Start/stop slideshow by clicking the picture
-- Cover actions
-
-* Wed Sep 30 2015 Joni Korhonen <joni.h.korhonen@gmail.com> 0.5-1
-- Initial release
-
+* Sun Apr 13 2014 Jack Tar <jack.tar@example.com> 0.0.1-1
+- Scrubbed the deck
+- Hoisted the sails
 

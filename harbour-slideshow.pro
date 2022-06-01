@@ -15,54 +15,47 @@ TARGET = harbour-slideshow
 CONFIG += sailfishapp
 
 SOURCES += src/harbour-slideshow.cpp \
+    src/folderloader.cpp \
+    src/folderworker.cpp \
+    src/migrator.cpp \
     src/settings.cpp \
-    src/foldermodel.cpp \
-    src/folderitem.cpp \
     src/translationhandler.cpp
 
-OTHER_FILES += qml/harbour-slideshow.qml \
+DISTFILES += qml/harbour-slideshow.qml \
+    qml/components/CollapsingHeader.qml \
+    qml/constants.js \
     qml/cover/CoverPage.qml \
+    qml/js/database.js \
+    qml/pages/AboutPage.qml \
+    qml/pages/ImagePage.qml \
+    qml/pages/PlaySlideshowPage.qml \
+    qml/pages/SettingsPage.qml \
+    qml/pages/SlideshowListPage.qml \
+    qml/pages/SlideshowPage.qml \
+    rpm/harbour-slideshow.changes.in \
+    rpm/harbour-slideshow.changes.run.in \
     rpm/harbour-slideshow.spec \
     rpm/harbour-slideshow.yaml \
     translations/*.ts \
-    harbour-slideshow.desktop \
-    qml/pages/MainPage.qml \
-    qml/pages/SlideshowPage.qml \
-    qml/pages/SettingsPage.qml \
-    qml/pages/AboutPage.qml \
-    qml/pages/ImagePage.qml \
-    rpm/harbour-slideshow.changes
+    harbour-slideshow.desktop
+
+SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 # to disable building translations every time, comment out the
 # following CONFIG line
 CONFIG += sailfishapp_i18n
+CONFIG += sailfishapp_i18n_idbased
 
 # German translation is enabled as an example. If you aren't
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/harbour-slideshow-fi.ts \
-    translations/harbour-slideshow-sv.ts \
-    translations/harbour-slideshow-en.ts \
-    translations/harbour-slideshow-de.ts
-
-VERSION = 1.0.4-1
-DEFINES += APP_VERSION=\\\"$$VERSION\\\"
+TRANSLATIONS += translations/harbour-slideshow-en.ts \
+    translations/harbour-slideshow-fi.ts
 
 HEADERS += \
+    src/folderloader.h \
+    src/folderworker.h \
+    src/migrator.h \
     src/settings.h \
-    src/foldermodel.h \
-    src/folderitem.h \
     src/translationhandler.h
-
-icon108.path  = /usr/share/icons/hicolor/108x108/apps
-icon108.files = 108x108/harbour-slideshow.png
-icon128.path  = /usr/share/icons/hicolor/128x128/apps
-icon128.files = 128x128/harbour-slideshow.png
-icon256.path  = /usr/share/icons/hicolor/256x256/apps
-icon256.files = 256x256/harbour-slideshow.png
-
-INSTALLS = icon108 icon128 icon256
-
-DISTFILES += \
-    qml/models/ImageModel.qml

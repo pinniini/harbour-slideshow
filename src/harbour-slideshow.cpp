@@ -1,72 +1,85 @@
-/*
-  Copyright (c) 2015, Joni Korhonen (pinniini)
-  All rights reserved.
-
-  You may use this file under the terms of BSD license as follows:
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions are met:
-
-  * Redistributions of source code must retain the above copyright notice, this
-    list of conditions and the following disclaimer.
-
-  * Redistributions in binary form must reproduce the above copyright notice,
-    this list of conditions and the following disclaimer in the documentation
-    and/or other materials provided with the distribution.
-
-  * Neither the name of harbour-slideshow nor the names of its
-    contributors may be used to endorse or promote products derived from
-    this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-*/
-
+//#ifdef QT_QML_DEBUG
 #include <QtQuick>
-#include <QtQml>
-#include <sailfishapp.h>
-#include <QTranslator>
+//#endif
+#include <QDebug>
+#include <QImageReader>
+#include <QStringList>
+#include <QByteArray>
 
-#include "settings.h"
-#include "foldermodel.h"
+#include <sailfishapp.h>
+
+#include "migrator.h"
 #include "translationhandler.h"
+#include "settings.h"
+#include "folderloader.h"
 
 int main(int argc, char *argv[])
 {
-    qmlRegisterType<Settings>("harbour.slideshow.Settings", 1, 0, "SlideSettings");
-    qmlRegisterType<FolderModel>("harbour.slideshow.FolderModel", 1, 0, "FolderModel");
-    qmlRegisterType<TranslationHandler>("harbour.slideshow.TranslationHandler", 1, 0, "TranslationHandler");
+    QScopedPointer<QGuiApplication> a(SailfishApp::application(argc, argv));
+    QScopedPointer<QQuickView> view(SailfishApp::createView());
 
-    QGuiApplication *a = SailfishApp::application(argc, argv);
+    a->setOrganizationDomain("pinniini.fi");
+    a->setOrganizationName("fi.pinniini"); // needed for Sailjail
+    a->setApplicationName("Slideshow");
 
-    // Translations.
-    Settings settings;
-    QString locale = settings.language();
+    // Migrate configs and data.
+    Migrator migrator("harbour-slideshow");
+    bool migrationStatus = migrator.migrate();
+    QString migrationError = "";
+    if (!migrationStatus)
+    {
+        migrationError = migrator.lastError();
+        qDebug() << "Error occured while migrating configurations to comply with SailJail." << migrationError;
+    }
+
+    // Settings
+    Settings *settings = new Settings(migrator.configFile(), nullptr);
+
     QTranslator translator;
-    if(locale != "en" && !translator.load("harbour-slideshow-" + locale, SailfishApp::pathTo("translations").toLocalFile()))
+    QString sysLocale = QLocale::system().name();
+    sysLocale.resize(2);
+    bool translationsLoaded = true;
+    QString locale = settings->getStringSetting("language", sysLocale);
+    if(!translator.load("harbour-slideshow-" + locale, SailfishApp::pathTo("translations").toLocalFile()))
     {
         qDebug() << "Could not load locale: " + locale;
+        translationsLoaded = false;
+    }
 
-        locale = QLocale::system().name();
+    // Just for safety.
+    if (!translationsLoaded)
+    {
+        locale = "en";
         if(!translator.load("harbour-slideshow-" + locale, SailfishApp::pathTo("translations").toLocalFile()))
         {
             qDebug() << "Could not load locale: " + locale;
         }
     }
+
     a->installTranslator(&translator);
 
-    QQuickView *view = SailfishApp::createView();
-    view->rootContext()->setContextProperty("appVersion", APP_VERSION);
-    view->setSource(SailfishApp::pathTo("qml/harbour-slideshow.qml"));
+    // Translator
+    TranslationHandler *handler = new TranslationHandler(nullptr);
+
+    // Supported image formats
+    QStringList filters;
+    foreach (QByteArray format, QImageReader::supportedImageFormats())
+    {
+        filters << "*." + QString(format);
+    }
+    qDebug() << "Supported image formats (as filters):" << filters;
+
+    qmlRegisterType<FolderLoader>("fi.pinniini.slideshow", 1, 0, "FolderLoader");
+
+    QString appVersion = "2.0.0";
+    view->rootContext()->setContextProperty("Settings", settings);
+    view->rootContext()->setContextProperty("TranslationHandler", handler);
+    view->rootContext()->setContextProperty("appVersion", appVersion);
+    view->rootContext()->setContextProperty("imageFileFilters", filters);
+//    view->rootContext()->setContextProperty("MigrationStatus", migrationStatus);
+//    view->rootContext()->setContextProperty("MigrationError", migrationError);
+
+    view->setSource(SailfishApp::pathToMainQml());
     view->show();
     return a->exec();
 }
