@@ -52,6 +52,7 @@ CONFIG += sailfishapp_i18n_idbased
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-slideshow-en.ts \
     translations/harbour-slideshow-fi.ts
+    translations/harbour-slideshow-sv.ts
 
 HEADERS += \
     src/folderloader.h \
