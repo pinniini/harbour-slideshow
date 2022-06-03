@@ -199,5 +199,13 @@
         <source>Image viewer</source>
         <translation>Bildläsare</translation>
     </message>
+    <message id="about-credits">
+        <source>Credits</source>
+        <translation>Tack</translation>
+    </message>
+    <message id="about-swedish-translations">
+        <source>Swedish translation by: Åke Engelbrektson</source>
+        <translation>Svensk översättning av: Åke Engelbrektson (eson57)</translation>
+    </message>
 </context>
 </TS>

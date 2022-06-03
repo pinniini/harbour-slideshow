@@ -181,6 +181,24 @@ Page {
                         text = qsTrId("menu-start-slideshow")
                     }
                 }
+
+                MenuItem {
+                    property bool translationToggle: page.translationToggle
+
+                    text: qsTrId("slideshow-menu-remove")
+                    onClicked: {
+                        console.log("Delete slideshow...")
+                        delegate.remorseDelete(function() {
+                            var show = slideshowListModel.get(index)
+                            DB.deleteSlideshow(show.id)
+                            slideshowListModel.remove(index)
+                        })
+                    }
+
+                    onTranslationToggleChanged: {
+                        text = qsTrId("slideshow-menu-remove")
+                    }
+                }
             }
         }
     }

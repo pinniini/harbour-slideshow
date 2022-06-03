@@ -157,7 +157,7 @@
     </message>
     <message id="about-issues">
         <source></source>
-        <translation>Löysitkö virheitä? Onko sinulla hyviä kehitysideoita? Raportoi ne github:iin, niin katson ne läpi mielelläni :)</translation>
+        <translation>Löysitkö virheitä? Onko sinulla hyviä kehitysideoita? Raportoi ne GitHub:iin, niin katson ne läpi mielelläni :)</translation>
     </message>
     <message id="settings-loop-background-music">
         <source></source>
@@ -198,6 +198,14 @@
     <message id="settings-header-imageViewer">
         <source></source>
         <translation>Kuvakatselija</translation>
+    </message>
+    <message id="about-credits">
+        <source></source>
+        <translation>Kiitokset</translation>
+    </message>
+    <message id="about-swedish-translations">
+        <source></source>
+        <translation>Ruotsinkieliset käännökset: Åke Engelbrektson (eson57)</translation>
     </message>
 </context>
 </TS>

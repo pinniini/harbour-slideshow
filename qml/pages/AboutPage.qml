@@ -7,6 +7,13 @@ Page {
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.All
 
+    // React on status changes.
+//    onStatusChanged: {
+    Component.onCompleted: {
+        issueLabel.text = Theme.highlightText(qsTrId("about-issues"), "github", Theme.highlightColor)
+        swedishTranslationLabel.text = Theme.highlightText(qsTrId("about-swedish-translations"), "eson57", Theme.highlightColor)
+    }
+
     // Content in flickable. Enables scroll if
     // content gets too long.
     SilicaFlickable {
@@ -21,17 +28,14 @@ Page {
 
             PageHeader {
                 id: header
-//                title: qsTr("About Slideshow")
                 title: qsTrId("about")
             }
 
             SectionHeader {
-//                text: qsTr("Info")
                 text: qsTrId("about-info-header")
             }
 
             Label {
-//                text: qsTr("Slideshow is an application to automatically view your awesome pictures. It works folder-based, i.e. you select a folder which contains pictures and start the slideshow from the pulley menu. Simple!")
                 text: qsTrId("about-info")
                 wrapMode: Text.Wrap
                 width: parent.width - Theme.paddingMedium
@@ -39,18 +43,15 @@ Page {
             }
 
             Label {
-//                text: qsTr("Version ") + appVersion
                 text: qsTrId("version").arg(appVersion)
                 x: Theme.paddingMedium
             }
 
             SectionHeader {
-//                text: qsTr("By who")
                 text: qsTrId("about-by-who-header")
             }
 
             Label {
-//                text: qsTr("Joni Korhonen, also known as pinniini")
                 text: "pinniini (Joni Korhonen)"
                 x: Theme.paddingMedium
                 wrapMode: Text.Wrap
@@ -58,22 +59,20 @@ Page {
             }
 
             SectionHeader {
-//                text: qsTr("License")
                 text: qsTrId("about-licence-header")
             }
 
             Label {
-                text: "GNU GPLv2"
+                text: "BSD"
                 font.underline: true
                 x: Theme.paddingMedium
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: Qt.openUrlExternally("https://choosealicense.com/licenses/gpl-2.0/")
+                    onClicked: Qt.openUrlExternally("https://choosealicense.com/licenses/bsd-3-clause/")
                 }
             }
 
             SectionHeader {
-//                text: qsTr("Code")
                 text: qsTrId("about-code-header")
             }
 
@@ -90,7 +89,22 @@ Page {
             }
 
             SectionHeader {
-//                text: qsTr("Ideas/Issues/Want to help")
+                text: qsTrId("about-credits")
+            }
+
+            Label {
+                id: swedishTranslationLabel
+                wrapMode: Text.Wrap
+                width: parent.width - Theme.paddingMedium
+                x: Theme.paddingMedium
+                text: qsTrId("about-swedish-translations")
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: Qt.openUrlExternally("https://github.com/eson57")
+                }
+            }
+
+            SectionHeader {
                 text: qsTrId("about-contributing-header")
             }
 
