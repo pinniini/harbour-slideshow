@@ -391,9 +391,13 @@ Dialog {
         menuStartSlideshow.text = qsTrId("menu-start-slideshow")
         slideshowNameField.label = qsTrId("slideshow-name-label")
         slideshowNameField.placeholderText = qsTrId("slideshow-name-placeholder")
-        slideshowImagesCollapsingHeader.text = qsTrId("slideshow-images") + "(" + imageListModel.count + ")"
+
+        // Use Qt.binding to maintain translation binding with item count changes.
+        slideshowImagesCollapsingHeader.text = Qt.binding(function() {return qsTrId("slideshow-images") + "(" + imageListModel.count + ")"})
         clearImages.text = qsTrId("menu-clear")
-        slideshowBackgroundMusicCollapsingHeader.text = qsTrId("slideshow-background-music") + "(" + backgroundMusicModel.count + ")"
+
+        // Use Qt.binding to maintain translation binding with item count changes.
+        slideshowBackgroundMusicCollapsingHeader.text = Qt.binding(function() {return qsTrId("slideshow-background-music") + "(" + backgroundMusicModel.count + ")"})
         clearMusic.text = qsTrId("menu-clear")
     }
 

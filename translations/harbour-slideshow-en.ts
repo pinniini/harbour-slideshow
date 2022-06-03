@@ -157,7 +157,7 @@
     </message>
     <message id="about-issues">
         <source></source>
-        <translation>Found bugs? Got some great improvement ideas? Please report them to github and I am happy to look them through :)</translation>
+        <translation>Found bugs? Got some great improvement ideas? Please report them to GitHub and I am happy to look them through :)</translation>
     </message>
     <message id="settings-loop-background-music">
         <source></source>
@@ -198,6 +198,14 @@
     <message id="settings-header-imageViewer">
         <source></source>
         <translation>Image viewer</translation>
+    </message>
+    <message id="about-credits">
+        <source></source>
+        <translation>Credits</translation>
+    </message>
+    <message id="about-swedish-translations">
+        <source></source>
+        <translation>Swedish translation by: Åke Engelbrektson (eson57)</translation>
     </message>
 </context>
 </TS>

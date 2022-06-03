@@ -82,6 +82,13 @@ Page {
                             setLanguage(value)
                         }
                     }
+                    MenuItem {
+                        property string value: "sv"
+                        text: "Svenska"
+                        onClicked: {
+                            setLanguage(value)
+                        }
+                    }
                 }
             }
 

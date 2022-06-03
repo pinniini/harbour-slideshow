@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<FolderLoader>("fi.pinniini.slideshow", 1, 0, "FolderLoader");
 
-    QString appVersion = "2.0.0";
+    QString appVersion = "2.0.1";
     view->rootContext()->setContextProperty("Settings", settings);
     view->rootContext()->setContextProperty("TranslationHandler", handler);
     view->rootContext()->setContextProperty("appVersion", appVersion);

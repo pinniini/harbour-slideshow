@@ -169,3 +169,14 @@ function updateSlideshow(slideshow) {
 
     return true;
 }
+
+function deleteSlideshow(slideshowId) {
+    var db = getDatabase();
+    if (db) {
+        db.transaction(function(tx) {
+            var del1 = tx.executeSql('DELETE FROM Music WHERE slideshowId=?', [slideshowId]);
+            var del2 = tx.executeSql('DELETE FROM Image WHERE slideshowId=?', [slideshowId]);
+            var del3 = tx.executeSql('DELETE FROM Slideshow WHERE rowid=?', [slideshowId]);
+        });
+    }
+}

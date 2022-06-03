@@ -9,7 +9,7 @@ Name:       harbour-slideshow
 # << macros
 
 Summary:    Slideshow application
-Version:    2.0.0
+Version:    2.0.1
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE
